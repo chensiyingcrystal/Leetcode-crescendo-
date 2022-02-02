@@ -73,17 +73,18 @@ public:
    }
 
    vector<int> twoSum(vector<int>& nums, int target) {
-      unordered_map_<int, int> output;
-      for (int i = 0; i < nums.size(); ++i) {
-          output[nums[i]] = i;
-      }
-      
-      for (int i = 0; i < nums.size(); ++i) {
-          complement = target - nums[i];
-          if (output.count(complement) && output[complement] != i) {
-              return {output[complement], i};
-          }
-      }
+        
+        unordered_map<int, int> output;
+        for (int i = 0; i < nums.size(); ++i) {
+            output[nums[i]] = i;
+        }
+        
+        for (int i = 0; i < nums.size(); ++i) {
+            int left = target - nums[i];
+            if (output.count(left) && output[left] != i) {
+                return {i, output[left]};
+            }
+        }
 
       return {};
     }
@@ -92,11 +93,12 @@ public:
 
 int main() {
     vector<int> nums;
-    nums.push_back(3);  
-    nums.push_back(2);
-    nums.push_back(4);
+    nums.push_back(2);  
+    nums.push_back(7);
+    nums.push_back(5);
+    nums.push_back(9);
     Solution* ss = new Solution();
-    vector<int> result = ss->twoSum(nums, 6);
+    vector<int> result = ss->twoSum(nums, 9);
     for (int i = 0; i < result.size(); i++) {
         cout << result[i] << endl;
     }
