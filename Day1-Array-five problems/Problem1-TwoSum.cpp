@@ -73,19 +73,19 @@ public:
    }
 
    vector<int> twoSum(vector<int>& nums, int target) {
-       unordered_map<int, int> output;
-       for (int i = 0; i < nums.size(); ++i) {
-           output[nums[i]] = i;
-       }
+        unordered_map<int, int> output;
+        for(int i = 0; i < nums.size(); i++) {
+            int complement = target - nums[i];
+            if(output.count(complement) and i != output[complement]) {
+                output.push_back(output[complement]);
+                output.push_back(i);
+                return output;
+            }
+            else {
+                output[nums[i]] = i;
+            }
+        }
 
-       for (int i = 0; i < nums.size(); ++i) {
-           int complement = target - nums[i];
-           if (output.count(complement) && output[complement] != i) {
-               return {i, output[complement]};
-           }
-       }
-
-       return {};
     }
 };
 
