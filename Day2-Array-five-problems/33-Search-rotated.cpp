@@ -5,9 +5,10 @@ using namespace std;
 
 class Solution {
 public:
-   Solution() {
+    Solution() {
 
-   }
+    }
+
     int findPivot(vector<int>& nums) {
         int left = 0;
         int right = nums.size() - 1;
@@ -35,9 +36,27 @@ public:
 
 
     int binary_search(vector<int>& nums, int start, int end, int target) {
+        int medium = (start + end) / 2;
 
-        return 0;
+        while(start < end and (end - start) > 1) {
+            if (target < nums[medium]) {
+                end = medium;
+            }
+            else {
+                start = medium;
+            }
+            medium = (start + end) / 2;
+        }
 
+        if (target == nums[start]) {
+            return start;
+        }
+        else if (target == nums[end]) {
+            return end;
+        }
+        else {
+            return -1;
+        }
     }
 
 
@@ -59,11 +78,6 @@ public:
         else {
             return binary_search(nums, 0, pivot, target);
         }
-
-
-
-
-
     }
 };
 
