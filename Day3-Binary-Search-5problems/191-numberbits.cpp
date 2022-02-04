@@ -9,7 +9,15 @@ public:
 
     }
     int hammingWeight(uint32_t n) {
-        
+        int count = 0;
+        while (n) {
+            int module = n & 1;
+            if (module) {
+                count += 1;
+            }
+            n = n >> 1;
+        }
+        return count;
     }
 };
 
