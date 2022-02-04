@@ -10,24 +10,16 @@ public:
    }
 
     int maxProduct(vector<int>& nums) {
-        int product = 1;
-        int maxProduct = INT_MIN;
-        int minProduct = 1;
-        for(int i = 0; i < nums.size(); i++) {
-            product *= nums[i];
-
-            if(product > 0 and minProduct < 0) {
-                maxProduct = max(maxProduct, product);
-            }
-            else { 
-                maxProduct = max(maxProduct, product / minProduct);
-            }
-
-            if(product < minProduct and product > 0) {
-                minProduct = product;
-            }
+        if (nums.size() == 1) return nums[0];
+        int min_temp = nums[0], max_temp = nums[0];
+        int max_product = nums[0];
+        for (int i = 1; i < nums.size(); i++) {
+            if (nums[i] < 0) swap(max_temp, min_temp);
+            max_temp = max(max_temp * nums[i], nums[i]);
+            min_temp = min(min_temp * nums[i], nums[i]);
+            max_product = max(max_product, max_temp);
         }
-        return maxProduct;
+        return max_product;
     }
 };
 
