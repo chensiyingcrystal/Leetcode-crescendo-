@@ -10,27 +10,27 @@ public:
    }
 
     int findMin(vector<int>& nums) {
-        if (nums.size() == 1) {
-            return nums[0];
-        }
-
-        int left = 0;
-        int right = nums.size() - 1;
-        int medium = (left + right) / 2;
-
-        while(left < right and (right - left > 1)) {
-            if(nums[left] < nums[medium]) {
-                left = medium;
-            }
-            else {
-                right = medium;
+            if (nums.size() == 1) {
+                return nums[0];
             }
 
-            medium = (left + right) / 2;
+            int left = 0;
+            int right = nums.size() - 1;
+            int medium = (left + right) / 2;
 
+            while(right - left > 1) {
+                if(nums[left] < nums[medium] and nums[medium] > nums[right]) {
+                    left = medium;
+                }
+                else {
+                    right = medium;
+                }
+
+                medium = (left + right) / 2;
+
+            }
+            return min(nums[right], nums[left]);
         }
-        return nums[right];
-    }
 };
 
 
