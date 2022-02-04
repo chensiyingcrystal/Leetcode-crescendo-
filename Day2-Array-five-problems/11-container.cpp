@@ -12,7 +12,7 @@ public:
     int maxArea(vector<int>& height) {
         const int n = height.size();
         int j = 0, k = n - 1;
-        int max_area = INT_MIN;
+        int max_area = 0;
         while (j < k) {
             int area = min(height[j], height[k]) * (k - j);
             if (area > max_area) {
