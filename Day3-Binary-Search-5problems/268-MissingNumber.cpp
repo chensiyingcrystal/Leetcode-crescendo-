@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <unordered_set>
 
 using namespace std;
 
@@ -10,20 +9,18 @@ public:
 
    }
 
+// xor method
+// 0 ^ 0 = 0; 
+// b ^ b = 0;
+// 0 ^ a = a;
+// a ^ b ^ b = a;
 
     int missingNumber(vector<int>& nums) {
-        unordered_set<int> nums_set;
-        const int n = nums.size();
-
-        for(int i = 0; i < n; ++i) {
-            nums_set.insert(nums[i]);
+        int m = 0;
+        for(int i = 1; i <= nums.size(); ++i) {
+            m = m ^ i ^ nums[i - 1];
         }
-
-        for(int i = 0; i <= n; ++i) {
-            if (!nums_set.count(i)) return i;
-        }
-
-        return 0;
+        return m;
     }
 };
 
