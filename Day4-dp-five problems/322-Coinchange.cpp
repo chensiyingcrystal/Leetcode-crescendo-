@@ -8,7 +8,25 @@ public:
     Solution() {
 
     }
-    
+
+    int coinChange(vector<int>& coins, int amount) {
+        vector<int> ans(amount + 1, INT_MAX);
+        ans[0] = 0;
+        for (int i = 1; i <= amount; i++) {
+            int min_value = INT_MAX;
+            for (auto coin : coins) {
+                if (i - coin >= 0) {
+                    min_value = min(min_value, ans[i - coin]);
+                }
+            }
+            if (min_value != INT_MAX) {
+                ans[i] = min_value + 1;
+            } 
+        }
+        return ans[amount] == INT_MAX ? -1 : ans[amount];
+    }
+
+// not that good as above
     // int coinChange(vector<int>& coins, int amount) {
     //     vector<int> ans;
     //     ans.push_back(0);
@@ -30,35 +48,15 @@ public:
     //     }
     //     return ans[amount] == INT_MAX ? -1 : ans[amount];
     // }
-
-//optimized method
-    int coinChange(vector<int>& coins, int amount) {
-        vector<int> ans(amount + 1, INT_MAX);
-        ans[0] = 0;
-        for (int i = 1; i <= amount; i++) {
-            int min_value = INT_MAX;
-            for (auto coin : coins) {
-                if (i - coin >= 0) {
-                    min_value = min(min_value, ans[i - coin]);
-                }
-            }
-            if (min_value != INT_MAX) {
-                ans[i] = min_value + 1;
-            } 
-        }
-        return ans[amount] == INT_MAX ? -1 : ans[amount];
-    }
-
 };
 
 
 int main() {
-    vector<int> coins;
-    coins.push_back(1);
-    coins.push_back(2);
-    coins.push_back(5);
-    int amount = 11;
+    vector<int> coins(3);
+    coins[0] = 1;
+    coins[1] = 2;
+    coins[2] = 5;
     Solution* ss = new Solution();
-    int result = ss->coinChange(coins, amount);
+    int result = ss->coinChange(coins, 11);
     cout << result;
 }
