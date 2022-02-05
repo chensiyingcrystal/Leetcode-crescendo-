@@ -2,7 +2,8 @@
   "files.associations": {
     "vector": "cpp",
     "__split_buffer": "cpp",
-    "string": "cpp"
+    "string": "cpp",
+    "chrono": "cpp"
   },
   "C_Cpp_Runner.cCompilerPath": "/usr/bin/clang",
   "C_Cpp_Runner.cppCompilerPath": "/usr/bin/clang++",
