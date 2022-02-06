@@ -3,7 +3,17 @@
     "vector": "cpp",
     "__split_buffer": "cpp",
     "string": "cpp",
-    "chrono": "cpp"
+    "chrono": "cpp",
+    "algorithm": "cpp",
+    "__hash_table": "cpp",
+    "array": "cpp",
+    "bitset": "cpp",
+    "initializer_list": "cpp",
+    "iterator": "cpp",
+    "string_view": "cpp",
+    "unordered_map": "cpp",
+    "utility": "cpp",
+    "iosfwd": "cpp"
   },
   "C_Cpp_Runner.cCompilerPath": "/usr/bin/clang",
   "C_Cpp_Runner.cppCompilerPath": "/usr/bin/clang++",
