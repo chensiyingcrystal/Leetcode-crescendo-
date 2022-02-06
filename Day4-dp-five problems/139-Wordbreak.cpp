@@ -30,7 +30,8 @@ public:
         return result[n];
     }
 
-    //     bool wordBreak(string s, vector<string>& wordDict) {
+//optimized edision
+    // bool wordBreak(string s, vector<string>& wordDict) {
     //     unordered_map<string, int> dict;
     //     int max_length = 0;
     //     for(auto x : wordDict) {
@@ -55,7 +56,6 @@ public:
     //     return result[n];
     // }
 
-}
 
 int main() {
     vector<string> wordDict;
