@@ -23,7 +23,7 @@ public:
                 str = s[j] + str;
                 if(dict.count(str)) {
                     int length = str.size();
-                    result[i] = result[i - length];
+                    result[i] = result[i] | result[i - length];
                 }
             }
         }
