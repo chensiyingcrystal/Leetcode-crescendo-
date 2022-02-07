@@ -11,18 +11,17 @@ public:
     }
 
 //初始的错误解法： 原因（不知道初始值怎么定义）
+//解决方法： 不是每个初始值都要存储。只有特殊边界值才需要；对于其他一致的值，可以用if语句对其进行control
     int combinationSum4(vector<int>& nums, int target) {
-        vector<int> ways(target + 2);
-        ways[0] = 0;
-        ways[1] = 1;
-        ways[2] = 1;
+        vector<uint32_t> ways(target + 1);
+        ways[0] = 1;
         for(int i = 1; i <= target; ++i) {
-            for(int j = 0; j < nums.size(); ++j) {
-                ways[i] += ways[i - j];
+            for(auto num : nums) {
+                if(i >= num) ways[i] += ways[i - num];
             }
         }
+        return ways[target];
     }
-
 }
 
 int main() {
