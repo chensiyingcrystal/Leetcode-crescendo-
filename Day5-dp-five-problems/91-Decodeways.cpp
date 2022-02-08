@@ -17,7 +17,7 @@ public:
 
         const int n = s.length();
         if(s.empty() || s[0] == '0') { return 0; }
-        if(n == 1) { return 1; }
+        if(n == 1) return 1; 
         vector<int> methods(n + 1, 0);
         methods[0] = 1;
         methods[1] = 1;
@@ -27,8 +27,8 @@ public:
             e1.push_back(s[i - 1]);
             string e2;
             e2.push_back(s[i - 2]);
-            if (library.count(e1)) { methods[i] = methods[i - 1]; }
-            if (library.count(e2 + e1)) {methods[i] += methods[i - 2]; }
+            if (library.count(e1)) methods[i] = methods[i - 1];
+            if (library.count(e2 + e1)) methods[i] += methods[i - 2];
         }
         return methods[n];
     }
