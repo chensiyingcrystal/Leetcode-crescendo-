@@ -1,5 +1,7 @@
 #include <iostream>
 #include <vector>
+#include <unordered_set>
+#include <string>
 
 using namespace std;
 
@@ -10,6 +12,12 @@ public:
     }
 
     int numDecodings(string s) {
+        unordered_set<string> library;
+        for(int x = 0; x <= 25; ++x) {
+            library.insert(to_string(x));
+        }
+
+        
         
     }
 
