@@ -10,8 +10,14 @@ public:
     }
 
     int uniquePaths(int m, int n) {
-        
-        
+        vector<int> n_column(n + 1, 0);
+        vector<vector<int>> w(m + 1, n_column);
+        for(int i = 0; i < m; ++i) {
+            for(int j = 0; j < n; ++j) {
+                w[i][j] = w[i - 1][j] + w[i][j - 1];
+                
+            }
+        }
     }
 
 };
@@ -22,3 +28,6 @@ int main() {
     cout << result << endl;
     return 0;
 }
+
+
+        
