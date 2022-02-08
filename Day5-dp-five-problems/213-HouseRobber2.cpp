@@ -29,6 +29,27 @@ public:
         return max(start_rob[n - 1], end_rob[n - 1]);     
     }
 
+    //对空间进行压缩
+    int rob(vector<int>& nums) {
+        //注意初始值界定的时候要提前判定没有该初始值的情况
+        if (nums.empty()) return 0;
+        if (nums.size() == 1) return nums[0];
+        const int n = nums.size();
+        int start1 = 0, start2 = nums[0], start_result;
+        int end1 = 0, end2 = nums[1], end_result;
+        for(int i = 1; i < n; ++i) {
+            start_result = max(start1 + nums[i - 1], start2);
+            start1 = start2;
+            start2 = start_result;
+        }
+        for(int j = 1; j < n; ++j) {
+            end_result = max(end1 + nums[j], end2);
+            end1 = end2;
+            end2 = end_result;
+        }
+        return max(start_result, end_result);     
+    }
+
 }
 
 int main() {
