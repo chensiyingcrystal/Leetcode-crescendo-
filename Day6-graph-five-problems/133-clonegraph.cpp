@@ -32,6 +32,27 @@ public:
 
     }
 
+    Node* cloneGraph(Node* node) {
+        if(node == NULL) return NULL;
+        unordered_map<int, Node*> copied;
+        queue<Node*> oldNodes;
+        oldNodes.push(node);
+        copied[node->val] = new Node(node->val);
+        while(!oldNodes.empty()) {
+            Node* oldNode = oldNodes.front();
+            oldNodes.pop();
+            for(auto& n : oldNode->neighbors) {
+                if(copied.find(n->val) == copied.end()) {
+                    copied[n->val] = new Node(n->val);
+                    oldNodes.push(n);
+                }
+                copied[oldNode->val]->neighbors.push_back(copied[n->val]);
+            }
+        }
+        return copied[node->val];
+    }
+
+
     // Node* cloneGraph(Node* node) {
     //     if (node == NULL) return NULL;
     //     unordered_map<int, Node*> discovered;
