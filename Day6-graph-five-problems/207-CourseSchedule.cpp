@@ -41,7 +41,7 @@ public:
     //     return true;
     // }
  
-     bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
+     bool canFinish(int numCourses, vector<vector<int> >& prerequisites) {
         unordered_map<int, int> input_map;
         unordered_map<int, vector<int> > output_map;
         for(int i = 0; i < prerequisites.size(); ++i) {
