@@ -75,8 +75,5 @@ public:
 }
 
 int main() {
-    Solution* ss = new Solution();
-    Node* result = ss->cloneGraph();
-
     return 0;
 }

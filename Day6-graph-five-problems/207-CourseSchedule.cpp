@@ -103,8 +103,5 @@ public:
 }
 
 int main() {
-    Solution* ss = new Solution();
-    Node* result = ss->canFinish();
-
     return 0;
 }
