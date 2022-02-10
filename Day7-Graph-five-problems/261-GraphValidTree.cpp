@@ -11,7 +11,7 @@ public:
     Solution() {
 
     }
-
+    //Solution1: bfs
     bool validTree(int n, vector<vector<int> >& edges) {
         //special case
         if (!edges.size()) return n == 1;
@@ -33,14 +33,16 @@ public:
         int count = 0;
         //begin bfs
         while(!q.empty()) {
+            //fetch the first node, pop, modify checking status, update the counting tool 
             int node = q.front();
             q.pop();
             to_be_visited.erase(node);
             count ++;
             //neighbor processing
             for(int neighbor : node_map[node]) {
+                //check to see if any other decision related to the final result
                 if(to_be_visited.count(neighbor)) return false;
-                //visited or not
+                //visited or not, if not, add to queue and update its checking status
                 if(!visited.count(neighbor)) {
                     q.push(neighbor);
                     to_be_visited.insert(neighbor);
@@ -48,6 +50,7 @@ public:
                 }
             }
         }
+        //return counting tool results
         return count == n;
     }
 };
