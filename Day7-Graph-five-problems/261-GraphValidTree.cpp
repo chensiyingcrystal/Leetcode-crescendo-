@@ -12,32 +12,43 @@ public:
 
     }
 
-    bool Graphvalidtree(int n, vector<vector<int> >& edges) {
+    bool validTree(int n, vector<vector<int> >& edges) {
+        //special case
+        if (!edges.size()) return n == 1;
+        //preprocessing
         unordered_map<int, vector<int> > node_map;
-        unordered_set<int> visited(n, 0);
-        queue<int> q;
-        int count = n - 1;
-        for(int i = 0; i < edges.size(); i++) {
-            node_map[edges[i][0]].push_back(edges[i][1]);
+        for(auto& edge : edges) {
+            node_map[edge[0]].push_back(edge[1]);
+            node_map[edge[1]].push_back(edge[0]);
         }
-        for (int i = 0; i < n; i++) {
-            if (!visited[i]) {
-                q.push(i);
-                visited[i] = 1;
-                while(!q.empty()) {
-                    int node = q.front();
-                    q.pop();
-                    count --;
-                    for(auto& neighbor : node_map[node]) {
-                        if (visited[neighbor]) return false
-                        q.push(neighbor);
-                        visited[neighbor] = 1;
-                    }
-                    visited[node] = 1;
+        //build queue and visited, to_be_visited
+        unordered_set<int> visited;
+        queue<int> q;
+        unordered_set<int> to_be_visited;
+        //primitive push value, set visited
+        q.push(edges[0][0]);
+        to_be_visited.insert(edges[0][0]);
+        visited.insert(edges[0][0]);
+        //couting tool
+        int count = 0;
+        //begin bfs
+        while(!q.empty()) {
+            int node = q.front();
+            q.pop();
+            to_be_visited.erase(node);
+            count ++;
+            //neighbor processing
+            for(int neighbor : node_map[node]) {
+                if(to_be_visited.count(neighbor)) return false;
+                //visited or not
+                if(!visited.count(neighbor)) {
+                    q.push(neighbor);
+                    to_be_visited.insert(neighbor);
+                    visited.insert(neighbor);
                 }
             }
         }
-        return n == 0;
+        return count == n;
     }
 };
 

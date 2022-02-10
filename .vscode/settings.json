@@ -14,7 +14,9 @@
     "unordered_map": "cpp",
     "utility": "cpp",
     "iosfwd": "cpp",
-    "queue": "cpp"
+    "queue": "cpp",
+    "deque": "cpp",
+    "unordered_set": "cpp"
   },
   "C_Cpp_Runner.cCompilerPath": "/usr/bin/clang",
   "C_Cpp_Runner.cppCompilerPath": "/usr/bin/clang++",
