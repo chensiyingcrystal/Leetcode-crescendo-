@@ -13,7 +13,7 @@ public:
         // special case
         if (intervals.empty() || intervals.size() == 1) return 0;
         int remove = 0;
-        // reference instead of value, which will increase time
+        // must use "&":reference instead of value, which will increase running time
         sort(intervals.begin(), intervals.end(), 
               [](vector<int>& a, vector<int>& b) {
                   return a[0] < b[0];
