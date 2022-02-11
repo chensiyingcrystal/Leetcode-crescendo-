@@ -1,5 +1,4 @@
 #include <iostream>
-#include <unordered_map>
 #include <vector>
 
 using namespace std;
@@ -15,7 +14,7 @@ public:
         if (intervals.empty()) return {};
         // sorting: sort intervals by its start
         sort(intervals.begin(), intervals.end(), 
-             [](vector<int> a, vector<int> b){
+             [](vector<int>& a, vector<int>& b){
                     return a[0] < b[0];
                 });
         vector<vector<int> > ans;
