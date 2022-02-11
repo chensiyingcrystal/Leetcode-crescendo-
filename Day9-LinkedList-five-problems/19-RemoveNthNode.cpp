@@ -30,6 +30,7 @@ public:
                 curr = curr->next;
             }
             if (curr == NULL) {
+                // special case: remove the first one; cannot point NULL to head
                 if (target == head) head = target->next;
                 else {prev->next = target->next;}
                 break;
