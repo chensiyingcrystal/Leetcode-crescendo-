@@ -20,7 +20,26 @@ public:
     };
 
     ListNode* removeNthFromEnd(ListNode* head, int n) {
-        
+        if (head == NULL) return NULL;
+        if (head->next == NULL && n == 1) return NULL;
+        ListNode* prev = NULL;
+        ListNode* curr = head;
+        while(curr != NULL) {
+            ListNode* target = curr;
+            for(int i = 0; i < n; i++) {
+                curr = curr->next;
+            }
+            if (curr == NULL) {
+                if (target == head) head = target->next;
+                else {prev->next = target->next;}
+                break;
+            }
+            else {
+                prev = target;
+                curr = target->next;
+            }
+        }
+        return head;
     }
 
 
