@@ -1,7 +1,6 @@
 #include <iostream>
 #include <unordered_map>
 #include <vector>
-#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -16,18 +15,18 @@ public:
         if (intervals.empty()) return {};
         // sorting: sort intervals by its start
         sort(intervals.begin(), intervals.end(), 
-             [](const Interval& a, const Interval& b){
-                    return a. start < b.start;
+             [](vector<int> a, vector<int> b){
+                    return a[0] < b[0];
                 });
-        vector<Interval> ans;
+        vector<vector<int> > ans;
         // if current.start <= last.end: Merge intervals(two cases: last.end > curren.end or <)
         // else: Insert a new interval
         for(const auto& interval : intervals) {
-            if (ans.empty() || interval.start > ans.back().end) {
+            if (ans.empty() || interval[0] > ans.back()[1]) {
                 ans.push_back(interval);
             }
             else {
-                ans.back().end = max(ans.back().end, interval.end);
+                ans.back()[1] = max(ans.back()[1], interval[1]);
             }
         }
         return ans; 
