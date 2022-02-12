@@ -21,23 +21,29 @@ public:
 
     ListNode* mergeKLists(vector<ListNode*>& lists) {
         if (lists.empty() || (lists.size() == 1 && lists[0] == NULL)) return NULL;
-        priority_queue<ListNode*, vector<int>, greater<ListNode* > min_heap;
+        auto comp = [](ListNode* a, ListNode* b) {return a->val > b->val;};
+        priority_queue<ListNode*, vector<ListNode*>, decltype(comp)> min_heap(comp);
         for(ListNode* listnode : lists) {
             ListNode* temp_node = listnode;
             while (temp_node != NULL) {
-                min_heap.push(temp_node*);
+                min_heap.push(temp_node);
                 temp_node = temp_node->next;
+                
             }
         }
+        if (min_heap.empty()) 
+            return NULL;
         ListNode* mergedlist = min_heap.top();
+        ListNode* head = mergedlist;
         min_heap.pop();
+        cout << head->val << endl;
         while(!min_heap.empty()) {
-            mergedlist->next = min_heap.top()
+            mergedlist->next = min_heap.top();
             mergedlist = min_heap.top();
             min_heap.pop();
         }
-        
-        
+        mergedlist->next = NULL;
+        return head; 
     }
 
 
