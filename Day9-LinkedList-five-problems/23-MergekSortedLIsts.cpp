@@ -21,8 +21,8 @@ public:
 // optimized: time complexity: Nlogk, space complexity: k
     ListNode* mergeKLists(vector<ListNode*>& lists) {
         // set the item before the head领头羊，下一个就是head
-        ListNode dummy(0);
-        ListNode* head = &dummy;
+        ListNode* dummy = new ListNode();
+        ListNode* head = dummy;
 
         // construct priority queue
         auto comp = [](ListNode* a, ListNode* b){ return a->val > b->val; };
@@ -41,7 +41,7 @@ public:
             pq.pop();
             if (head->next) pq.push(head->next);
         }
-        return dummy.next;
+        return dummy->next;
     }
 
     

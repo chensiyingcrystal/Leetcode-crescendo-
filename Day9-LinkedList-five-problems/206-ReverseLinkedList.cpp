@@ -21,12 +21,9 @@ public:
     ListNode* reverseList(ListNode* head) {
         // special case
         if (head == NULL) return NULL;
-        ListNode* curr = new ListNode();
-        ListNode* prev = new ListNode();
-        ListNode* next = new ListNode();
-        curr = head;
-        prev = NULL;
-        next = NULL;
+        ListNode* curr = head;
+        ListNode* prev = NULL;
+        ListNode* next = NULL;
         while (curr->next != NULL) {
             next = curr->next;
             curr->next = prev;
