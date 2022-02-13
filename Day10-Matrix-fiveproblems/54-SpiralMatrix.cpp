@@ -10,6 +10,7 @@ public:
 
    }
 
+// solution2
     vector<int> spiralOrder(vector<vector<int> >& matrix) {
         int m = matrix.size();
         int n = matrix[0].size();
@@ -33,6 +34,7 @@ public:
         return spiral;
     }
 
+// solution1
         vector<int> spiralOrder(vector<vector<int>>& matrix) {
         int m = matrix.size();
         int n = matrix[0].size();
