@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <unordered_set>
 #include <unordered_map>
 #include <queue>
 
@@ -12,9 +13,10 @@ public:
     }
 
     int longestConsecutive(vector<int>& nums) {
+        // special case
         const int n = nums.size();
-        if (n == 0) return 0;
-        vector<int> checked(n, 0);
+        // 标记
+        unordered_set<int> checked;
         int count = 0;
         unordered_map<int, int> nums_index;
         for(int i = 0; i < n; i++) {
@@ -23,16 +25,21 @@ public:
         queue<int> q;
         int ans = 0;
         for(int i = 0; i < n; i++) {
-            if (!checked[i]) {
+            if (!checked.count(nums[i])) {
                 q.push(i);
                 count = 1;
+                checked.insert(nums[i]);
                 while(!q.empty()) {
                     int index = q.front();
                     q.pop();
-                    if (nums_index.find(nums[index] + 1) != nums_index.end() && 
-                        !checked[nums_index[nums[index] + 1]]) {
+                    if (nums_index.find(nums[index] + 1) != nums_index.end() && !checked.count(nums[index] + 1)) {
                         q.push(nums_index[nums[index] + 1]);
-                        checked[nums_index[nums[index] + 1]] = 1;
+                        checked.insert(nums[index] + 1);
+                        count += 1;
+                    }
+                    if (nums_index.find(nums[index] -1) != nums_index.end() && !checked.count(nums[index]-1)) {
+                        q.push(nums_index[nums[index] - 1]);
+                        checked.insert(nums[index] - 1);
                         count += 1;
                     }
                 }

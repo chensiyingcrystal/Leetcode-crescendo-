@@ -13,22 +13,13 @@ public:
     }
 
     string alienOrder(vector<string>& words) {
-        // special case
-        if (words.empty()) return "";
-        if (words.size() == 1) return words[0];
         // 构建拓扑图
         unordered_map<char, unordered_set<char> > topo;
-        unordered_map<char, int> restrictions;
+        unordered_map<char, int> restrictions;      
+        if (!buildGraph(words, topo, restrictions)) return "";
         // 构建存储结果和指示器
         string result;
-        for (auto& word : words) {
-            for (auto& c : word) {
-                restrictions[c] = 0;
-            }
-        }
         int number = restrictions.size();
-        // 构建拓扑图        
-        if (!buildGraph(words, topo, restrictions)) return "";
         // 初始化队列：确定初始元素
         queue<char> q;
         for(auto c : restrictions) {
@@ -55,11 +46,17 @@ public:
 
     bool buildGraph(vector<string>& words, unordered_map<char, unordered_set<char> >& topo, 
     unordered_map<char, int>& restrictions) {
+        for (auto& word : words) {
+            for (auto& c : word) {
+                restrictions[c] = 0;
+            }
+        }
+        
         for(int i = 0; i < words.size() - 1; i++) {
             string self = words[i];
             string next = words[i + 1];
-            // 检查是否会出现ab abb的情况
-            if(self.size() < next.size() && next.substr(0, self.size()) == self) return false;
+            // 检查是否会出现abb ab的情况
+            if(self.size() > next.size() && self.substr(0, next.size()) == next) return false;
             for (int j = 0; j < min(self.size(), next.size()); j++) {
                 if (self[j] != next[j]) {
                     if (topo[self[j]].find(next[j]) == topo[self[j]].end()) {
