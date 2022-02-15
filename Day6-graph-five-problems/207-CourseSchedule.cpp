@@ -56,7 +56,7 @@ public:
                 q.push(i);
             }
         }
-        // 开始bfs
+        // 开始拓扑排序（bfs）
         while(!q.empty()) {
             // 从队列取出元素并删除
             int temp = q.front();
@@ -73,6 +73,7 @@ public:
                 }
             }  
         }
+        // return指示器结果
         return numCourses == 0; 
     }
 
