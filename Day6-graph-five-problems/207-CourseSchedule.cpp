@@ -42,25 +42,33 @@ public:
     // }
  
      bool canFinish(int numCourses, vector<vector<int> >& prerequisites) {
+        // 构建拓扑图：节点的受约束数量和约束节点对被约束节点的映射表
         unordered_map<int, int> input_map;
         unordered_map<int, vector<int> > output_map;
         for(int i = 0; i < prerequisites.size(); ++i) {
             input_map[prerequisites[i][0]] += 1;
             output_map[prerequisites[i][1]].push_back(prerequisites[i][0]);
         }
+        // 初始化队列，确定拓扑图的开始节点
         queue<int> q;
         for(int i = 0; i < numCourses; i++) {
             if(input_map.find(i) == input_map.end()) {
                 q.push(i);
             }
         }
+        // 开始bfs
         while(!q.empty()) {
+            // 从队列取出元素并删除
             int temp = q.front();
             q.pop();
+            // 指示的计数器开始更新
             numCourses --;
+            // 对节点的邻居操作：删除节点的边，与此同时受约束节点的受限制数量减1，如果转变为0，将其添加队列中
             if(output_map.find(temp) != output_map.end()) {
                 for(auto& output : output_map[temp]) {
                     input_map[output] --;
+                    // 添加入队列的两次机会：初始受限制数量为0，中途受限制数量转变为0
+                    // 不需要检测该节点是否已经访问过，因为它如果没有在初始队列中添加，就一定不会与其重复
                     if(input_map[output] == 0) q.push(output);
                 }
             }  
