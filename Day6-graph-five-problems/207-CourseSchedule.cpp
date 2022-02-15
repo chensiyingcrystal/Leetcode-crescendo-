@@ -60,10 +60,7 @@ public:
             numCourses --;
             if(output_map.find(temp) != output_map.end()) {
                 for(auto& output : output_map[temp]) {
-                    //redundant clause
-                    // if(input_map.find(output) != input_map.end()) {
                     input_map[output] --;
-                    // }
                     if(input_map[output] == 0) q.push(output);
                 }
             }  
