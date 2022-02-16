@@ -10,6 +10,80 @@ public:
     Solution() {
 
     }
+    //bfs方法
+    vector<vector<int>> pacificAtlantic(vector<vector<int>>& heights) {
+        //special case, dimension
+        if (heights.empty()) return {};
+        const int m = heights.size();
+        const int n = heights[0].size();
+
+        //建立记录结果的容器
+        vector<vector<int>> p(m, vector<int>(n, 0));
+        vector<vector<int>> a(m, vector<int>(n, 0));
+
+        //对首行和末行每个元素进行bfs搜索
+        for (int x = 0; x < n; x++) {
+            bfs(heights, 0, x, 0, p);
+            bfs(heights, m - 1, x, 0, a);
+        }
+
+        //对首列和末列每个元素进行bfs搜索
+        for (int x = 0; x < m; x++) {
+            bfs(heights, x, 0, 0, p);
+            bfs(heights, x, n - 1, 0, a);
+        }
+            
+        //将bfs结果的交集存入最终结果中
+        vector<vector<int>> ans;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (p[i][j] && a[i][j]) {
+                    vector<int> pair;
+                    pair.push_back(i);
+                    pair.push_back(j);
+                    ans.push_back(pair);
+                }
+            }
+        }
+        //返回结果
+        return ans;
+    }
+
+private:
+//bug点：一定要传引用！！
+    void bfs(vector<vector<int>>& heights, int i, int j, int h, vector<vector<int>>& result) {
+        const int m = heights.size();
+        const int n = heights[0].size();
+
+        int row_arr[] = {1, -1, 0, 0};
+        int col_arr[] = {0, 0, 1, -1};
+
+        // 初始化q
+        queue<int> q;
+        q.push(i * n + j);
+        result[i][j] = 1;
+        while (!q.empty()) {
+            int tmp = q.front();
+            q.pop();
+            //bug点 应该是除n而不是m
+            i = tmp / n;
+            j = tmp % n;
+            // 对其邻居进行搜索
+            for (int x = 0; x < 4; x++) {
+                int n_i = i + row_arr[x];
+                int n_j = j + col_arr[x];
+                if (n_i < 0 || n_j < 0 || n_i > m - 1 || n_j > n - 1) continue;
+                //bug点 对于h的比较是邻居的值和当前值进行比较，不是和传入的h
+                if (result[n_i][n_j] || heights[i][j] > heights[n_i][n_j]) continue;
+                q.push(n_i * n + n_j);
+                result[n_i][n_j] = 1;
+            }
+        }
+    }
+
+
+
+
     // 优化方法 dfs，从边界出发向中间进行深度优先搜索， 对每个元素进行记录，减少时间复杂度
     vector<vector<int>> pacificAtlantic(vector<vector<int>>& heights) {
         //special case, dimension
