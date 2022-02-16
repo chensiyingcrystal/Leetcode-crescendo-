@@ -15,9 +15,11 @@ public:
     int longestConsecutive(vector<int>& nums) {
         // special case
         const int n = nums.size();
-        // 建立标记元素，为了查找方便复制所有元素进入unordered_set, 建立存储结果
+        // 建立队列（放在循环外），因为循环内每次队列空了才会到下一个，这样做可以略省空间
+        //建立标记元素，为了查找方便复制所有元素进入unordered_set, 建立存储结果
         unordered_set<int> checked;
         unordered_set<int> nums_set;
+        queue<int> q;
         for(int i = 0; i < n; i++) {
             nums_set.insert(nums[i]);
         }
@@ -29,7 +31,6 @@ public:
             // 这也是为什么要对该元素的每个邻居都要进行左右查找，如果只是单方向进行相当于默认递增，而只有找到最小值的时候，链条长度才为最长，元素重复查找导致时间复杂度增加 
             if (!checked.count(nums[i])) {
                 //初始化队列
-                queue<int> q;
                 q.push(nums[i]);
                 //计数器工作，同时标记为已访问
                 count = 1;
