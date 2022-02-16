@@ -60,22 +60,18 @@ public:
 
 //Solution2: 另一种解法是单向增长，所以只找最小值进行最大值的循环，如果有比该元素更小的则跳过，时间复杂度与上面相近
     int longestConsecutive(vector<int>& nums) {
-        unordered_set<int> x;
-        int count=0, ans=0;
-        for(int i=0; i<nums.size(); i++) 
-            x.insert(nums[i]);
-        for(auto i: x) {
-            count=0;
-            if(!x.count(i-1)) {
-                count++;
-                 while(x.count(i+1)) {
-                    count++;
-                     i++;
-                 }
-                 ans = max(ans, count);
+        // 快捷的初始化set的写法：将nums的所有元素全部插入hash set
+        unordered_set<int> h(nums.begin(), nums.end());
+        int ans = 0;
+        // 直接对hash set的元素进行访问，可以避免重复值，减少时间复杂度
+        for (int num : h) {
+            if (!h.count(num - 1)) {
+                int count = 0;
+                while (h.count(num++)) count++;
+                ans = max(ans, count);
             }
         }
-     return ans;
+        return ans;
     }
 };
 
