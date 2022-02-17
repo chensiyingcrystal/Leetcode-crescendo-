@@ -13,6 +13,7 @@ public:
 
     }
 //solution1: sort each word and then group
+//time complexity: o(NKlogK) space: o(NK)(字符串与数字不同，每个字符都要占2字节)
     vector<vector<string> > groupAnagrams(vector<string>& strs) {
         unordered_map<string, vector<string> > group;
         vector<vector<string> > result;
@@ -30,6 +31,40 @@ public:
         }
         return result;
     }
+
+//interview recommended
+//solution2: use 26 characters couting, and put every sorted word in a map
+//time complexity: o(N*(K+26)) -> o(NK) space: o(NK + N*26)
+    vector<vector<string> > groupAnagrams(vector<string>& strs) {
+        if (strs.empty()) return {};
+        unordered_map<string, vector<string> > group;
+        vector<vector<string> > result;
+
+        for (string s : strs) {
+            group[strSort(s)].push_back(s);
+        }
+
+        for (auto& pair : group) {
+            result.push_back(pair.second);
+        }
+
+        return result; 
+    }
+    
+    string strSort(string s) {
+        int arr[26] = {0};
+        for (char c : s) {
+            arr[c - 'a']++;
+        }
+        
+        string t;
+        for (int x = 0; x < 26; x++) {
+            t += string(arr[x], x + 'a');
+        }
+        return t;
+    }
+
+
 //brute force, will tle
     // vector<vector<string> > groupAnagrams(vector<string>& strs) {
     //     //build visited, result
