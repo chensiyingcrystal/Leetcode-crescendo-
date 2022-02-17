@@ -15,22 +15,19 @@ public:
     }
 //easy solution: reverse and compare, little trick: sift all alnum
   bool isPalindrome(string s) {
-    string filtered_string, reversed_string;
-
+    string filtering, reversing;
 //filtering
-    for (auto ch : s) {
-    //use isalnum to determine if it's an Alphanumeric character
-      if (isalnum(ch))
-        filtered_string += tolower(ch);
+    for (char& c : s) {
+        //use isalnum to determine if it's an Alphanumeric character
+        if (isalnum(c)) {
+            filtering += tolower(c);
+        }
     }
-
 //reversing
-    reversed_string.resize(filtered_string.size());
-    reverse_copy(filtered_string.begin(), filtered_string.end(),
-                 reversed_string.begin());
-
+    reversing.resize(filtering.size());
+    reverse_copy(filtering.begin(), filtering.end(), reversing.begin());
 //comparing
-    return filtered_string == reversed_string;
+    return filtering == reversing;
   }
 
 //常规做法（自己写的）
