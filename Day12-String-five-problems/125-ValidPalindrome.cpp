@@ -13,24 +13,41 @@ public:
 
 
     }
-//easy solution: reverse and compare, little trick: sift all alnum
-  bool isPalindrome(string s) {
-    string filtering, reversing;
-//filtering
-    for (char& c : s) {
-        //use isalnum to determine if it's an Alphanumeric character
-        if (isalnum(c)) {
-            filtering += tolower(c);
+//solution1: reverse and compare, little trick: sift all alnum
+//time: o(n); space: o(n)
+    bool isPalindrome(string s) {
+        string filtering, reversing;
+        //filtering
+        for (char& c : s) {
+            //use isalnum to determine if it's an Alphanumeric character
+            if (isalnum(c)) {
+                filtering += tolower(c);
+            }
         }
+        //reversing
+        reversing.resize(filtering.size());
+        reverse_copy(filtering.begin(), filtering.end(), reversing.begin());
+        //comparing
+        return filtering == reversing;
     }
-//reversing
-    reversing.resize(filtering.size());
-    reverse_copy(filtering.begin(), filtering.end(), reversing.begin());
-//comparing
-    return filtering == reversing;
-}
 
-//常规做法（自己写的）
+//solution2: two pointers, recommened
+//time: o(n); space: o(1)
+    bool isPalindrome(string s) {
+        for (int i = 0, j = s.size() - 1; i < j; i++, j--) {
+            while (i < j && !isalnum(s[i])) {
+                i++;
+            }
+            while (i < j && !isalnum(s[j])) {
+                j--;
+            }
+
+            if (tolower(s[i]) != tolower(s[j])) return false;
+        }
+        return true;
+    }
+
+//常规做法（自己写的）time: o(n), space: o(1)
     bool isPalindrome(string s) {
         string t;
         for (char c : s) {
