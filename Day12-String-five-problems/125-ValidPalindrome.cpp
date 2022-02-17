@@ -28,7 +28,7 @@ public:
     reverse_copy(filtering.begin(), filtering.end(), reversing.begin());
 //comparing
     return filtering == reversing;
-  }
+}
 
 //常规做法（自己写的）
     bool isPalindrome(string s) {
