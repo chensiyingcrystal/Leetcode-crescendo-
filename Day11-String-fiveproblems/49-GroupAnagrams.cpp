@@ -12,38 +12,42 @@ public:
 
 
     }
+//solution1: sort each word and then group
 
-    bool isAnagram(string s, string t) {
-        if (s.empty() || t.empty()) return false;
-        // 容易忽略的点： 这种类型的题，对于特殊case记得判断大小，s的size不能小于t的
+//brute force, will tle
+    vector<vector<string> > groupAnagrams(vector<string>& strs) {
+        //build visited, result
+        vector<int>visited(strs.size(), 0);
+        vector<vector<string> > result;
+        //loop through each element to see if one is another's anagram
+        for (int i = 0; i < strs.size(); i++) {
+            if (visited[i] == 0) {
+                vector<string> result_of_i;
+                result_of_i.push_back(strs[i]);
+                visited[i] = 1;
+                for (int j = i + 1; j < strs.size(); j++) {
+                    if (visited[j] == 0) {
+                        if (anaGrams(strs[i], strs[j])) {
+                            result_of_i.push_back(strs[j]);
+                            visited[j] = 1;
+                        }
+                    }
+                }
+                result.push_back(result_of_i);
+            }
+        }
+        return result;
+    }
+
+    bool anaGrams(string s, string t) {
         if (s.size() != t.size()) return false;
-        unordered_map<char, int> s_map, t_map;
-        for (char c : s) s_map[c]++;
-        for (char c : t) t_map[c]++;
-
-        for (auto& c : s_map) {
-            //not using '.count' here
-            //count函数直接放回的是一个数值，如果存在，那么返回1，反之0；
-            //find返回的是一个iterator， 直接输出iterator是会报错的，要输出的话得取出迭代器的值再输出。 
-            if (t_map[c.first] != s_map[c.first]) return false;
+        int arr[26] = {0};
+        for (char c : s) arr[c - 'a']++;
+        for (char c : t) arr[c - 'a']--;
+        for (int i = 0; i < 26; i++) {
+            if (arr[i] != 0) return false;
         }
         return true;
     }
 
-//space and time optimized edition
-        bool isAnagram(string s, string t) {
-            if (s.empty() || t.empty()) return false;
-            if (s.size() != t.size()) return false;
-
-            //这里用vector int和array的时间空间差别不大
-            // int st[26] = {0};
-            vector<int> st(26);
-            for (char c : s) st[c - 'a']++;
-            for (char c : t) st[c - 'a']--;
-
-            for (int i = 0; i < 26; i++) { 
-                if (st[i] != 0) return false;
-            }
-            return true;
-        }
 };

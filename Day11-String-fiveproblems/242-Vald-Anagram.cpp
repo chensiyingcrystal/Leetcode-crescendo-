@@ -14,7 +14,8 @@ public:
     }
 
     bool isAnagram(string s, string t) {
-        if (s.empty() || t.empty()) return false;
+        //错误判断的特殊case
+        // if (s.empty() || t.empty()) return false;
         // 容易忽略的点： 这种类型的题，对于特殊case记得判断大小，s的size不能小于t的
         if (s.size() != t.size()) return false;
         unordered_map<char, int> s_map, t_map;
