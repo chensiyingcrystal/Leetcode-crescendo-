@@ -17,7 +17,8 @@
     "queue": "cpp",
     "deque": "cpp",
     "unordered_set": "cpp",
-    "iostream": "cpp"
+    "iostream": "cpp",
+    "ios": "cpp"
   },
   "C_Cpp_Runner.cCompilerPath": "/usr/bin/clang",
   "C_Cpp_Runner.cppCompilerPath": "/usr/bin/clang++",

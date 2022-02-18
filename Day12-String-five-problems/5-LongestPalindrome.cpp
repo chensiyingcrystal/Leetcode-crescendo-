@@ -54,7 +54,7 @@ public:
     }
 
 //Soluton2: dp, space complexity o(1), from one point or two and then expand
-// time: best o(n), worst o(n2), space o(1)
+// time: best o(n)(every word is different and contain some symbols), worst o(n2), space o(1)
 // time decreased dramatically compared to solution1
     string longestPalindrome(string s) {
         const int n = s.size();
@@ -85,4 +85,30 @@ public:
         return right - left - 1;
     }
 
+//easy to write
+    string longestPalindrome(string s) {
+        const int n = s.size();
+        //result
+        int maxLen = 0, start = 0;
+        //build lambda funtion
+        //bug: variable n cannot captured in a lambda without capture-default specified
+        //remember to put '&' inside '[]'
+        auto getLen = [&](int left, int right) {
+            while (left >= 0 && right < n && s[left] == s[right]) {
+                left--;
+                right++;
+            }
+            return right - left - 1;
+        };
+        // begin for loop
+        for (int i = 0; i < n; i++) {
+            int curLen = max(getLen(i, i), getLen(i, i + 1));
+            if (curLen > maxLen) {
+                maxLen = curLen;
+                //counting start should consider the even number and odd number of length case
+                start = i - (curLen - 1) / 2;
+            }
+        }
+        return s.substr(start, maxLen);
+    }
 };
