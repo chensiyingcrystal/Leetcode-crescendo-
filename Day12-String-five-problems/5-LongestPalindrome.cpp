@@ -54,6 +54,8 @@ public:
     }
 
 //Soluton2: dp, space complexity o(1), from one point or two and then expand
+// time: best o(n), worst o(n2), space o(1)
+// time decreased dramatically compared to solution1
     string longestPalindrome(string s) {
         const int n = s.size();
         //result
@@ -73,7 +75,10 @@ public:
     //return the maximum length of a palindrome that is expanded from a point or two points
     int getLen(string& s, int left, int right) {
         const int n = s.size();
-        while (s[left] == s[right] && left >= 0 && right < n) {
+        //horrible bug: if left is -1, then s[-1] will overflow
+        //remember to put control boundary first
+        // while (s[left] == s[right] && left >= 0 && right < n) {
+        while (left >= 0 && right < n && s[left] == s[right]) {
             left--;
             right++;
         }
