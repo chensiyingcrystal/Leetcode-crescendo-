@@ -1,7 +1,6 @@
 #include <iostream>
 #include <vector>
 #include <unordered_map>
-#include <queue>
 
 using namespace std;
 
@@ -20,10 +19,7 @@ public:
         TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
     };
 
-    bool isSameTree(TreeNode* p, TreeNode* q) {
-        if (!p && !q) return true;
-        if (!p && q || p && !q) return false;
-        if (p -> val != q -> val) return false;
-        return isSameTree(p -> left, q -> left) && isSameTree(p -> right, q -> right);
+    TreeNode* invertTree(TreeNode* root) {
+        
     }
 };

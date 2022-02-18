@@ -19,7 +19,7 @@ public:
         TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
     };
 //简洁的写法
-//time o(|V|) space o(1)
+//time o(N), N is the number of nodes; space: worst o(N), best o(log(N))
     int maxDepth(TreeNode* root) {
         if (!root) return 0;
         return max(maxDepth(root -> left), maxDepth(root -> right)) + 1;
