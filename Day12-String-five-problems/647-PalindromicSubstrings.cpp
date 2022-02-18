@@ -22,7 +22,8 @@ public:
                 right++;
                 count++;
             }
-            return count;
+            //important: even case, not counting itself; odd case, counting itself
+            return left == right? count : count - 1;
         };
         for (int i = 0; i < n; i++) {
             int num = getNumber(i, i) + getNumber(i, i + 1);
