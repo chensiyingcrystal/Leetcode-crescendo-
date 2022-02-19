@@ -95,8 +95,25 @@ vector<vector<int> > levelOrder(TreeNode* root) {
     }
 
 //solution 4: recursive
-vector<vector<int> > levelOrder(TreeNode* root) {
-    
+vector<vector<int> > result;
 
+vector<vector<int> > levelOrder(TreeNode* root) {
+    if (!root) return {};
+    makeOrder(root, 0);
+    return result;
     }
+
+void makeOrder(TreeNode* node, int level) {
+    if (level == result.size()) {
+        vector<int> new_list;   
+        result.push_back(new_list);
+    }
+
+    result[level].push_back(node -> val);
+
+    if (node -> left) makeOrder(node -> left, level + 1);
+    if (node -> right) makeOrder(node -> right, level + 1);
+}
+
+
 };
