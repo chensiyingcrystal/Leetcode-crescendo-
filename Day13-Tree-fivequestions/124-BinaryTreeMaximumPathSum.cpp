@@ -21,6 +21,17 @@ public:
     };
 
     int maxPathSum(TreeNode* root) {
-        
+        if (!root) return 0;
+        int ans = INT_MIN;
+        maxCurrsum(root, ans);
+        return ans;
+    }
+
+    int maxCurrsum(TreeNode* node, int& ans) {
+        if (!node) return 0;
+        int maxLeft = max(maxCurrsum(node -> left, ans), 0);
+        int maxRight = max(maxCurrsum(node -> right, ans), 0);
+        ans = max(ans, node -> val + maxLeft + maxRight);
+        return node -> val + max(maxLeft, maxRight);
     }
 };
