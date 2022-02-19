@@ -37,6 +37,7 @@ public:
                 continue;
             }
             //add space to split
+            //add delimiter is important for all these types of questions
             else result += to_string(tmp -> val) + " ";
 
             q.push(tmp -> left);
