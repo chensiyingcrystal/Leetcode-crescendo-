@@ -19,10 +19,12 @@ public:
         TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
         TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
     };
-
+//第一遍自己写的
     TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+        if (preorder.empty()) return NULL;
         TreeNode* root = new TreeNode(preorder[0]);
-
+        if (preorder.size() == 1) return root;
+        
         vector<int> in_left, in_right;
         int k;
         for (int i = 0; i < inorder.size(); i++) {
@@ -36,7 +38,7 @@ public:
         }
 
         vector<int> pre_left, pre_right;
-        for (int i = 1; i < in_left.size(); i++) {
+        for (int i = 1; i < in_left.size() + 1; i++) {
             pre_left.push_back(preorder[i]);
         }
 
@@ -50,4 +52,23 @@ public:
         return root;
     }
 
+//简洁的方法：遇到类似的从相对位置走确定步长的，传参数
+    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+        if (preorder.empty()) return NULL;
+        return helper(preorder, 0, preorder.size(), inorder, 0, inorder.size());
+    }
+
+    TreeNode* helper(vector<int>& preorder, int ps, int pe, vector<int>& inorder, int is, int ie) {
+        if (ps > pe) return NULL;
+        
+        int i = 0;
+        while (inorder[is + i] != preorder[ps]) i++; 
+
+        TreeNode* root = new TreeNode(preorder[ps]);
+
+        root -> left = helper(preorder, ps + 1, ps + i, inorder, is, is + i - 1);
+        root -> right = helper(preorder, ps + i + 1, pe, inorder, is + i + 1, ie);
+
+        return root;
+    }
 };
