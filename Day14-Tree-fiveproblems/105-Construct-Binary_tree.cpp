@@ -53,9 +53,10 @@ public:
     }
 
 //简洁的方法：遇到类似的从相对位置走确定步长的，传参数
+//更省时，上面的方法每次都需要新建动态数组
     TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
         if (preorder.empty()) return NULL;
-        return helper(preorder, 0, preorder.size(), inorder, 0, inorder.size());
+        return helper(preorder, 0, preorder.size() - 1, inorder, 0, inorder.size() - 1);
     }
 
     TreeNode* helper(vector<int>& preorder, int ps, int pe, vector<int>& inorder, int is, int ie) {
