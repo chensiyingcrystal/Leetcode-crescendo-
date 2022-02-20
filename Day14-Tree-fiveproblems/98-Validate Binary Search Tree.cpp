@@ -94,6 +94,7 @@ public:
         if (node == NULL) return true;
         //another base case: may not need, but you can writer first to clear your mind
         if (node -> left == NULL && node -> right == NULL) {
+            //赋值的时候会自动转换
             max_val = node -> val;
             min_val = node -> val;
             return true;
@@ -111,7 +112,7 @@ public:
         //first thing, second thing
         //bug点，测试数据node的val可能等于32位signed最小值或最大值
         //INT_MIN和INT_MAX的值是32小值和最大值
-        //赋值是会自动转化，但是由于这里要加1和减1，如果不先将INT转成大一level的，加1减1后就会溢出原有的
+        //赋值是会自动转化，但是由于这里要加1和减1，如果不先将INT转成大一level的，加1减1后就会溢出
         //可以转化为int64_t或者long
         long left_max = (long) INT_MIN - 1;
         long right_max = (long) INT_MIN - 1;
@@ -119,7 +120,7 @@ public:
         long right_min = (long) INT_MAX + 1;
 
         if (!helper(node -> left, left_max, left_min)) return false;
-        if (!helper(node -> right, right_max, right_min)); return false;
+        if (!helper(node -> right, right_max, right_min)) return false;
 
         //third thing
         //bug点 不能等于
