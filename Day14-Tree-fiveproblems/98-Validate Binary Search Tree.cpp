@@ -19,7 +19,7 @@ public:
         TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
         TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
     };
-
+//yifan's edition(same)
     // bool isValidBST(TreeNode* root, long& min_v, long& max_v) {
     //         if (root == nullptr) {
     //             return true;
@@ -60,11 +60,6 @@ public:
     //     }
 
     
-
-
-
-
-
 //理解题意：要满足二叉树的特点必须：
     //左支所有值要小于root值，同时右支所有值要大于root值
     //左支和右支都是BST -> 左支的左下方所有值要小于该值，右下方所有值要大于该值，但是整体所有值都要小于root值
@@ -134,5 +129,64 @@ public:
         return true;
 
     }
+
+//solution2: lnr inorder traversing, using node
+    bool isValidBST(TreeNode* root, TreeNode*& pre) {
+            if (root == nullptr) {
+                return true;
+            }
+            if (!isValidBST(root->left, pre)) {
+                return false;
+            }
+            if (pre != nullptr && pre->val >= root->val) {
+                return false;
+            }
+            pre = root;
+            return (isValidBST(root->right, pre));
+        }
+    bool isValidBST(TreeNode* root) {
+        TreeNode* pre = nullptr;
+        return isValidBST(root, pre);
+    }
+
+//solution2: inorder - using long
+    bool isValidBST(TreeNode* root) {
+        long pre = (long) INT_MIN - 1;
+        return helper(root, pre);
+    }
+//bug点：important！！！从头到尾沿用的pre，需要写&！！！
+    bool helper(TreeNode* root, long& pre) {
+        if (root == NULL) return true;
+
+        if (!helper(root -> left, pre)) return false;
+        if (pre != (long) INT_MIN - 1 && root -> val <= pre) return false;
+        pre = root -> val;
+        return helper(root -> right, pre);
+    }
+
+//solution3：官方solution 不会
+    bool validate(TreeNode* root, TreeNode* low, TreeNode* high) {
+        // Empty trees are valid BSTs.
+        if (root == nullptr) {
+            return true;
+        }
+
+        // The current node's value must be between low and high.
+        if ((low != nullptr and root->val <= low->val) or
+            (high != nullptr and root->val >= high->val)) {
+            return false;
+        }
+
+        // The left and right subtree must also be valid.
+        return validate(root->right, root, high) and
+               validate(root->left, low, root);
+    }
+
+    bool isValidBST(TreeNode* root) {
+        return validate(root, nullptr, nullptr);
+    }
+
+
+
 
 };
