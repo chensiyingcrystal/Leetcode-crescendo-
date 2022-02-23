@@ -1,5 +1,6 @@
 #include <unordered_map>
 #include <bits/stdc++.h>
+#include <numeric>
 
 using namespace std;
 
@@ -28,12 +29,12 @@ public:
             }
         }
 
-        int sum_cookies = 0;
-        for (auto& cookie : cookies) {
-            sum_cookies += cookie;
-        }
-
-        return sum_cookies;
+        // int sum_cookies = 0;
+        // for (auto& cookie : cookies) {
+        //     sum_cookies += cookie;
+        // }
+        //快速求和
+        return accumulate(cookies.begin(), cookies.end(), 0);
     }
 
     // int candy(vector<int>& ratings) {
