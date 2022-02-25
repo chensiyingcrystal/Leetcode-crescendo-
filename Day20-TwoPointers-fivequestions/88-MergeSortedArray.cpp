@@ -30,6 +30,7 @@ public:
         }
     } 
 //取巧的办法（没有用双指针）：merger and sort
+//time: o((n+m)log(n+m)), space o(n)(sorting: recursion depth)
     void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
         for (int i = 0; i < n; i++) {
             nums1[i + m] = nums2[i];
