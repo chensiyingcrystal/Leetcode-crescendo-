@@ -57,8 +57,54 @@ public:
     }
 
 
-//或者代码也可以这样写
+//错误代码：
+    int findContentChildren(vector<int>& g, vector<int>& s) {
+        if (s.empty()) return 0;
 
+        sort(g.begin(), g.end());
+        sort(s.begin(), s.end());
 
+        int count = 0;
+        int j = 0;
+        //bug2: 这里写for循环要格外注意，将g写在外围是错误的，这样会要产生两层循环
+        //而实际上一层循环就应该做到
+        for (int i = 0; i < g.size(); i++) {
+            //bug1:要将对索引的限制写在引用索引之前，这样可以引起及时的短路，不至于去引用s[j+1]
+            if (j < s.size() && g[i] <= s[j]) {
+                j++;
+                count++;
+            }
+        }
+        return count;
+    }
 
+//正确代码
+    int findContentChildren(vector<int>& g, vector<int>& s) {
+        sort(g.begin(), g.end());
+        sort(s.begin(), s.end());
+
+        int count = 0;
+        int j = 0;
+        for (int i = 0; i < s.size(); i++) {
+            if (j < g.size() && s[i] >= g[j]) {
+                j++;
+                count++;
+            }
+        }
+        return count;
+    }
+//更进一步的做法是，j到了哪个小孩的位置，它之前的小孩肯定都分了才轮到他，因此j的位置可以指示number
+    int findContentChildren(vector<int>& g, vector<int>& s) {
+        sort(g.begin(), g.end());
+        sort(s.begin(), s.end());
+
+        int j = 0;
+        for (int i = 0; i < s.size(); i++) {
+            if (j < g.size() && s[i] >= g[j]) {
+                j++;
+            }
+        }
+        //本来应该返回j+1，但是j在循环结束后都会自增1，所以最后小孩数量应该就是j本身
+        return j;
+    }
 };
