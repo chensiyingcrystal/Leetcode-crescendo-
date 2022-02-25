@@ -37,40 +37,13 @@ public:
         return accumulate(cookies.begin(), cookies.end(), 0);
     }
 
-    // int candy(vector<int>& ratings) {
-    //     if (ratings.empty()) return 0;
-    //     //find minimum value, record its index
-    //     int min_rating = INT_MAX, k;
-    //     for (int i = 0; i < ratings.size(); i++) {
-    //         if (ratings[i] < min_rating) {
-    //             k = i;
-    //             min_rating = ratings[i];
-    //         }
-    //     }
+//错误解法：只用一遍循环
+//错误原因：如果是递增序列这样可以，但如果是递减序列，当前值确定后，下一个值有可能也增加，发生改变
+//这样还是要回过头来重新看，因此要从前向后遍历，再从后向前遍历，保证之前在后置位的这回在前置位
+//每次看哪个方向呢？
+//正确：从左扫向左看，从右扫向右看，只修改自己的值，即每次只关注自己是否高了而candy少了
+//错误:第一遍向左向右看，进行初步递增，第二遍检查，看是否存在自己高于别人但糖果数字低的
+//错误原因：这样就达不到最少糖果的要求了，如果出现peak两边是valley的情况，peak将会多增加一次
 
-    //     //from index k to right, counting
-    //     int cookies = 1, sum_cookies = 1;
-    //     for (int i = k + 1; i < ratings.size(); i++) {
-    //         if (ratings[i] > ratings[k]) { 
-    //             cookies++;
-    //         }
-    //         else cookies = 1;
-    //         sum_cookies += cookies;
-    //         k = i;
-    //     }
-
-    //     //from 0 to index k, counting
-    //     int cookies = 1;
-    //     for (int i = k - 1; i >= 0; i--) {
-    //         if (ratings[i] > ratings[k]) {
-    //             cookies++;
-    //         }
-    //         else cookies = 1;
-    //         sum_cookies += cookies;
-    //         k = i;
-    //     }
-
-    //     return sum_cookies;
-    // }
- 
+    
 };
