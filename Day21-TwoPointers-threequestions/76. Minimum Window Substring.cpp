@@ -43,9 +43,41 @@ public:
 
             right++;
         }
-
-        return s.substr(start, size - 1);
-        
+        return s.substr(start, size - 1);  
     }    
+//改进代码
+    string minWindow(string s, string t) {
+        const int m = s.size();
+        const int n = t.size();
+        
+        if (m < n) return "";
+        
+        int left = 0, right = 0;
+        int count = 0;
+        int start = 0, size = INT_MAX;
+
+        unordered_set<char> t_set;
+        for (char c : t) {
+            t_set.insert(c);
+        }
+
+        while (right < m) {
+            if (t_set.find(s[right]) != t_set.end()) count++;
+
+            while (count >= n) {
+                int new_size = right - left + 1;
+                if (new_size < size) {
+                    size = new_size;
+                    start = left;
+                }
+
+                if (t_set.find(s[left]) != t_set.end()) count--;
+                left++;
+            }
+
+            right++;
+        }
+        return size == INT_MAX? "" : s.substr(start, size);  
+    }
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
 };
