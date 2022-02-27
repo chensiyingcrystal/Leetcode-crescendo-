@@ -11,7 +11,7 @@ public:
 
 
     }
-    
+//暴力解法知道做吗？
     bool judgeSquareSum(int c) {
         
     }
