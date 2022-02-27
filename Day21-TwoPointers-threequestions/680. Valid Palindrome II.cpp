@@ -11,7 +11,43 @@ public:
 
 
     }
-    
+//正确解法：
+    bool validPalindrome(string s) {
+        int left = 0, right = s.size() - 1;
+        int count = 0;
+
+        while (left <= right) {
+            if (s[left] != s[right]) return isPalindrome(s, left + 1, right) || isPalindrome(s, left, right - 1);
+            else {
+                left++;
+                right--;
+            }
+        }
+        return true;  
+    }
+//精简写法
+    bool isPalindrome(string& s, int l, int r) {
+        while (l < r) {
+            if (s[l++] != s[r--]) return false;
+        }
+        return true;
+    }
+//错误原因：不能遇到不相等就同时移动两个指针，也不能主观认定我移动左边，还是右边
+//也不是根据相邻的判断是移动左边还是右边（不是贪心）
+    bool validPalindrome(string s) {
+        const int n = s.size();
+        int left = 0, right = n - 1;
+        int count = 0;
+
+        while (left <= right) {
+            if (s[left] != s[right]) count++;
+            if (count > 1) return false;
+            left++;
+            right--;
+        }
+        return true;  
+    }
+//第一遍的暴力解：超时
     bool validPalindrome(string s) {
         if (isPalindrome(s)) return true;
 
