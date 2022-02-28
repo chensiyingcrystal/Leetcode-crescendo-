@@ -11,7 +11,7 @@ public:
 
 
     }
-    //很多时候双指针是一种辅助手段
+    //很多时候双指针是一种辅助手段 //双指针的经典应用：连续对应字符
     //这个题之所以可以使用双指针辅助是因为比较字符串是基于顺序推进的，这样一遍就够
     //使用sorting： time： o(nxlogn + nx)(n: dictionary的字符串数量，x是字符串平均长度)； space： o(logn)
     string findLongestWord(string s, vector<string>& dictionary) {

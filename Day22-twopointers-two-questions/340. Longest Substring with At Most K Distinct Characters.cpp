@@ -12,7 +12,7 @@ public:
 
 
     }
-    //双指针的经典应用：连续对应字符
+    
 //76题的变形，学会用count和vector<int>track unique character
 //如果用hash map或者set，可以用erase（key）移除元素
     int lengthOfLongestSubstringKDistinct(string s, int k) {
