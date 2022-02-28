@@ -11,6 +11,8 @@ public:
 
 
     }
+    //此题是非常经典的双指针题：本身判断是否是panlindrome就可以用双指针解题
+    //这道题展示了双指针在删除元素方面的应用：将指针index作为argument传入进行判定，作为下个函数里面指针的起始
 //正确解法：
     bool validPalindrome(string s) {
         int left = 0, right = s.size() - 1;
