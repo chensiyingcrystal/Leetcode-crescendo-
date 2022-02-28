@@ -11,6 +11,7 @@ public:
 
 
     }
+    //这道题展示了指针的灵活使用：倒着来和加入第三个指针
 //最初：用了两个指针但是不会解，卡壳原因：while的边界条件怎么定义？
 //破解：加入第三个指针，writing pointer, 用第三个指针控制条件
     void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
