@@ -11,7 +11,8 @@ public:
 
 
     }
-    
+    //用双指针解这道题的优点：space o（1）
+    //前提：序列是排好序的
     vector<int> twoSum(vector<int>& numbers, int target) {
         const int k = numbers.size();
         vector<int> result;
