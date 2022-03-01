@@ -6,6 +6,19 @@
 
 using namespace std;
 
+class Node {
+    public:
+    bool endMark;
+    Node* ch[26];
+
+    Node() {
+        endMark = false;
+        for (int i = 0; i < 26; i++) {
+            ch[i] = nullptr;
+        }
+    }
+};
+
 class Trie {
 public:
     Trie() {
