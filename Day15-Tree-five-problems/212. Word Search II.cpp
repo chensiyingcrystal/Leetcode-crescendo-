@@ -69,6 +69,9 @@ public:
 
 class Solution {
 public:
+    int row[4] = {0, 0, 1, -1};
+    int col[4] = {1, -1, 0, 0};
+
     void insert(string s, TrieNode* head) {
         TrieNode* curr = head;
         for (int i = 0; i < s.length(); i++) {
@@ -82,7 +85,7 @@ public:
         curr -> word = s;
     }
 
-    void searchWords(vector<vector<int> >& board, int i, int j, TrieNode* node, vector<string> result) {
+    void searchWords(vector<vector<char> >& board, int i, int j, TrieNode* node, vector<string> result) {
         if (i < 0 || i >= board.size() || j < 0 || j >= board.size() || board[i][j] == '*') return;
         if (node == nullptr) return;
 
@@ -91,7 +94,13 @@ public:
             node -> endMark = false;
         }
 
-
+        char tmp = board[i][j];
+        board[i][j] = '*';
+        for (int x = 0; x < 4; x++) {
+            int neighbor = board[i + row[x]][j + col[x]] - 97;
+            searchWords(board, i + row[x], j + col[x], node -> ch[neighbor], result);
+        }
+        board[i][j] = tmp;
     }
 
     vector<string> findWords(vector<vector<char> >& board, vector<string>& words) {
@@ -103,11 +112,11 @@ public:
         vector<string> result;
         for (int i = 0; i < board.size(); i++) {
             for (int j = 0; j < board.size(); j++) {
-                searchWords();
+                int id = board[i][j] - 97;
+                searchWords(board, i, j, head -> ch[id], result);
             }
         }
 
         return result;
     }
-
 };
