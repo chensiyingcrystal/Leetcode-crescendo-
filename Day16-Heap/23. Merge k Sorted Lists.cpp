@@ -51,4 +51,38 @@ public:
         return head;
     }
 
+//Sotion2: merge two lists once, total merging time (k - 1)
+
+//Best Solution: prioritey queue
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        //construct priority queue
+        auto compare = [](ListNode* a, ListNode* b) {
+            //bug: 是大于不是小于
+            return a -> val > b -> val;
+        };
+        priority_queue<ListNode*, vector<ListNode*>, decltype(compare)> pq(compare);
+
+        //push node into pq
+        for (ListNode* list : lists) {
+            if (list != nullptr) {
+                pq.push(list);
+            }
+        }
+
+        //set the head node
+        ListNode* head = new ListNode(0);
+        ListNode* tmp = head;
+        
+        //extract each node from the pq and push next into it
+        while (!pq.empty()) {
+            tmp -> next = pq.top();
+            tmp = pq.top();
+            pq.pop();
+            if (tmp -> next != nullptr) {
+                pq.push(tmp -> next);
+            }
+        }
+
+        return head -> next;
+    }
 };
