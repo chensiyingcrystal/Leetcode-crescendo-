@@ -11,10 +11,10 @@ public:
 //更简便的同时寻找的算法: 类似递归，设计好base case，然后不断收敛边界，进行faith jump， if not return, return default value
 // Formula: If a sorted array is shifted, if you take the middle, always one side will be sorted. Take the recursion according to that rule.
 // 1- take the middle and compare with target, if matches return.
-// 2- if middle is bigger than left side, it means left is sorted
+// 2- if middle is bigger or equal than left side, it means left is sorted
 // 2a- if [left] < target < [middle] then do recursion with left, middle - 1 (right)
 // 2b- left side is sorted, but target not in here, search on right side middle + 1 (left), right
-// 3- if middle is less than right side, it means right is sorted
+// 3- if middle is less than left side, it means right is sorted
 // 3a- if [middle] < target < [right] then do recursion with middle + 1 (left), right
 // 3b- right side is sorted, but target not in here, search on left side left, middle -1 (right)算法
     int search(vector<int>& nums, int target) {
