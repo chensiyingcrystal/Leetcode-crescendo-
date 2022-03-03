@@ -12,6 +12,7 @@ public:
 
 
     }
+    //break into subproblems的思维
     vector<int> searchRange(vector<int>& nums, int target) {
         if (nums.empty()) return {-1, -1};
         return {findFirst(nums, target), findLast(nums, target)};
@@ -20,6 +21,7 @@ public:
     int findFirst(vector<int>& nums, int& target) {
         const int n = nums.size();
         int low = 0, high = n - 1, leftmost = -1;
+        //bug： 等于号很重要！
         while (low <=high) {
             int half = (low + high) / 2;
             if (nums[half] > target) {
@@ -29,6 +31,7 @@ public:
                 low = half + 1;
             }
             else {
+                //用一个值来记录half
                 leftmost = half;
                 high = half - 1;
             }
