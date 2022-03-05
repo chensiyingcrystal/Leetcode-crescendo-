@@ -33,6 +33,7 @@ public:
     }
 
     //define a helper function to find k most element
+    //重要：以后看到这样index更新的问题，要想起可以定义start的pointer，用相对位置和步长获取绝对位置！！
     double findKMostElement(vector<int>& nums1, int start1, int end1, vector<int>& nums2, int start2, int end2, int k) {
         //define the length of the new nums(use pointers to represent our created nums)
         int length1 = end1 - start1 + 1;
