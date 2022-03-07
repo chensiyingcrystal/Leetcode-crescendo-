@@ -1,27 +1,68 @@
 #include <vector>
 #include <list>
-#include <bits/stdc++.h>
+#include <priority_queue>
 
 using namespace std;
 
 class Solution {
 public:
-    vector<vector<int> > reconstructQueue(vector<vector<int> >& people) {
-        //sort "people" queue in non-increasing order
-        sort(people.begin(), people.end(), [](vector<int>& a, vector<int>& b) {
-            if (a[0] != b[0]) return a[0] > b[0];
-            else return a[1] < b[1];
+    int findKthLargest(vector<int>& nums, int k) {
+        sort(nums.begin(), nums.end(), [](int a, int b){
+            return a > b;
         });
+        return nums[k - 1];
+    }
 
-        //insert using list
-        list<vector<int> > q;
-        for (int i = 0; i < people.size(); i++) {
-            list<vector<int> >::iterator r = q.begin();
-            advance(r, people[i][1]);
-            q.insert(r, people[i]);
+    //priority queue
+    //time: nlogk, space:o(k)
+    int findKthLargest(vector<int>& nums, int k) {
+        auto comp = [](int a, int b) {
+            return a > b;
+        };
+        priority_queue<int, vector<int>, decltype(comp)> q(comp);
+
+        for (int& num : nums) {
+            q.push(num);
+            if (q.size() > k) {
+                q.pop();
+            }
         }
-        
-        return vector<vector<int> >(q.begin(), q.end());
+        return q.top();
+    }
+
+    //quick sort
+    //time: o(n), space: o(1)
+    int findKthLargest(vector<int>& nums, int k) {
+        const int n = nums.size();
+        int l = 0, r = n - 1;
+        while (true) {
+            int idx = quickSort(nums, l, r);
+            if (n - idx == k) {
+                return nums[idx];
+            }
+            else if (n - idx > k) {
+                l = idx + 1;
+            }
+            else {
+                r = idx - 1;
+            }
+        }
+    }
+
+    int quickSort(vector<int>& nums, int l, int r) {
+        int pivot = nums[l];
+        while (l < r) {
+            while (l < r && nums[r] >= pivot) {
+                r--;
+            }
+            nums[l] = nums[r];
+            while (l < r && nums[l] <= pivot) {
+                l++;
+            }
+            nums[r] = nums[l];
+        }
+        nums[l] = pivot;
+        return l;
     }
 
 };
