@@ -32,7 +32,11 @@ public:
 
     //quick sort
     //time: o(n), space: o(1)
+    //平均情况下，总操作数是n + n/2 + n/4 + ... + 1 = 2n
+    //最差情况下，总操作数是n + n - 1 + n - 2 + ... + 1 = o(n2)
+    //为了pivot每次不取到极端情况，可在主函数最开始加入随机打乱数组的代码
     int findKthLargest(vector<int>& nums, int k) {
+        random_shuffle(nums.begin(), nums.end());
         const int n = nums.size();
         int l = 0, r = n - 1;
         while (true) {

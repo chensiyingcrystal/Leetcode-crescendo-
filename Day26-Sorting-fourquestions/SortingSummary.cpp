@@ -59,10 +59,10 @@ public:
  * 时间复杂度：o(nlogn)
  */
 void quick_sort(vector<int> &nums, int l, int r) {
-    if (l + 1 >= r) {
+    if (l >= r) {
         return; 
     }
-    int first = l, last = r - 1, key = nums[first];
+    int first = l, last = r, key = nums[first];
     while (first < last){
        while(first < last && nums[last] >= key) {
            --last;
@@ -88,7 +88,7 @@ int main() {
         cout << element << endl;
     }
     return 0;
-
+}
 /**归并排序 merge sort
  * 算法：分而治之
  * 先分一半，再将每个一个继续分成一半，直至到单个元素
