@@ -113,6 +113,22 @@ public:
  * 然后对0到n-2的数组重复此操作，直到元素剩下一个
  * 时间复杂度： n2
  */
+    void bubbleSort(vector<int>& nums, int n) {
+        bool swapped = false;
+        for (int i = 1; i < n; i++) {
+            //the last item is already in its place
+            for (int j = 1; j < n - i + 1; j++) {
+                if (nums[j] < nums[j - 1]) {
+                    swap(nums[j], nums[j - 1]);
+                    swapped = true;
+                }
+            }
+
+            if (!swapped) {
+                break;
+            }
+        }
+    }
 
 /** 5. 插入排序 insert sort
  * 算法：从index为1的数开始（第二个），设定i位置的数为key，对从0至i-1的排好序的数组进行遍历（index为j）
