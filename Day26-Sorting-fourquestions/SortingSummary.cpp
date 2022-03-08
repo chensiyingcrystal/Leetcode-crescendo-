@@ -117,6 +117,7 @@ public:
         bool swapped = false;
         for (int i = 1; i < n; i++) {
             //the last item is already in its place
+            //第一遍冒到最后，第二遍冒到n-2即可，以此类推
             for (int j = 1; j < n - i + 1; j++) {
                 if (nums[j] < nums[j - 1]) {
                     swap(nums[j], nums[j - 1]);
