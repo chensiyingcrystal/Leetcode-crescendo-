@@ -17,18 +17,20 @@ public:
                     p++;
                     q++;
                 }
-                q++;
+                else {
+                    q++;
+                }
             }
             
             //check if we found the word matches with string s 
             if (p >= dictionary[i].length()) {
-                if (dictionary[i].length() > ans.length() || dictionary[i] < ans) {
+                if (dictionary[i].length() > ans.length() 
+                || (dictionary[i].length() == ans.length() && dictionary[i] < ans)) {
                     ans = dictionary[i];
                 }
             }
         }
 
         return ans == ""? "" : ans;
-
     } 
 };
