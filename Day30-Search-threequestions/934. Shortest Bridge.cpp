@@ -143,5 +143,76 @@ public:
             dfs(grid, new_i, new_j, m, n);
         }
     }
+
+    //另一种写法：使用level记录所有点的level，在q的while循环里面增加一个while循环（使用q.size），消化当前所有level的点
+    int row[4] = {1, -1, 0, 0};
+    int col[4] = {0, 0, 1, -1};
+
+    int shortestBridge(vector<vector<int> >& grid) {
+        //grid.size
+        int m = grid.size(), n = grid[0].size();
+        //mark the first island to 2 as well as initialize q;
+        queue<pair<int, int> > q;
+        bool flag = true;
+        for (int i = 0; i < m; i++) {
+            if (flag = false) break;
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] == 1) {
+                    dfs(grid, i, j, m, n, q);
+                    flag = false;
+                    break;
+                }
+            }
+        }
+
+        //start bfs: use an int level to record our levels
+        int level = -1;
+        while (!q.empty()) {
+            //representing the levle of the current "nodes"
+            level++;
+
+            //process the current "nodes" once
+            int size = q.size();
+            while (!size--) {
+                //retrieve the first one and pop it out
+                pair<int, int> tmp = q.front();
+                q.pop();
+                //check if it's the second island
+                if (grid[tmp.first][tmp.second] == 1) return level - 1;
+
+                //begin processing its neighbor
+                for (int x = 0; x < 4; x++) {
+                    int new_i = tmp.first + row[x];
+                    int new_j = tmp.second + col[x];
+                    //make sure it's in the scope
+                    
+                }
+
+            }
+
+    
+
+        }
+
+    }
+
+    void dfs(vector<vector<int> >& grid, int i, int j, int m, int n, queue<pair<int, int> >& q) {
+        //make sure everything is in the scope
+        if (i < 0 || j < 0 || i >= m || j >= n) return;
+        //make sure that this point is neither visited nor the water
+        if (grid[i][j] == 2 || grid[i][j] == 0) return;
+
+        //entering the point; modify it to 2
+        grid[i][j] = 2;
+        //initialize the q;
+        q.push({i, j});
+
+        //process its neighbors
+        for (int x = 0; x < 4; x++) {
+            int new_i = i + row[x];
+            int new_j = j + col[x];
+            dfs(grid, new_i, new_j, m, n, q);
+        }
+    }
 };
 
