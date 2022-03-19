@@ -155,7 +155,7 @@ public:
         queue<pair<int, int> > q;
         bool flag = true;
         for (int i = 0; i < m; i++) {
-            if (flag = false) break;
+            if (flag == false) break;
             for (int j = 0; j < n; j++) {
                 if (grid[i][j] == 1) {
                     dfs(grid, i, j, m, n, q);
@@ -166,6 +166,7 @@ public:
         }
 
         //start bfs: use an int level to record our levels
+        //mark visited point as 2; directly modify that in the grid;
         int level = -1;
         while (!q.empty()) {
             //representing the levle of the current "nodes"
@@ -173,27 +174,29 @@ public:
 
             //process the current "nodes" once
             int size = q.size();
-            while (!size--) {
+            while (size--) {
                 //retrieve the first one and pop it out
                 pair<int, int> tmp = q.front();
                 q.pop();
-                //check if it's the second island
-                if (grid[tmp.first][tmp.second] == 1) return level - 1;
-
+                
                 //begin processing its neighbor
                 for (int x = 0; x < 4; x++) {
                     int new_i = tmp.first + row[x];
                     int new_j = tmp.second + col[x];
                     //make sure it's in the scope
-                    
+                    if (new_i < 0 || new_i >= m || new_j < 0 || new_j >= n) continue;
+                    //check if it's been visited
+                    if (grid[new_i][new_j] == 2) continue;
+                    //check if it's the second island
+                    if (grid[new_i][new_j] == 1) return level;
+
+                    //mark it as visited and push it into the queue
+                    grid[new_i][new_j] = 2;
+                    q.push({new_i, new_j});
                 }
-
             }
-
-    
-
         }
-
+        return 0;
     }
 
     void dfs(vector<vector<int> >& grid, int i, int j, int m, int n, queue<pair<int, int> >& q) {
