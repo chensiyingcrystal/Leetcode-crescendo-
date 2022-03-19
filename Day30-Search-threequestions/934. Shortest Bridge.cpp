@@ -78,29 +78,31 @@ public:
 
     int shortestBridge(vector<vector<int> >& grid) {
         int m = grid.size(), n = grid[0].size();
-        //find the first island, mark each of them as 2, push them into the queue for initialization
-        queue<pair<int, int> > q;
+        //find the first island, mark each of them as 2
         bool flag = true;
         for (int i = 0; i < m; i++) {
             if (flag == false) break;
             for (int j = 0; j < n; j++) {
                 if (grid[i][j] == 1) {
-                    dfs(grid, i, j, m, n, q);
+                    dfs(grid, i, j, m, n);
                     flag = false;
                     break;
                 }
             }
         }
 
-        //Now we have found all first land with them marked as 2 and with a queue intialized
+        //Now we have found all first land with them marked as 2
         //begin our bfs
         //our result and visited container are one
         //visited represent distance from the first island
+        //set the first island in visited as 0; initialize the queue
+        queue<pair<int, int> > q;
         vector<vector<int> > visited(m, vector<int>(n, -1));
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
                 if (grid[i][j] == 2) {
                     visited[i][j] = 0;
+                    q.push({i, j});
                 }
             }
         }
@@ -110,7 +112,7 @@ public:
             q.pop();
 
             if (grid[tmp.first][tmp.second] == 1) return visited[tmp.first][tmp.second] - 1;
-            
+
             for (int x = 0; x < 4; x++) {
                 int new_i = tmp.first + row[x];
                 int new_j = tmp.second + col[x];
@@ -122,12 +124,10 @@ public:
             }
         }
 
-
-
-
+        return 0;
     }
 
-    void dfs(vector<vector<int> >& grid, int i, int j, int m, int n, queue<pair<int, int> >& q) {
+    void dfs(vector<vector<int> >& grid, int i, int j, int m, int n) {
         //the index must be in the scope
         if (i < 0 || i >= m || j < 0 || j >= n) return;
         //the point not be visited and the point must be part of the island
@@ -135,12 +135,12 @@ public:
 
         //entering into the point and mark it as 2; push it into the queue
         grid[i][j] = 2;
-        q.push({i, j});
         //start searching its neighbors
         for (int x = 0; x < 4; x++) {
             int new_i = i + row[x];
             int new_j = j + col[x];
-            dfs(grid, i, j, m, n);
+            //bug: new_i, new_j instead of i, j
+            dfs(grid, new_i, new_j, m, n);
         }
     }
 };
