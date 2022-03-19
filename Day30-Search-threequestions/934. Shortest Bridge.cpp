@@ -9,6 +9,9 @@ class Solution {
 public:
 //这是一个找最短距离的问题
 //break成子问题：先找第一个岛 + 标记 + 从标记的所有点出发
+//重点：bfs中如何使用level？ 
+//方法一： 处理一层再递增level，优点节省空间
+//方法二： 建立同等大小的visited grid，标记每个点的level为母点level+1
     int row[4] = {1, -1, 0, 0};
     int col[4] = {0, 0, 1, -1};
 
@@ -110,7 +113,13 @@ public:
         while (!q.empty()) {
             pair<int, int> tmp = q.front();
             q.pop();
-
+            
+            //check if it's the second island
+                    //bug: 初始值需要检查的话一般在while语句外（即initialize的时候）就检查好
+                    //初始值不需要检查的话 就放在邻居检查的地方，这样就不用多余push进去一次
+                    //如果提前检查同时直接在grid上标记visited的话，
+                    //一定注意要先检查再修改！不然就会出现先将第二个岛修改为2，再检查，这样会出现大bug！！！
+                    //如果使用visited进行标记，这个顺序是没有影响的
             if (grid[tmp.first][tmp.second] == 1) return visited[tmp.first][tmp.second] - 1;
 
             for (int x = 0; x < 4; x++) {
@@ -173,7 +182,7 @@ public:
             level++;
 
             //process the current "nodes" once
-            int size = q.size();
+            fdint size = q.size();
             while (size--) {
                 //retrieve the first one and pop it out
                 pair<int, int> tmp = q.front();
@@ -188,6 +197,9 @@ public:
                     //check if it's been visited
                     if (grid[new_i][new_j] == 2) continue;
                     //check if it's the second island
+                    //bug: 初始值需要检查的话一般在while语句外（即initialize的时候）就检查好
+                    //初始值不需要检查的话 就放在邻居检查的地方，这样就不用多余push进去一次
+                    //如果提前检查，那么就会出现先将第二个岛修改为2，再检查，这样会出现大bug！！！
                     if (grid[new_i][new_j] == 1) return level;
 
                     //mark it as visited and push it into the queue
