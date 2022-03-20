@@ -8,6 +8,103 @@ using namespace std;
 
 class Solution {
 public:
+//官方题解
+//Time complexity: O(NK^2 + α)
+//Space complexity: O(NK)
+    unordered_map<string, vector<string>> adjList;
+    vector<string> currPath;
+    vector<vector<string>> shortestPaths;
+    
+    vector<string> findNeighbors(string &word, unordered_set<string>& wordList) {
+        vector<string> neighbors;
+        
+        for (int i = 0; i < word.size(); i++) {
+            char oldChar = word[i];   
+            
+            // replace the i-th character with all letters from a to z except the original character
+            for (char c = 'a'; c <= 'z'; c++) {
+                word[i] = c;
+                
+                // skip if the character is same as original or if the word is not present in the wordList
+                if (c == oldChar || !wordList.count(word)) {
+                    continue;
+                }
+                neighbors.push_back(word);
+            }
+            word[i] = oldChar;
+        }
+        return neighbors;
+    }
+    
+    void backtrack(string &source, string &destination) {
+        // store the path if we reached the endWord
+        if (source == destination) {
+            shortestPaths.push_back(currPath);
+        }
+        for (int i = 0; i < adjList[source].size(); i++) {
+            currPath.push_back(adjList[source][i]);
+            backtrack(adjList[source][i], destination);
+            currPath.pop_back();
+        }
+    }
+    
+    void bfs(string beginWord, string endWord, unordered_set<string> wordList) {
+        queue<string> q;
+        q.push(beginWord);
+        
+        // remove the root word which is the first layer
+        if (wordList.find(beginWord) != wordList.end()) {
+            wordList.erase(wordList.find(beginWord));
+        }
+        
+        unordered_map<string, int> isEnqueued;
+        isEnqueued[beginWord] = 1;
+        
+        while (!q.empty())  {
+            // visited will store the words of current layer
+            vector<string> visited;
+            
+            for (int i = q.size() - 1; i >= 0; i--) {
+                string currWord = q.front(); 
+                q.pop();
+
+                // findNeighbors will have the adjacent words of the currWord
+                vector<string> neighbors = findNeighbors(currWord, wordList);
+                for (auto word : neighbors) {
+                    visited.push_back(word);
+                    // add the edge from currWord to word in the list
+                    adjList[currWord].push_back(word);
+                    
+                    if (isEnqueued.find(word) == isEnqueued.end()) {
+                        q.push(word);
+                        isEnqueued[word] = 1;
+                    }
+                }
+            }
+            // removing the words of the previous layer
+            for (int i = 0; i < visited.size(); i++) {
+                if (wordList.find(visited[i]) != wordList.end()) {
+                    wordList.erase(wordList.find(visited[i]));
+                }
+            }
+        }
+    }
+    
+    vector<vector<string>> findLadders(string beginWord, string endWord, vector<string>& wordList) {
+        // copying the words into the set for efficient deletion in BFS
+        unordered_set<string> copiedWordList(wordList.begin(), wordList.end());
+        // build the DAG using BFS
+        bfs(beginWord, endWord, copiedWordList);
+        
+        // every path will start from the beginWord
+        currPath = {beginWord};
+        // traverse the DAG to find all the paths between beginWord and endWord
+        backtrack(beginWord, endWord);
+        
+        return shortestPaths;
+    }
+
+//另一个题解的写法（不推荐，但是有些点值得学习）
     vector<vector<string> > findLadders(string beginWord, string endWord, vector<string> &wordList) {
         vector<vector<string> > res;
         unordered_set<string> dict = {wordList.begin(), wordList.end()};
@@ -17,12 +114,13 @@ public:
         }
     
         //BFS: construct graph
-        // key：word，value：level
+        //Need 1 map for recording key：word，value：level
         unordered_map<string, int> steps = {{beginWord, 0}};
-        // 记录了单词是从哪些单词扩展而来，key：单词，value：单词列表，这些单词可以变换到 key ，它们是一对多关系
+        //Need 2nd map for recording the word and its parent word
         unordered_map<string, unordered_set<string> > from = {{beginWord, {}}};
         int step = 0;
         bool found = false;
+        //initialize queue
         queue<string> q = queue<string>{{beginWord}};
         dict.erase(beginWord);
         int wordLen = beginWord.length();
@@ -33,24 +131,21 @@ public:
                 const string currWord = move(q.front());
                 string nextWord = currWord;
                 q.pop();
-                // 将每一位替换成 26 个小写英文字母
+                // find childs/neighbors
                 for (int j = 0; j < wordLen; ++j) {
                     const char origin = nextWord[j];
                     for (char c = 'a'; c <= 'z'; ++c) {
                         nextWord[j] = c;
+                        //if added before
                         if (steps[nextWord] == step) {
                             from[nextWord].insert(currWord);
                         }
                         if (dict.find(nextWord) == dict.end()) {
                             continue;
                         }
-                        // 如果从一个单词扩展出来的单词以前遍历过，距离一定更远，为了避免搜索到已经遍历到，且距离更远的单词，需要将它从 dict 中删除
                         dict.erase(nextWord);
-                        // 这一层扩展出的单词进入队列
                         q.push(nextWord);
-                        // 记录 nextWord 从 currWord 而来
                         from[nextWord].insert(currWord);
-                        // 记录 nextWord 的 step
                         steps[nextWord] = step;
                         if (nextWord == endWord) {
                             found = true;
@@ -63,23 +158,23 @@ public:
                 break;
             }
         }
-        // 第 2 步：深度优先遍历找到所有解，从 endWord 恢复到 beginWord ，所以每次尝试操作 path 列表的头部
+        //dfs: from end to start
         if (found) {
-            vector<string> Path = {endWord};
-            dfs(res, endWord, from, Path);
+            vector<string> path = {endWord};
+            dfs(res, endWord, from, path);
         }
         return res;
     }
 
-    void dfs(vector<vector<string> > &res, const string &Node, unordered_map<string, unordered_set<string> > &from,
+    void dfs(vector<vector<string> > &res, const string &node, unordered_map<string, unordered_set<string> > &from,
              vector<string> &path) {
-        if (from[Node].empty()) {
-            res.push_back({path.rbegin(), path.rend()});
+        if (from[node].empty()) {
+            res.push_back({path.begin(), path.end()});
             return;
         }
-        for (const string &Parent: from[Node]) {
-            path.push_back(Parent);
-            dfs(res, Parent, from, path);
+        for (const string &parent: from[node]) {
+            path.push_back(parent);
+            dfs(res, parent, from, path);
             path.pop_back();
         }
     }
