@@ -7,6 +7,7 @@ class Solution {
 public:
 //方法二： 推荐，学习写法！！卡壳的原因是不是j = i+1， 而是在下一次backtrack的时候传比自己大的值！！！
 //极大降低时间复杂度
+//组合的关键在于，每次需要从自己的下一个开始考虑，因为每次都是向后看的，因此不需要判重（对于无重复元素的来说）
     vector<vector<int> > combine(int n, int k) {
         vector<vector<int> > ans;
         vector<int> temp;

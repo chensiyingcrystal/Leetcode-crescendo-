@@ -34,6 +34,9 @@ public:
         p.pop_back();
     }
 //方法二，用backtracking模版写
+//排列问题就是：不能重复选自己，除了自己之外其他人都可以选，不同的顺序算一种不同排列
+//所以每到一个点，只要排除掉自己未被访问过（没有duplicates时）和自己的index未被访问过（有duplicates时）
+//其他的需要用for循环确定；注意自己本身也应写入for循环，因为从一开始就需要考虑到全部元素
     vector<vector<int> > ans;
     vector<vector<int> > permute(vector<int>& nums) {
         vector<int> temp;
