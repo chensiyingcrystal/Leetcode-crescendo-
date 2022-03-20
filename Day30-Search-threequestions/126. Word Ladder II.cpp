@@ -10,9 +10,8 @@ class Solution {
 public:
     vector<vector<string> > findLadders(string beginWord, string endWord, vector<string> &wordList) {
         vector<vector<string> > res;
-        // 因为需要快速判断扩展出的单词是否在 wordList 里，因此需要将 wordList 存入哈希表，这里命名为「字典」
         unordered_set<string> dict = {wordList.begin(), wordList.end()};
-        // 修改以后看一下，如果根本就不在 dict 里面，跳过
+        //if endWord is not in dict, then return empty list
         if (dict.find(endWord) == dict.end()) {
             return res;
         }
