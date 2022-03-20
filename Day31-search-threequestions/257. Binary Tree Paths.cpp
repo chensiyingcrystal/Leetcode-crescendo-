@@ -56,25 +56,26 @@ int val;
         return tmp_string;
     }
 
-//另一种解法
-    vector<string> v;
-    void helper(TreeNode *root,string s){
-        if (root == NULL){
-            return;
-        }
-        s += to_string(root->val) + "->";
-        if (root->left == NULL && root->right == NULL){
-            s.pop_back();
-            s.pop_back();
-            v.push_back(s);
-        }
-        helper(root->left,s);
-        helper(root->right,s);
-    }
+//另一种解法,不需要建立数组再转string,但是这里string path就需要复制传值，而不是引用传值！！
+//1.不能用模板解决一切！空子和叶子都需要在递归的base case中考虑，其中空子直接返回，而叶子需要把结果push进去
+//2.传引用和传复制的区别：传引用的话必须使用回溯，即要返回修改状态，然而在string中操作非常低效，因此传复制
     vector<string> binaryTreePaths(TreeNode* root) {
-        string s = "";
-        helper(root,s);
-        return v;
+        vector<string> paths;
+        string path = "";
+        helper(root, path, paths);
+        return paths;
+
+    }
+
+    void helper(TreeNode* node, string path, vector<string>& paths) {
+        if (node == nullptr) return;
+        if (node -> left == nullptr && node -> right == nullptr) {
+            path += to_string(node -> val);
+            paths.push_back(path);
+        }
+        path += to_string(node -> val) + "->";
+        helper(node -> left, path, paths);
+        helper(node -> right, path, paths);
     }
     
 };
