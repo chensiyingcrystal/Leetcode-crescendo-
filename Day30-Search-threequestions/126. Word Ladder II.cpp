@@ -15,17 +15,16 @@ public:
         if (dict.find(endWord) == dict.end()) {
             return res;
         }
-        // 特殊用例处理
-        dict.erase(beginWord);
-
-        // 第 1 步：广度优先遍历建图
-        // 记录扩展出的单词是在第几次扩展的时候得到的，key：单词，value：在广度优先遍历的第几层
+    
+        //BFS: construct graph
+        // key：word，value：level
         unordered_map<string, int> steps = {{beginWord, 0}};
         // 记录了单词是从哪些单词扩展而来，key：单词，value：单词列表，这些单词可以变换到 key ，它们是一对多关系
         unordered_map<string, unordered_set<string> > from = {{beginWord, {}}};
         int step = 0;
         bool found = false;
         queue<string> q = queue<string>{{beginWord}};
+        dict.erase(beginWord);
         int wordLen = beginWord.length();
         while (!q.empty()) {
             step++;
