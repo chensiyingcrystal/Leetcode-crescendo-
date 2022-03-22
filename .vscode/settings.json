@@ -24,7 +24,8 @@
     "list": "cpp",
     "stack": "cpp",
     "ostream": "cpp",
-    "set": "cpp"
+    "set": "cpp",
+    "numeric": "cpp"
   },
   "C_Cpp_Runner.cCompilerPath": "/usr/bin/clang",
   "C_Cpp_Runner.cppCompilerPath": "/usr/bin/clang++",
