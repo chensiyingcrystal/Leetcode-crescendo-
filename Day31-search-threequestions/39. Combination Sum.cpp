@@ -9,11 +9,11 @@ public:
     vector<vector<int> > combinationSum(vector<int>& candidates, int target) {
         vector<int> tmp;
         vector<vector<int> > ans;
-        backtrack(candidates, target, tmp, ans);
+        backtrack(candidates, target, 0, tmp, ans);
         return ans;
     }
 
-    void backtrack(vector<int>& candidates, int target, vector<int>& tmp, vector<vector<int> >& ans) {
+    void backtrack(vector<int>& candidates, int target, int first, vector<int>& tmp, vector<vector<int> >& ans) {
         int sum = accumulate(tmp.begin(), tmp.end(), 0);
         if (sum > target) return;
         if (sum == target) {
@@ -21,9 +21,9 @@ public:
             return;
         }
 
-        for (int i = 0; i < candidates.size(); i++) {
+        for (int i = first; i < candidates.size(); i++) {
             tmp.push_back(candidates[i]);
-            backtrack(candidates, target, tmp, ans);
+            backtrack(candidates, target, first, tmp, ans);
             tmp.pop_back();
         }
     }
