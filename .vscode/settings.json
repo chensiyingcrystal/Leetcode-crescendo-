@@ -25,7 +25,8 @@
     "stack": "cpp",
     "ostream": "cpp",
     "set": "cpp",
-    "numeric": "cpp"
+    "numeric": "cpp",
+    "__functional_03": "cpp"
   },
   "C_Cpp_Runner.cCompilerPath": "/usr/bin/clang",
   "C_Cpp_Runner.cppCompilerPath": "/usr/bin/clang++",
