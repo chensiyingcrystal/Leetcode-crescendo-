@@ -40,6 +40,7 @@ public:
                 q.pop();
                 //bug: first edge then erase node
                 //bug: loop through only edges of the node instead of all nodes' edges
+                //bug: cannot use int& here(non-const bind to const, because of p is key?)
                 for (int p : neighbor[tmp]) {
                     neighbor[p].erase(tmp);
                     if (neighbor[p].size() == 1 && neighbor.size() > 2) {
@@ -52,6 +53,7 @@ public:
 
         //return the left nodes in the graph list
         vector<int> ans;
+        //bug: p is a pair
         for(auto& p : neighbor) {
             ans.push_back(p.first);
         }
