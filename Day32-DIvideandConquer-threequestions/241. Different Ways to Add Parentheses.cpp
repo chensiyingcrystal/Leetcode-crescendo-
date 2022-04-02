@@ -1,5 +1,5 @@
 #include <vector>
-#include <unordered_set>
+#include <unordered_map>
 #include <string>
 
 using namespace std;
@@ -18,25 +18,34 @@ void divid_merge(一个数组) {
 }
 */
     vector<int> diffWaysToCompute(string expression) {
+        //trick: to avoid duplication during recursion, we use memorization here that can
+        //increase the time complexity
+        unordered_map<string, vector<int> > map;
         const int n = expression.length();
-        return helper(expression, 0, n - 1);
+        return helper(expression, 0, n - 1, map);
     }
 
-    vector<int> helper(string& s, int start, int end) {
+    vector<int> helper(string& s, int start, int end, unordered_map<string, vector<int> >& map) {
+        int length = end - start + 1;
+        string s1 = s.substr(start, length);
+        if (map.count(s1)) {
+            return map[s1];
+        }
+
         vector<int> ans;
         //base case
-        int length = end - start + 1;
         //bug: using s.length() is wrong
         if (length == 1  || length == 2) {
             //bug: using s is wrong
-            ans.push_back(stoi(s.substr(start, length)));
+            ans.push_back(stoi(s1));
+            map[s1] = ans;
             return ans;
         }
         //divide: find each operator and then divide according that
         for (int i = start; i <= end; i++) {
             if (s[i] == '+' || s[i] == '-' || s[i] == '*') {
-                vector<int> left = helper(s, start, i - 1);
-                vector<int> right = helper(s, i + 1, end);
+                vector<int> left = helper(s, start, i - 1, map);
+                vector<int> right = helper(s, i + 1, end, map);
                 //then conquer
                 for (int x = 0; x < left.size(); x++) {
                     for (int y = 0; y < right.size(); y++) {
@@ -49,6 +58,7 @@ void divid_merge(一个数组) {
                 }
             }
         }
+        map[s1] = ans;
         return ans;
     }
 };
