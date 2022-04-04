@@ -42,4 +42,16 @@ public:
         map[n] = ans;
         return ans;
     }
+    //分治部分简便的写法
+        vector<int> left = helper(n - n / 2, map);
+        vector<int> right = helper(n / 2, map);
+        //conquer
+        vector<int> ans(n);
+        int i = 0;
+        for (auto& x : left) {
+            ans[i++] = x * 2 - 1; 
+        } 
+        for (auto& y : right) {
+            ans[i++] = y * 2;
+        }
 };
