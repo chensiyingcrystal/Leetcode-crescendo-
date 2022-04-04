@@ -35,6 +35,7 @@ public:
             ans[i] = left[i] * 2 - 1; 
         } 
         for (int j = 0; j < right.size(); j++) {
+            //bug: are this two index both j?
             ans[j + left.size()] = right[j] * 2;
         }
         //record
