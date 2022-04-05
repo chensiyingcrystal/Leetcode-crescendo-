@@ -6,12 +6,18 @@ using namespace std;
 
 class Solution {
 public:
+//错误想法：max（奇数index加起来的和，偶数index加起来的和
     int rob(vector<int>& nums) {
-        int odd_sum = 0, even_sum = 0;
-        for (int i = 0; i < nums.size(); i++) {
-            if (i % 2 == 0) even_sum += i;
-            else odd_sum += i;
+        if (nums.size() == 1) return nums[0];
+        if (nums.size() == 2) return max(nums[0], nums[1]);
+        //bug: pre2 is the max of two
+        int pre1 = nums[0], pre2 = max(nums[0], nums[1]), curr;
+        for (int i = 2; i < nums.size(); i++) {
+            //bug：curr is already the sum_of_money
+            curr = max(pre1 + nums[i], pre2);
+            pre1 = pre2;
+            pre2 = curr;
         }
-        return max(odd_sum, even_sum);
+        return curr;
     }
 };
