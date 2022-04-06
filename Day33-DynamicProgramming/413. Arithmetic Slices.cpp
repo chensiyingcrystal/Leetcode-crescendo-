@@ -76,11 +76,40 @@ public:
         return ans;
     }
 
-//第三步的观察需要的技巧：头部固定, 每次考虑以end为结尾的数列，思考前一个数字的end和curr数字的end有什么关系
+//第三步的观察需要的技巧：头部固定->尾部固定, 每次考虑以end为结尾的数列，思考前一个数字的end和curr数字的end有什么关系
 //类似的思路，我们可以构造出「自顶向下」的递归解法：
-//定义递归函数 slices(A, end)的含义是区间 A[0, end] 中，以 end 作为终点的，等差数列的个数。
+//定义递归函数 rec(A, end)的含义是区间 A[0, end] 中，以 end 作为终点的，等差数列的个数。
 // A[0, end]内的以 end 作为终点的等差数列的个数，相当于在 A[0, end - 1]的基础上，增加了 A[end] 。
 // 有两种情况：
-  // A[end] - A[end - 1] == A[end - 1] - A[end - 2]时，说明增加的A[end]能和前面构成等差数列，那么 slices(A, end) = slices(A, end - 1) + 1；
-  // A[end] - A[end - 1] != A[end - 1] - A[end - 2]时， 说明增加的 A[end]不能和前面构成等差数列，所以slices(A, end) = 0；
-// 最后，我们要求的是整个数组中的等差数列的数目，所以需要把 0 <= end <= len(A - 1)0<=end<=len(A−1) 的所有递归函数的结果累加起来。
+  // A[end] - A[end - 1] == A[end - 1] - A[end - 2]时，说明增加的A[end]能和前面构成等差数列，那么 rec(A, end) = rec(A, end - 1) + 1；
+  // A[end] - A[end - 1] != A[end - 1] - A[end - 2]时， 说明增加的 A[end]不能和前面构成等差数列，所以rec(A, end) = 0；
+//分析第一种情况背后的逻辑：当尾部固定时，之所以产生多个子数组，是因为头部在变化
+//而以前一个数为结尾的所有子数组的头部同样也可以作为后一个数的头部，因此后一个数子数组个数至少与前一个数的相等
+//另外，前一个数的相邻的数虽不能作为前一个数为end的开头，但是可以作为后一个数的开头（此时数组中正好为3个元素），因此需要+1
+// 最后，我们要求的是整个数组中的等差数列的数目，上面所有子数组是不重叠的
+//所以需要把 0 <= end <= len(A - 1)0<=end<=len(A−1) 的所有递归函数的结果累加起来。
+    int numberOfArithmeticSlices(vector<int>& nums) {
+        const int n = nums.size();
+        if (n <= 2) return 0;
+        int ans = 0;
+        rec(nums, n - 1, ans);
+        return ans;
+    }
+
+    int rec(vector<int>& nums, int end, int& ans) {
+        //bug:这里不能仅设置n==2，还需要判断是否是等差数列，但是如果小于2就直接返回0
+        if (end < 2) {
+            return 0;
+        }
+        int res = 0;
+        if (nums[end] - nums[end - 1] == nums[end - 1] - nums[end - 2]) {
+            res = rec(nums, end - 1, ans) + 1;
+            ans += res;
+        }
+        else {
+            res = 0;
+            //bug！！！：这里虽然可以直接得到当前值，但是还是要通过递归前面的值，修改ans
+            rec(nums, end - 1, ans);
+        }
+        return res;
+    }
