@@ -30,4 +30,12 @@ public:
         if (j + 1 < grid[0].size()) backtrack(grid, i, j + 1, tmp, sums);
         tmp -= grid[i][j];
     }
+
+    int minPathSum(vector<vector<int> >& grid) {
+        const int m = grid.size();
+        const int n = grid[0].size();
+        vector<vector<int> > dp(m, vector<int>(n));
+        
+
+    }
 };
