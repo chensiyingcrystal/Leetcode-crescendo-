@@ -113,3 +113,23 @@ public:
         }
         return res;
     }
+//将递归自顶向下的思路转换为dp自底向上的过程，就变成了动态规划的解法
+    int numberOfArithmeticSlices(vector<int>& nums) {
+        const int n = nums.size();
+        if (n <= 2) return 0;
+        vector<int> dp(n);
+        dp[0] = 0, dp[1] = 0;
+        int sums = 0;
+        for (int i = 2; i < n; i++) {
+            if (nums[i] - nums[i - 1] == nums[i - 1] - nums[i - 2]) {
+                dp[i] = dp[i - 1] + 1;
+                sums += dp[i];
+            }
+            else {//由于本来默认的值就是0，这一段不写也可以ß
+                dp[i] = 0;
+            }
+        }
+        return sums;
+    }
+
+};
