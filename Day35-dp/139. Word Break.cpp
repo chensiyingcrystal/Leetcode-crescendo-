@@ -31,4 +31,24 @@ public:
         }
         return dp[n];
     }
+//另一个写法是，开头与dict里面的字符长度相关,这样就不用逐个字符检查是否与dict中word匹配
+//如果以i对应字符结尾，以扣去dict字符长度后开头的字符串与该word相同
+//那么dp[i] = dp[i] || dp[i-L]
+    bool wordBreak(string s, vector<string>& wordDict) {
+        if (s.empty()) return false;
+        //initialize a container to record dp result
+        const int n = s.length();
+        vector<bool> dp(n + 1);
+        dp[0] = true;
+        for (int i = 1; i <= n; i++) {
+            for (string& word : wordDict) {
+                int length = word.length();
+                if (i >= length && s.substr(i - length, length) == word) {
+                    dp[i] = dp[i] || dp[i - length];
+                }
+                if (dp[i]) continue;
+            }
+        }
+        return dp[n];
+    }
 };
