@@ -6,21 +6,15 @@ using namespace std;
 
 class Solution {
 public:
-//define a shorter string: text2 and a longer one, text1
-//based on text2, dp[i]represents the longest common subsequence that ends with text2[i]
-//The formula is: dp[i] = max(dp[i], dp[j] + 1), for j from 0 to i - 1, if text2[i] is in text1
-//else: dp[i] = 0
-//update the max_Len when looping through text2
+//dp[i][j]represents to the index i for the text1 and j for the text2
+//the length of the longest common subsequence
+//The formula should be: 
+//dp[i][j] = dp[i-1][j-1] + 1, if text1[i] == text2[j]
+//else: dp[i][j] = max(dp[i-1][j], dp[i][j-1]) 
     int longestCommonSubsequence(string text1, string text2) {
-      //we wanna make sure that text2 is always the shorter one 
-        if (text1.length() < text2.length()) {
-            string tmp = text1;
-            text1 = text2;
-            text2 = tmp;
-      }
-        const int m = text1.length();
-        const int n = text2.length();
+
         
+
 
 
 
