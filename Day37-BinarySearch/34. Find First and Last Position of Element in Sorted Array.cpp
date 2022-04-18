@@ -12,6 +12,7 @@ public:
 
 
     }
+//自己写的第一遍代码
    vector<int> searchRange(vector<int>& nums, int target) {
        if (nums.empty()) return {-1, -1};
        const int n = nums.size();
@@ -71,4 +72,59 @@ public:
        }
        return {l, r};
    }
+//改进版代码
+//-将重复代码封入一个function，用boolean值判断要寻找第一个还是最后一个出现的index
+//将同类型的代码逻辑整合
+//-改进变量名称
+    vector<int> searchRange(vector<int>& nums, int target) {
+        if (nums.empty()) return {-1, -1};
+
+        const int n = nums.size();
+        int start = helper(nums, target, n, true);
+
+        if (start == -1) return {-1, -1};
+
+        int end = helper(nums, target, n, false);
+        return {start, end};
+    }
+
+    int helper(vector<int>& nums, int target, int n, bool flag) {
+        int pos = -1;
+        int left = 0, right = n - 1;
+        //add empty line indicating logic section
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] == target) {
+                //the value of flag determines the options we will perform 
+                //if it's true, we're finding the start position of the value of target
+                //else, we're finding its end position
+                if (flag) {
+                    //two cases that indicating the mid element is the start position
+                    if (mid == left || nums[mid - 1] < target) {
+                        pos = mid;
+                        return pos;
+                    }
+                    else {
+                        right = mid - 1;
+                    }
+                }
+                else {
+                    if (mid == right || nums[mid + 1] > target) {
+                        pos = mid;
+                        return pos;
+                    }
+                    else {
+                        left = mid + 1;
+                    }
+                }
+            }
+            else if (nums[mid] > target) {
+                right = mid - 1;
+            }
+            else {
+                left = mid + 1;
+            }
+        }
+        return pos;
+    }
 };
