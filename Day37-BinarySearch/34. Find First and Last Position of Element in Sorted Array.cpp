@@ -179,6 +179,10 @@ public:
 //用right-left>1写出来的版本
 //特点：不用去考虑nums[mid] == target的单独的情况，将其包含在left或者right一侧
 //要做post-processing，对最后剩下的两个端点进行考虑；需要思考一下post-processing对只有两元素（无法进入循环）的情况进行考虑是否适用
+//两个版本的区别是：
+//对于left<=right,每次查找一个元素，由于递进边界的条件是mid+1或者-1，因此需要排除nums[mid] == target的情况，需要对此情况特殊考虑
+//对于right - left > 1，这种情况下总是将nums[mid] == target包含进left side或者right side的一个阵营
+//在循环终止后，总是有一个端点包含target或者都不包含
         vector<int> searchRange(vector<int>& nums, int target) {
         const int n = nums.size();
         if (n == 0) return {-1, -1};
