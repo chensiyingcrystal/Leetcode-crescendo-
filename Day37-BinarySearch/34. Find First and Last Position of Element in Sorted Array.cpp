@@ -127,4 +127,6 @@ public:
         }
         return pos;
     }
+//自己写的第三遍
+       vector<int> searchRange(vector<int>& nums, int target) {
 };
