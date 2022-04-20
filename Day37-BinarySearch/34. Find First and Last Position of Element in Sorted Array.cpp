@@ -128,5 +128,105 @@ public:
         return pos;
     }
 //自己写的第三遍
-       vector<int> searchRange(vector<int>& nums, int target) {
+    vector<int> searchRange(vector<int>& nums, int target) {
+        const int n = nums.size();
+        if (n == 0) return {-1, -1};
+        //建议增加对于一个元素的检查
+
+        //search left boundary
+        int leftbound = searchBoundary(nums, target, true);
+
+        //if not found, return {-1, -1}
+        if (leftbound == -1) return {-1, -1};
+
+        //else, search right boundary
+        int rightbound = searchBoundary(nums, target, false);
+        
+        return {leftbound, rightbound};
+    }
+
+    int searchBoundary(vector<int>& nums, int target, bool flag) {
+        //尽量添加此变量
+        const int n = nums.size();
+        int left = 0, right = n - 1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] == target) {
+                if (flag) { // indicating we're finding left boundary
+                //bug！！！凡是这样类型的index一定注意有没有overflow
+                    if (mid >= 1 && nums[mid - 1] == nums[mid]) {
+                        right = mid - 1;
+                    }
+                    else return mid;
+                }
+                else { // indicating we're finding right boundary
+                //bug！！！凡是这样类型的index一定注意有没有overflow
+                    if (mid <= n - 2 && nums[mid + 1] == nums[mid]) {
+                        left = mid + 1;
+                    }
+                    else return mid;
+                }
+            }
+            else if (nums[mid] < target) {
+                left = mid + 1;
+            }
+            else {
+                right = mid - 1;
+            } 
+        }
+        return -1;
+    }
+//用right-left>1写出来的版本
+//特点：不用去考虑nums[mid] == target的单独的情况，将其包含在left或者right一侧
+//要做post-processing，对最后剩下的两个端点进行考虑；需要思考一下post-processing对只有两元素（无法进入循环）的情况进行考虑是否适用
+        vector<int> searchRange(vector<int>& nums, int target) {
+        const int n = nums.size();
+        if (n == 0) return {-1, -1};
+
+        //search left boundary
+        int leftbound = searchBoundary(nums, target, true);
+
+        //if not found, return {-1, -1}
+        if (leftbound == -1) return {-1, -1};
+
+        //else, search right boundary
+        int rightbound = searchBoundary(nums, target, false);
+        
+        return {leftbound, rightbound};
+    }
+
+    int searchBoundary(vector<int>& nums, int target, bool flag) {
+        const int n = nums.size();      
+        int left = 0, right = n - 1;
+        while (right - left > 1) {
+            int mid = left + (right - left) / 2;
+            if (flag) {
+                if (nums[mid] >= target) {
+                    right = mid;
+                }
+                else {
+                    left = mid;
+                }
+            }
+            else {
+                if (nums[mid] <= target) {
+                    left = mid;
+                }
+                else {
+                    right = mid;
+                }
+            }
+        }
+        if (flag) {
+            if (nums[left] == target) return left;
+            else if (nums[right] == target) return right;
+            return -1;    
+        }
+        else {
+            if (nums[right] == target) return right;
+            else if (nums[left] == target) return left;
+            return -1;
+        }
+        return -1;
+    }
 };
