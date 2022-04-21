@@ -12,6 +12,11 @@ public:
 
 
     }
+//This question is different from 33 in that the input allows duplicate numbers
+//which means that we need to seperate the situation where nums[mid] == nums[left]
+//becuase in this case, we cannot tell if the chasm is on the left side of index mid or the right
+//but one thing we can know for sure is that the target is not on the left([left] = [mid], [mid] != target)
+//so what we can instead do is increment left by 1, turning this problem in this case to o(n) time complexity.
     bool search(vector<int>& nums, int target) {
         const int n = nums.size();
         if (n == 1) return target == nums[0] ? true : false;
