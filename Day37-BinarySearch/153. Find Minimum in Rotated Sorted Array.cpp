@@ -12,6 +12,7 @@ public:
 
 
     }
+//目标：不断抛弃多余的有序部分，收敛到断层
 //本题显然用right-left>1能更好地handle chasm中寻找minimum的题
 //因为此时我们不再是寻找一个值，而是找到断层所在区间，即将原区间最后收敛到断层左右再取最小值就可以了
 //我们知道旋转数组包含两部分，一部分有序，一部分无序（断层所在），因此每次我们都需要丢弃有序区间
@@ -30,6 +31,7 @@ public:
         int left = 0, right = n - 1;
         while (right - left > 1) {
             int mid = left + (right - left) / 2;
+            //下面这行代码是多余的，加速代码进程，但是不写最后也会收敛至断层处
             if (mid >= 1 && nums[mid] < nums[mid - 1]) return nums[mid];
             if (nums[mid] >= nums[left]) {
                 left = mid;
