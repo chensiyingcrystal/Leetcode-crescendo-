@@ -15,4 +15,5 @@ b. there's two cases where we encounter the first target:
     -the mid element is the first element
     -the element to the left of the mid index is not equal to the mid element
 c. we can set a helper function for the main function and add a boolean to decide whether we want to find the first or the last position
-                
+  `int left = 0, right = n - 1;
+  `              
