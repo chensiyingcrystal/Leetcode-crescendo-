@@ -152,6 +152,43 @@ public:
     }
 //改写成另一种
     int search(vector<int>& nums, int target) {
+        const int n = nums.size();
+        //this method needs to consider special cases where nums has only one or two elements
+        if (n == 1) return target == nums[0] ? 0 : -1;
+        if (n == 2) {
+            if (target == nums[0]) return 0;
+            if (target == nums[1]) return 1;
+            return -1;
+        }
 
+        int left = 0, right = n - 1;
+        while (right - left > 1) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] == target) return mid;
+            //this case can handle the situation where the nums has not been rotated
+            //in this case it will always been led to this if-clause and bs been operated as usual
+            if (nums[mid] >= nums[left]) {
+                if (target >= nums[left] && target < nums[mid]) {
+                    right = mid;
+                }
+                else {
+                    left = mid;
+                }
+            }
+            else {
+                if (target > nums[mid] && target <= nums[right]) {
+                    left = mid;
+                }
+                else {
+                    right = mid;
+                }
+            }
+        }
+        //The case will finally converge to the chasm
+        //apart from the left or right, other elements have all been visited
+        //so we need to do some post-processing
+        if (nums[left] == target) return left;
+        if (nums[right] == target) return right;
+        return -1;
     }
 };
