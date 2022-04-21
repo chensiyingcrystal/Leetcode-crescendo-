@@ -122,10 +122,10 @@ public:
 //one-pass
     int search(vector<int>& nums, int target) {
         const int n = nums.size();
-        if (n == 1) {
-            return target == nums[0] ? 0 : -1;
-        }
-
+        //Here we do not need to consider the case where nums has only one element
+        //because in this case, mid will be equal to the left
+        //and once the target not equal to the mid, it will be led to either one end increment by 1
+        //the loop terminated and -1 is returned
         int left = 0, right = n - 1;
         while (left <= right) {
             int mid = left + (right - left) / 2;
@@ -149,5 +149,9 @@ public:
             }
         }
         return -1;
+    }
+//改写成另一种
+    int search(vector<int>& nums, int target) {
+
     }
 };
