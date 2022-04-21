@@ -20,6 +20,7 @@ public:
     bool search(vector<int>& nums, int target) {
         const int n = nums.size();
         if (n == 1) return target == nums[0] ? true : false;
+        
         int left = 0, right = n - 1;
         while (left <= right) {
             int mid = left + (right - left) / 2;
