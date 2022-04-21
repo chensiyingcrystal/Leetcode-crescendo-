@@ -120,6 +120,18 @@ public:
         return -1;
     }
 //one-pass
+//这道题可以用一遍二分解决的原因在于
+//使用二分将target逼入单调递增或者chasm的区域
+//二分并非仅对于单调有序的数组可以做，如果此时有两段，一段有序，另一段无序也可以用一遍二分
+//算法在于：each time we locate target to the ordered part, if it's not in there
+    //we will discard the ordered part, thus converging the area continuously to the chasm
+    //if the target is in the ordered part, this is the normal bs
+    //if it's equal to the chasm, we will finally converge to that
+    //for the left<=right modulate, we will get mid equal to the left or right, meaning they will
+        //be visisted finally before the loop terminated
+    //for the right-left > 1 case, we will finally converge to the chasm. 
+        //then by adding some post-processing, we will find the target; if not, return -1;
+    //if nothing is found, return -1
     int search(vector<int>& nums, int target) {
         const int n = nums.size();
         //Here we do not need to consider the case where nums has only one element
