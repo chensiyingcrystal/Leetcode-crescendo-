@@ -48,6 +48,7 @@ public:
             int mid = left + (right - left) / 2;
             if (mid >= 1 && nums[mid] < nums[mid - 1]) return nums[mid];
             //不需要考虑单调递增未经旋转的情况，因为右边界一直向左侵吞
+            //关键区别是mid等于极值的时候，是左区间挪动还是右区间挪动
             if (nums[mid] <= nums[right]) {
                 right = mid;
             }
