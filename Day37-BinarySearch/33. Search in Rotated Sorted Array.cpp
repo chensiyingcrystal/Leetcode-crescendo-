@@ -151,6 +151,8 @@ public:
         return -1;
     }
 //改写成另一种
+//前处理和后处理变多，但是代码主体基本相似，两种方式没有大的区别，甚至第一种更好
+//此题在于寻找单个目标，因此前一种方式写起来会更加简单
     int search(vector<int>& nums, int target) {
         const int n = nums.size();
         //this method needs to consider special cases where nums has only one or two elements
