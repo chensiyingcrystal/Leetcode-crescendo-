@@ -65,4 +65,41 @@ public:
 
         return dfs(node1 -> left, node2 -> right) && dfs(node1 -> right, node2 -> left);
     }
+//bfs自己再敲一遍
+    bool isSymmetric(TreeNode* root) {
+        if (!root) return true;
+        if (root -> left == nullptr && root -> right == nullptr) return true;
+        if (root -> left == nullptr || root -> right == nullptr) return false;
+
+        queue<TreeNode*> qleft;
+        queue<TreeNode*> qright;
+        qleft.push(root -> left);
+        qright.push(root -> right);
+        while(!qleft.empty() && !qright.empty()) {
+            TreeNode* tleft = qleft.front();
+            qleft.pop();
+            TreeNode* tright = qright.front();
+            qright.pop();
+
+            if (tleft -> val != tright -> val) return false;
+            if (!tleft -> left && tright -> right) return false;
+            if (tleft -> left && !tright -> right) return false;
+            if (tleft -> left && tright -> right) {
+                qleft.push(tleft -> left);
+                qright.push(tright -> right);
+            }
+
+            if (!tleft -> right && tright -> left) return false;
+            if (tleft -> right && !tright -> left) return false;
+            if (tleft -> right && tright -> left) {
+                qleft.push(tleft -> right);
+                qright.push(tright -> left);
+            }
+        }
+        return true;
+    }
+//dfs自己再敲一遍
+    bool isSymmetric(TreeNode* root) {
+
+    }
 };
