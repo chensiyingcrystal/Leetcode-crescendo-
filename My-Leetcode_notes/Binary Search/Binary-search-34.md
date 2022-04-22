@@ -7,12 +7,16 @@
 * 与bs相关的**数学题：
    * 69（https://leetcode.com/problems/sqrtx/）
    * 367（https://leetcode.com/problems/valid-perfect-square/）
-* index边界题**intermediate: 插入型找index题35（https://leetcode.com/problems/search-insert-position/）
-                 找左右边界index题34（https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/）
-* 旋转数组类型**advanced：旋转数组找数字33（https://leetcode.com/problems/search-in-rotated-sorted-array/）
-                       33变形题出现重复数字81（https://leetcode.com/problems/search-in-rotated-sorted-array-ii/）
-                       旋转数组找最小值153（https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/）
-                       153变形题出现重复数字154（https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/）
+
+* index边界题**intermediate: 
+   * 插入型找index题35（https://leetcode.com/problems/search-insert-position/）
+   * 找左右边界index题34（https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/）
+
+* 旋转数组类型**advanced：
+   * 旋转数组找数字33（https://leetcode.com/problems/search-in-rotated-sorted-array/）
+   * 33变形题出现重复数字81（https://leetcode.com/problems/search-in-rotated-sorted-array-ii/）
+   * 旋转数组找最小值153（https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/）
+   * 153变形题出现重复数字154（https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/）
 
 2. Design and Mindset
 important: **overall perspective全局观
