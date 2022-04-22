@@ -16,6 +16,8 @@ struct TreeNode {
 class Solution {
 public:
 //method1: bfs
+//bfs如何进行层序遍历？
+//记录下每一层bfs的个数，优先循环完当前数目，即为当前层的node
     vector<vector<int> > levelOrder(TreeNode* root) {
         if (root == nullptr) return {};
         
@@ -62,5 +64,33 @@ public:
         ans[level].push_back(node -> val);
         if (node -> left) dfs(node -> left, level + 1, ans);
         if (node -> right) dfs(node -> right, level + 1, ans);
+    }
+
+//再敲一遍bfs
+    vector<vector<int> > levelOrder(TreeNode* root) {
+        if (root == nullptr) return {};
+        vector<vector<int> > ans;
+
+        queue<TreeNode*> q;
+        q.push(root);
+        while (!q.empty()) {
+            int k = q.size();
+            vector<int> tmp;
+            while(k--) {
+                TreeNode* node = q.front();
+                q.pop();
+
+                tmp.push_back(node -> val);
+                if (node -> left != nullptr) q.push(node -> left);
+                if (node -> right != nullptr) q.push(node -> right);
+            }
+            ans.push_back(tmp);
+        }
+        return ans;
+    }
+//dfs
+    vector<vector<int> > levelOrder(TreeNode* root) {
+        
+
     }
 };
