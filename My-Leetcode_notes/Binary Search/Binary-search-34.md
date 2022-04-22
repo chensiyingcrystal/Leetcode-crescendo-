@@ -1,10 +1,12 @@
 # Binary Search 周总结
 1. **Question Overview**题目分类
 
-* 最**基础的binary search： 704（https://leetcode.com/problems/binary-search/）
+* 最**基础的binary search： 
+   * 704（https://leetcode.com/problems/binary-search/）
 
-* 与bs相关的**数学题：69（https://leetcode.com/problems/sqrtx/）
-                  367（https://leetcode.com/problems/valid-perfect-square/）
+* 与bs相关的**数学题：
+   * 69（https://leetcode.com/problems/sqrtx/）
+   * 367（https://leetcode.com/problems/valid-perfect-square/）
 * index边界题**intermediate: 插入型找index题35（https://leetcode.com/problems/search-insert-position/）
                  找左右边界index题34（https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/）
 * 旋转数组类型**advanced：旋转数组找数字33（https://leetcode.com/problems/search-in-rotated-sorted-array/）
