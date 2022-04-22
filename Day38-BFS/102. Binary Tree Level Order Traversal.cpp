@@ -15,7 +15,50 @@ struct TreeNode {
 
 class Solution {
 public:
+//method1: bfs
     vector<vector<int> > levelOrder(TreeNode* root) {
+        if (root == nullptr) return {};
         
+        vector<vector<int> > ans;
+        queue<TreeNode*> q;
+        q.push(root);
+        while(!q.empty()) {
+            int k = q.size();
+            vector<int> tmp;
+            while (k--) {
+                TreeNode* node = q.front();
+                q.pop();
+                tmp.push_back(node -> val);
+                
+                if (node -> left != nullptr) q.push(node -> left);
+                if (node -> right != nullptr) q.push(node -> right);
+            }
+            ans.push_back(tmp);
+        }
+        return ans;
+    }
+//method2: dfs
+    vector<vector<int> > levelOrder(TreeNode* root) {
+        if (!root) return {};
+
+        vector<vector<int> > ans;
+        dfs(root, 0, ans);
+        return ans;
+        
+    }
+
+    void dfs(TreeNode* node, int level, vector<vector<int> >& ans) {
+        //bug: not writing as: level > ans.size() - 1
+        //ans.size() returns an unsigned int
+        //so if you subtract 1 from an unsigned int, the answer will not be -1
+        //instead it will be a very large number, which will lead to incorrect answer
+        if (level == ans.size()) {
+            vector<int> tmp;
+            ans.push_back(tmp);
+        }
+        
+        ans[level].push_back(node -> val);
+        if (node -> left) dfs(node -> left, level + 1, ans);
+        if (node -> right) dfs(node -> right, level + 1, ans);
     }
 };
