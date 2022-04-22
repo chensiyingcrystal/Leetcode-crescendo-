@@ -40,6 +40,8 @@ public:
         return ans;
     }
 //method2: dfs
+//前序遍历，top -> bottom, left -> right
+//此题使用前序后序中序都是ac的，因为我们直接用level作为索引，所以是bottom-》top还是反过来并不重要
 //手动添加level标记，用level指示index，将同层的放入同一个数组中
 //由于dfs并不能知道总的level数，结果数组不能初始化，需要在level到达下一层时开创新的数组空间
     vector<vector<int> > levelOrder(TreeNode* root) {
@@ -90,7 +92,20 @@ public:
     }
 //dfs
     vector<vector<int> > levelOrder(TreeNode* root) {
-        
+        if (root == nullptr) return {};
+        vector<vector<int> > ans;
+        dfs(root, 0, ans);
+        return ans;
+    }
 
+    void dfs(TreeNode* root, int level, vector<vector<int> >& ans) {
+        if (level == ans.size()) {
+            vector<int> tmp;
+            ans.push_back(tmp);
+        }
+
+        ans[level].push_back(root -> val);
+        if (root -> left != nullptr) dfs(root -> left, level + 1, ans);
+        if (root -> right != nullptr) dfs(root -> right, level + 1, ans);
     }
 };
