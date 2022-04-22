@@ -2,7 +2,7 @@
 1. **Question Overview**题目分类
 
 * 最**基础的binary search： 
-   * [704](https://leetcode.com/problems/binary-search/）
+   * (704)[https://leetcode.com/problems/binary-search/]
 
 * 与bs相关的**数学题：
    * 69（https://leetcode.com/problems/sqrtx/）
