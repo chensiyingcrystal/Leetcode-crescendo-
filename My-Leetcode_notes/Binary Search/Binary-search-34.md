@@ -1,6 +1,8 @@
 # Binary Search 周总结
 1. **Question Overview题目分类
+
 -- 最**基础的binary search： 704（https://leetcode.com/problems/binary-search/）
+
 -- 与bs相关的**数学题：69（https://leetcode.com/problems/sqrtx/）
                   367（https://leetcode.com/problems/valid-perfect-square/）
 -- index边界题**intermediate: 插入型找index题35（https://leetcode.com/problems/search-insert-position/）
