@@ -15,7 +15,37 @@ struct TreeNode {
 
 class Solution {
 public:
+//method1: bfs(iteratively)
     bool isSymmetric(TreeNode* root) {
+        if (root == nullptr) return true;
+        if (root -> left == nullptr && root -> right == nullptr) return true;
+        if (root -> left == nullptr || root -> right == nullptr) return false;
         
+        queue<TreeNode*> qleft;
+        queue<TreeNode*> qright;
+        qleft.push(root -> left);
+        qright.push(root -> right);
+        while (!qleft.empty() && !qright.empty()) {
+            TreeNode* q1 = qleft.front();
+            TreeNode* q2 = qright.front();
+            qleft.pop();
+            qright.pop();
+
+            if (q1 -> val != q2 -> val) return false;
+            if (q1 -> left == nullptr && q2 -> right != nullptr) return false;
+            if (q1 -> left != nullptr && q2 -> right == nullptr) return false;
+            if (q1 -> left != nullptr && q2 -> right != nullptr) {
+                qleft.push(q1 -> left);
+                qright.push(q2 -> right);
+            }
+
+            if (q1 -> right == nullptr && q2 -> left != nullptr) return false;
+            if (q1 -> right != nullptr && q2 -> left == nullptr) return false;
+            if (q1 -> right != nullptr && q2 -> left != nullptr) {
+                qleft.push(q1 -> right);
+                qright.push(q2 -> left);
+            }
+        }
+        return true;
     }
 };
