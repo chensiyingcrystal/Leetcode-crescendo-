@@ -16,6 +16,8 @@ struct TreeNode {
 class Solution {
 public:
 //method1: bfs(iteratively)
+//time: traverse the entire tree and each node one, the total run time is O(N)
+//space: the worst case, the maximum nodes in the queue is n; O(n)
     bool isSymmetric(TreeNode* root) {
         if (root == nullptr) return true;
         if (root -> left == nullptr && root -> right == nullptr) return true;
@@ -49,6 +51,8 @@ public:
         return true;
     }
 //method2: dfs(recursively)
+//time: o(n)
+//space: o(n); in the worst case, the tree is linear and the height is o(n)
     bool isSymmetric(TreeNode* root) {
         if (root == nullptr) return true;
         return dfs(root -> left, root -> right);
