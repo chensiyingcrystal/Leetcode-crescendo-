@@ -100,6 +100,14 @@ public:
     }
 //dfs自己再敲一遍
     bool isSymmetric(TreeNode* root) {
+        if(root == nullptr) return true;
+        return dfs(root -> left, root -> right);
+    }
 
+    bool dfs(TreeNode* node1, TreeNode* node2) {
+        if (node1 == nullptr && node2 == nullptr) return true;
+        if (node1 == nullptr || node2 == nullptr) return false;
+        if (node1 -> val != node2 -> val) return false;
+        return dfs(node1 -> left, node2 -> right) && dfs(node1 -> right, node2 -> left);
     }
 };
