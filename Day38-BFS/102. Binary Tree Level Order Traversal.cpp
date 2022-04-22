@@ -38,6 +38,8 @@ public:
         return ans;
     }
 //method2: dfs
+//手动添加level标记，用level指示index，将同层的放入同一个数组中
+//由于dfs并不能知道总的level数，结果数组不能初始化，需要在level到达下一层时开创新的数组空间
     vector<vector<int> > levelOrder(TreeNode* root) {
         if (!root) return {};
 
