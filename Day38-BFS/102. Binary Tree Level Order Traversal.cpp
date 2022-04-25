@@ -17,6 +17,7 @@ class Solution {
 public:
 //method1: bfs
 //bfs如何进行层序遍历？
+//outer loop iterating each level on the tree; inner loop iterating each node within a single level
 //记录下每一层bfs的个数，优先循环完当前数目，即为当前层的node
     vector<vector<int> > levelOrder(TreeNode* root) {
         if (root == nullptr) return {};
