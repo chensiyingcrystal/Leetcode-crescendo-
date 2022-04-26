@@ -17,9 +17,20 @@ struct TreeNode {
 class Solution {
 public:
     bool isBalanced(TreeNode* root) {
-        
-
+        if (root == nullptr) return true;
+        if (!isBalanced(root -> left)) return false;
+        if (!isBalanced(root -> right)) return false;
+        return abs(treeLevel(root -> left) - treeLevel(root -> right)) <= 1;
     }
+
+    int treeLevel(TreeNode* node) {
+        if (node == nullptr) return 0;
+        return max(treeLevel(node -> left), treeLevel(node -> right)) + 1;
+    }
+
+    
+
+
 
 
 
