@@ -37,8 +37,13 @@ public:
 public:
     bool isBalanced(TreeNode* root) {
         if (root == nullptr) return true;
-        
+        int left = height(root -> left);
 
+
+    }
+
+    int height(TreeNode* node) {
+        
     }
 
     
