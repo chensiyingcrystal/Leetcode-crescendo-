@@ -34,7 +34,11 @@ public:
         return max(treeLevel(node -> left), treeLevel(node -> right)) + 1;
     }
 //one-way: use global variable or reference variable
-//小熊推荐的写法
+//小熊推荐的写法: 因为一次遍历需要两个信息，因此我们可以同时返回两个信息
+//与dfs tree traversal的题类似，想好base case和该节点的结果是怎么由
+//左右子树的dfs结果得来之后就leap of faith！！不要过度思考
+//但是注意，每次为了放心不错漏，需要提前思考一下左右子树任一为空的递归方程是不是
+//会有所不同，类似题111minimum tree！这样就能更放心地写递归
 public:
     bool isBalanced(TreeNode* root) {
         if (root == nullptr) return true;
@@ -43,15 +47,15 @@ public:
     }
 
     pair<int, bool> dfs(TreeNode* root) {
-        if (root -> left == nullptr && root -> right == nullptr) {
-            return make_pair(1, true);
+        if (root == nullptr) {
+            return make_pair(0, true);
         }
-
-        
-
-
-
-        
+        pair<int, bool> left = dfs(root -> left);
+        pair<int, bool> right = dfs(root -> right);
+        pair<int, bool> self;
+        self.first = max(left.first, right.first) + 1;
+        self.second = left.second && right.second && abs(right.first - left.first) <= 1;
+        return self;
     }
 
     
