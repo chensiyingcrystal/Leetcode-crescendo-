@@ -39,6 +39,7 @@ public:
 //左右子树的dfs结果得来之后就leap of faith！！不要过度思考
 //但是注意，每次为了放心不错漏，需要提前思考一下左右子树任一为空的递归方程是不是
 //会有所不同，类似题111minimum tree！这样就能更放心地写递归
+//此题就是先序遍历+剪枝
 public:
     bool isBalanced(TreeNode* root) {
         if (root == nullptr) return true;
@@ -51,7 +52,10 @@ public:
             return make_pair(0, true);
         }
         pair<int, bool> left = dfs(root -> left);
+        //add some triming operations 
+        if (!left.second) return make_pair(0, false);
         pair<int, bool> right = dfs(root -> right);
+        if (!right.second) return make_pair(0, false);
         pair<int, bool> self;
         self.first = max(left.first, right.first) + 1;
         self.second = left.second && right.second && abs(right.first - left.first) <= 1;
