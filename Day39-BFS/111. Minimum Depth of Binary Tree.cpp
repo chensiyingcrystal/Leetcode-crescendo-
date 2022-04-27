@@ -75,6 +75,8 @@ public:
 //小熊推荐的另一种写法
     int minDepth(TreeNode* root) {
         //可以先在主函数中排除root为null的特殊情况
+        //如果都放一个函数写，那么可能出现最初root就是空或者是base case是空的情况
+        //会比较confuse，所以可以分开写
         if (root == nullptr) return 0;
         return dfs(root);
     }

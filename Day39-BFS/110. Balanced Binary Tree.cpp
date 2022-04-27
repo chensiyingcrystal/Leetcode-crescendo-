@@ -34,15 +34,21 @@ public:
         return max(treeLevel(node -> left), treeLevel(node -> right)) + 1;
     }
 //one-way: use global variable or reference variable
+//小熊推荐的写法
 public:
     bool isBalanced(TreeNode* root) {
         if (root == nullptr) return true;
-        int left = height(root -> left);
-
-
+        pair<int, bool> ans = dfs(root);
+        return ans.second;
     }
 
-    int height(TreeNode* node) {
+    pair<int, bool> dfs(TreeNode* root) {
+        if (root -> left == nullptr && root -> right == nullptr) {
+            return make_pair(1, true);
+        }
+
+        
+
         
     }
 
