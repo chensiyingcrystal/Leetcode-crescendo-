@@ -72,4 +72,8 @@ public:
         }
         return mindepth;
     }
+//小熊推荐的另一种写法
+    int minDepth(TreeNode* root) {
+        
+    }
 };
