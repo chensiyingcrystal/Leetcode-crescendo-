@@ -57,8 +57,10 @@ public:
         pair<int, bool> right = dfs(root -> right);
         if (!right.second) return make_pair(0, false);
         pair<int, bool> self;
+        //两个信息分别是怎样由子节点的结果得到的
         self.first = max(left.first, right.first) + 1;
-        self.second = left.second && right.second && abs(right.first - left.first) <= 1;
+        //这里如果没有前面的剪枝，应该是3个and
+        self.second = abs(right.first - left.first) <= 1;
         return self;
     }
 
