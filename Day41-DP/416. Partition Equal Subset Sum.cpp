@@ -81,8 +81,8 @@ public:
         if (sum_of_nums % 2 != 0) return false;
         int target = sum_of_nums / 2;
         const int n = nums.size();
-        //这里可以是n和target的大小，但是为了便于和模板一样，可以+1保证不会overflow
-        vector<vector<int> > result(n + 1, vector<int>(target + 1, 0));
+        //这里可以是n和target的大小，但是为了便于和模板一样，可以各+1保证不会overflow
+        vector<vector<int> > result(n, vector<int>(target + 1, 0));
         return dfs(nums, n - 1, target, result);
     }
 
@@ -100,4 +100,31 @@ public:
         else result[i][target] = 2;
         return ans;
     }
+//method4: bottom up dynamic programming
+//dp[i][j]: nums containing the former ith elements, whether or not if some of elements could
+//form its subset that can add up to j
+//time: o(mn); space: o(mn)
+    bool canPartition(vector<int>& nums) {
+        int sum_of_nums = accumulate(nums.begin(), nums.end(), 0);
+        if (sum_of_nums % 2 != 0) return false;
+        int target = sum_of_nums / 2;
+        const int n = nums.size();
+
+        vector<vector<bool> > result(n + 1, vector<bool>(target + 1, false));
+        for (int i = 0, j = 0; i < n + 1; i++) result[i][j] = true;
+        for (int i = 0, j = 1; j < target + 1; j++) result[i][j] = false;
+        for (int i = 1; i < n + 1; i++) {
+            int num = nums[i - 1];
+            for (int j = 1; j < target + 1; j++) {
+                if (j >= num) {
+                    result[i][j] = result[i - 1][j] || result[i - 1][j - num];
+                }
+                else {
+                    result[i][j] = result[i - 1][j];
+                }
+            }
+        }
+        return result[n][target];
+    }
+
 };
