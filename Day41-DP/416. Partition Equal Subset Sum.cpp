@@ -58,9 +58,46 @@ public:
 
     bool dfs(vector<int>& nums, int i, int target) {
         if (target == 0) return true;
-        if (target > 0 && i == 0) return false;
-        if (target < 0) return false;
+        if (i < 0 || target < 0) return false;
 
         return dfs(nums, i - 1, target) || dfs(nums, i - 1, target - nums[i]);
+    }
+//method3: Top-down dp(memorization)
+//Since the same subproblem is computed again and again, 
+//the problem has Overlapping Subproblem property and can be solved using Dynamic Programming.
+//time: o(m*n)
+// In the worst case where there is no overlapping calculation, 
+// the maximum number of entries in the memo would be m⋅n. 
+// For each entry, overall we could consider that it takes constant time, 
+// i.e. each invocation of dfs() at most emits one entry in the memo.
+// The overall computation is proportional to the number of entries in memo. 
+// Hence, the overall time complexity is \mathcal{O}(m \cdot n)O(m⋅n).
+//space: o(m*n)
+// We are using a 2 dimensional array of size (m⋅n) 
+// and O(n) space to store the recursive call stack. 
+// This gives us the space complexity as O(n) + O(m⋅n) = O(m⋅n)
+    bool canPartition(vector<int>& nums) {
+        int sum_of_nums = accumulate(nums.begin(), nums.end(), 0);
+        if (sum_of_nums % 2 != 0) return false;
+        int target = sum_of_nums / 2;
+        const int n = nums.size();
+        //这里可以是n和target的大小，但是为了便于和模板一样，可以+1保证不会overflow
+        vector<vector<int> > result(n + 1, vector<int>(target + 1, 0));
+        return dfs(nums, n - 1, target, result);
+    }
+
+    bool dfs(vector<int>& nums, int i, int target, vector<vector<int> >& result) {
+        if (target == 0) return true;
+        if (i < 0 || target < 0) return false;
+        
+        //bug:假如只initialize了target的空间大小，最大的index是到target-1,因此会overflow
+        //两种方法：第一是每次索引target的时候需要用target-1访问target的实际结果
+        //第二种就是直接initialize target+1的空间大小，这样target能直接按照target访问
+        if (result[i][target] == 1) return true;
+        if (result[i][target] == 2) return false;
+        bool ans = dfs(nums, i - 1, target, result) || dfs(nums, i - 1, target - nums[i], result);
+        if (ans) result[i][target] = 1;
+        else result[i][target] = 2;
+        return ans;
     }
 };
