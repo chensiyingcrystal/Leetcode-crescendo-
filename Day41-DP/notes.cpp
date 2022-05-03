@@ -9,10 +9,10 @@ using namespace std;
 */
 int getMaxValue(vector<int>& w, vector<int>& v, int W) {
     const int m = w.size(), n = W;
-    vector<vector<int> > dp(m + 1, vector<int>(n, 0));
-    for (int i = 0; i < m + 1; i++) {
+    vector<vector<int> > dp(m + 1, vector<int>(n + 1, 0));
+    for (int i = 1; i < m + 1; i++) {
+        int wi = w[i - 1], vi = v[i - 1];
         for (int j = 1; j <= n; j++) {
-            int wi = w[i - 1], vi = v[i - 1];
             if (j >= wi) {
                 dp[i][j] = max(dp[i - 1][j], dp[i - 1][j - wi] + vi);  
             }
@@ -22,4 +22,19 @@ int getMaxValue(vector<int>& w, vector<int>& v, int W) {
         }
     }
     return dp[m][n];
+}
+
+//compress space complexity to o(n)
+int getMaxValue(vector<int>& w, vector<int>& v, int W) {
+    const int m = w.size(), n = W;
+    vector<int> dp(n + 1, 0);
+    for (int i = 1; i < m + 1; i++) {
+        int wi = w[i - 1], vi = v[i - 1];
+        for (int j = n; j >= 1; j--) {
+            if (j >= wi) {
+                dp[j] = max(dp[j], dp[j - wi] + vi);  
+            }
+        }
+    }
+    return dp[n];
 }
