@@ -62,7 +62,7 @@ public:
 
         return dfs(nums, i - 1, target) || dfs(nums, i - 1, target - nums[i]);
     }
-//method3: Top-down dp(memorization)
+//method3: Top-down recursion + memorization
 //Since the same subproblem is computed again and again, 
 //the problem has Overlapping Subproblem property and can be solved using Dynamic Programming.
 //time: o(m*n)
