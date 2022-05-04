@@ -24,15 +24,15 @@
 
 * The left-shift and right-shift operators are equivalent to multiplication and division by 2 respectively. 
 
-* 常见的位运算特性（0s和1s分别表示只由0或1构成的二进制数字）：
-x ^ 0s = x
-x ^ 1s = ~x
-x ^ x = 0
-x & 0s = 0
-x & 1s = x
-x & x = x
-x | 0s = x
-x | 1s = 1s
-x | x = x
+* 位运算特性（0s和1s分别表示只由0或1构成的二进制数字）：
+* x ^ 0s = x
+* x ^ 1s = ~x
+* x ^ x = 0
+* x & 0s = 0
+* x & 1s = x
+* x & x = x
+* x | 0s = x
+* x | 1s = 1s
+* x | x = x
 
                 
