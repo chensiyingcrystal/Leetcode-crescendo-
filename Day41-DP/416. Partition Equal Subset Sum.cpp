@@ -126,5 +126,28 @@ public:
         }
         return result[n][target];
     }
+//method5: bottom up dynamic programming + space compress
+//time: o(mn); space: o(n)
+    bool canPartition(vector<int>& nums) {
+        int sum_of_nums = accumulate(nums.begin(), nums.end(), 0);
+        if (sum_of_nums % 2 != 0) return false;
+        int target = sum_of_nums / 2;
+        const int n = nums.size();
 
+        vector<bool> result(target + 1, false);
+        //初始值即为i=0时候那一行的值
+        result[0] = true;
+        for (int i = 1; i <= n; i++) {
+            int num = nums[i - 1];
+            for (int j = target; j >= 1; j--) {
+                if (j >= num) {
+                    result[j] = result[j] || result[j - num];
+                }
+            }
+        }
+
+            
+        }
+        return result[n][target];
+    }
 };
