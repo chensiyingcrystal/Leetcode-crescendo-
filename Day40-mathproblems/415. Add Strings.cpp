@@ -26,8 +26,10 @@ public:
             p1--;
             p2--;
         }
-
+        //bug: use p1--
         while (p1 >= 0) {
+            //char to int !! (int)char would convert to ascii number
+            //int to char: char c = '0' + i
             int tmp = (num1[p1] - '0') + point;
             result = to_string(tmp % 10) + result;
             point = tmp / 10;
@@ -40,7 +42,7 @@ public:
             point = tmp / 10;
             p2--;
         }
-        
+        //bug: forget to add the left point
         if (point > 0) result = to_string(point) + result;
         
         return result;
