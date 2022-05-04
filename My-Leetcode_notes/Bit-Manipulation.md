@@ -24,6 +24,8 @@
 
 * The left-shift and right-shift operators are equivalent to multiplication and division by 2 respectively. 
 
+* 左移和右移两边的operand都不能为负数，不能超过32如果int是用32位bit存的话
+
 * 位运算特性（0s和1s分别表示只由0或1构成的二进制数字）：
 * x ^ 0s = x
 * x ^ 1s = ~x
@@ -34,5 +36,8 @@
 * x | 0s = x
 * x | 1s = 1s
 * x | x = x
+
+* 取到最后一位数字： n & 1
+* 每次右移动然后取最后一位数字: n & 1; n >>= 1;
 
                 
