@@ -139,15 +139,10 @@ public:
         result[0] = true;
         for (int i = 1; i <= n; i++) {
             int num = nums[i - 1];
-            for (int j = target; j >= 1; j--) {
-                if (j >= num) {
-                    result[j] = result[j] || result[j - num];
-                }
+            for (int j = target; j >= num; j--) {
+                result[j] = result[j] || result[j - num];
             }
         }
-
-            
-        }
-        return result[n][target];
+        return result[target];
     }
 };
