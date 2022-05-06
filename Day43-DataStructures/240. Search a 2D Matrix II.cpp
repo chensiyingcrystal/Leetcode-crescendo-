@@ -106,5 +106,21 @@ public:
         }
         return false;
     }
-        
+//简单的查找方法
+//on every iteration (during which we do not return true) 
+//either row or col is is decremented/incremented exactly once.
+//Because row can only be decremented mm times and col can only be incremented nn times 
+//before causing the while loop to terminate, the loop cannot run for more than n+mn+m iterations.
+// Because all other work is constant, the overall time complexity is linear in the sum of the dimensions of the matrix.
+    bool searchMatrix(vector<vector<int> >& matrix, int target) {
+        const int m = matrix.size(), n = matrix[0].size();
+        int row = m - 1, col = 0;
+        while (row >= 0 && col < n) {
+            int number = matrix[row][col];
+            if (number == target) return true;
+            if (number > target) row--;
+            else if (number < target) col++;
+        }
+        return false;
+    }
 };
