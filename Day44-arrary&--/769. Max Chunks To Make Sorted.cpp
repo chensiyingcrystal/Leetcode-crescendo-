@@ -55,4 +55,40 @@ public:
         }
         return count + 1;
     }
+//上述代码改进: 不需要三次循环；不需要第二遍额外的空间；不需要i=1作为初始值
+    int maxChunksToSorted(vector<int>& arr) {
+        const int n = arr.size();
+        int count = 0;
+        //first loop to record the maximum value from 0 to ith elements
+        vector<int> max_value(n);
+        max_value[0] = arr[0];
+        //从头开始循环至结尾
+        for (int i = 1; i < n; i++) {
+            max_value[i] = max(arr[i], max_value[i - 1]);
+        }
+        //second loop from end to start recording minimum value from ith elements to the end
+        //不再占用空间，因为只需要判断即可
+        //利用左边一个数字为止的最大值和包含当前元素以及右边元素的最小值进行判断
+        //或者利用包含当前数字以及向左的最大值和不包含当前元素及其右边的最小值进行判断
+        int min_value = INT_MAX;
+        for (int i = n - 1; i >= 0; i--) {
+            if (max_value[i] < min_value) count++;
+            min_value = min(min_value, arr[i]);
+        }
+        return count;
+    }
+//简单解法：贪心？
+//由于数组是0到n-1的排列，那么在i元素的位置，从0到i的元素最大值一定会大于或等于i（因为比它小的元素最多只有i-1个）
+//当从0到当前元素的最大值大于i的时候，i元素的右边数组中必然有一个元素小于或等于i（因此肯定也比该最大值要小）
+//这样左边元素的最大值不见得小于右边数组的最小值，肯定不能在i位置切分
+//因此只有当前最大值恰好等于i的时候，才能完成一次切分
+    int maxChunksToSorted(vector<int>& arr) {
+        const int n = arr.size();
+        int max_value = INT_MIN, count = 0;
+        for (int i = 0; i < n; i++) {
+            max_value = max(max_value, arr[i]);
+            if (max_value == i) count++;
+        }
+        return count;
+    }
 };
