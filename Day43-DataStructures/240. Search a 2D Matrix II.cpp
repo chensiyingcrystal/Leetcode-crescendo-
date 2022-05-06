@@ -106,7 +106,7 @@ public:
         }
         return false;
     }
-//简单的查找方法
+//简单的查找方法: two pointers
 //on every iteration (during which we do not return true) 
 //either row or col is is decremented/incremented exactly once.
 //Because row can only be decremented mm times and col can only be incremented nn times 
