@@ -8,27 +8,19 @@ using namespace std;
 class Solution {
 public:
 
-    bool isValid(string s) {
-        const int n = s.length();
-        stack<char> s_stack;
-        int i = 0;
-        while (i < n) {
-            char c = s[i];
-            if (c == '(' || c == '[' || c == '{') {
-                s_stack.push(c);
-            }
-            else {
-                if (s_stack.empty()) return false;
-                char top = s_stack.top();
-                //in addition to checking stack is empty or not, we have to 
-                //make sure that the brackets matches with each other
-                if (c == ')' && top != '(') return false;
-                if (c == ']' && top != '[') return false;
-                if (c == '}' && top != '{') return false;
-                s_stack.pop();
-            }
-            i++;
+    vector<int> dailyTemperatures(vector<int>& temperatures) {
+        //store result
+        const int n = temperatures.size();
+        vector<int> ans(n);
+        //initialize a stack
+        stack<int> stk;
+        //loop through in reverse order each element in the temperatures array
+        for (int i = n - 1; i >= 0; i--) {
+            
+
+
         }
-        return s_stack.empty()? true : false;
+
+        
     }
 };
