@@ -11,7 +11,7 @@ keeping the structures of the tree.
 
 * [**To see another explanation**] (https://www.geeksforgeeks.org/priority-queue-set-1-introduction/)
 
-------------------------------------------------**Priority queue properties**----------------------------------------------------
+---------------------------**Priority queue properties**-------------------------
 
 * Every item has a priority associated with it
 * The first item removed from a queue has the highest priority 
