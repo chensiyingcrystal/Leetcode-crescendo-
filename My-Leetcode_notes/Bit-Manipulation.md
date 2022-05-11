@@ -1,7 +1,7 @@
 # Bit Manipulation 周总结
 1. **Question Overview**题目分类
-
-
+* 190
+* 461
 
 2. 常用操作
 * 运算符是对每个bit的数字进行运算最后返回的是10进制下的int
