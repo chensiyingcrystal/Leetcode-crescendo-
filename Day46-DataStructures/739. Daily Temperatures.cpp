@@ -44,11 +44,12 @@ public:
         }
     return ans;
     }
-//
+//第二种方法：使用map存储temperature和对应answer的键值对
     vector<int> dailyTemperatures(vector<int>& temperatures) {
         //store result
         const int n = temperatures.size();
         vector<int> ans(n);
+        unordered_map<int, int> record;
         //initialize a stack
         stack<int> stk;
         //loop through in reverse order each element in the temperatures array
@@ -56,6 +57,7 @@ public:
             //special processing for the last element
             if (i == n - 1) {
                 ans[i] = 0;
+                record[temperatures[i]] = 0;
                 stk.push(temperatures[i]);
                 continue;
             }
@@ -63,13 +65,14 @@ public:
             //are smaller than it?
             int count = 0;
             while (!stk.empty() && stk.top() <= temperatures[i]) {
-                count += 
+                count += record[stk.top()];
                 stk.pop();
             }
             //determine if the stk is already empty, if so, then ans[i] should equal to 0
             //otherwise, ans[i] = count + 1;
             ans[i] = stk.empty()? 0 : count + 1;
             //still need to push the element into the stack
+            record[temperatures[i]] = ans[i];
             stk.push(temperatures[i]);
         }
     return ans;
