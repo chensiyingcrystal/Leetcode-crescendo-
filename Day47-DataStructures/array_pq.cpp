@@ -51,6 +51,7 @@ void dequeue() {
     tmp.priority = INT_MIN;
     int index_tmp = -1;
 
+    //duplicate code, should set as another function or integrated in other function
     for (int i = 0; i < curr; i++) {
         if(pq[i].priority > tmp.priority) {
             tmp = pq[i];
@@ -88,15 +89,13 @@ int main() {
     dequeue();
  
     // Check the top element
-    ind = peek();
-    cout << pr[ind].value << endl;
+    cout << peek() << endl;
    
-      // Dequeue the top element
+    // Dequeue the top element
     dequeue();
    
-      // Check the top element
-    ind = peek();
-    cout << pr[ind].value << endl;
+    // Check the top element
+    cout << peek() << endl;
  
     return 0;
 }
