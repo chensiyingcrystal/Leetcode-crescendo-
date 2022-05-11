@@ -22,7 +22,9 @@ in a priority queue with descending order.
 
 ---------------------------**Priority queue implementation**-------------------------
 * 1. **Using array**
-* see details in: [array_pq.cpp]
+* see details in: [../Day47-DataStructures/array_pq.cpp]
 
+* 2. **Using Linked List**
+* see details in: [../Day47-DataStructures/linkedlist_pq.cpp]
 
 Priority queue is realized by heap.

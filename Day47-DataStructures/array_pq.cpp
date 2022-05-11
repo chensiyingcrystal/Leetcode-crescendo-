@@ -1,4 +1,4 @@
-#include <bits/stdc++.h>
+#include <iostream>
 
 using namespace std;
 
@@ -33,10 +33,10 @@ int peek() {
         if (pq[i].priority == tmp.priority) {
             if (pq[i].value > tmp.value) { 
                 tmp = pq[i];
+            }
         }
         else if (pq[i].priority > tmp.priority) {
             tmp = pq[i];
-            top_index = i;
         }
     }
 
