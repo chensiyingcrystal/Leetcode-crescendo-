@@ -11,7 +11,7 @@ keeping the structures of the tree.
 
 * [**To see another explanation**] (https://www.geeksforgeeks.org/priority-queue-set-1-introduction/)
 
-* -----------------**Priority queue properties**-------------------------
+---------------------------**Priority queue properties**-------------------------
 
 * Every item has a priority associated with it
 * The first item removed from a queue has the highest priority 
@@ -20,8 +20,8 @@ If sorted in acending order, then the smallest number is on the top of the tree;
 *On the other hand, the element with the maximum value in the heap will be removed first
 in a priority queue with descending order.
 
-*--------------------Priority queue implementation-------------------------
-* 1. Using array
+---------------------------**Priority queue implementation**-------------------------
+* 1. **Using array**
 * 
 
 
