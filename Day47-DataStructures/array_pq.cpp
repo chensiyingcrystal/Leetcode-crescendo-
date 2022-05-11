@@ -6,7 +6,7 @@ using namespace std;
 struct item {
     int value;
     int priority;
-}
+};
 
 //store the element of a priority queue
 item pq[100000];
