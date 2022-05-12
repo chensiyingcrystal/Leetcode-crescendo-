@@ -11,8 +11,8 @@ using namespace std;
 //In practical, we often use array instead of tree data structures(using pointers)
 //to implement a heap.
 //Because a heap is a completed binary tree, so when represented by an array,
-//for the node at index i, its parent node's index must be i/2;
-//and its two children node's indices must be 2i
+//for the node at index i, its parent node's index must be (i-1)/2;
+//and its two children node's indices must be 2i+1 and 2i+2
 
 //Basic implementation in a maximum heap
 //float and sink
@@ -37,7 +37,11 @@ void push(int k) {
 }
 
 //delete the maximum number; remove the last number to the beginning; and then do the sink
-
+void pop() {
+    heap[0] = heap.back();
+    heap.pop_back();
+    sink(0);
+}
 
 
 void swim(int pos) {
@@ -45,6 +49,10 @@ void swim(int pos) {
         swap(heap[pos], heap[(pos - 1) / 2]);
         pos = (pos - 1) / 2;
     }
+}
+
+void sink(int pos) {
+
 }
 
 
