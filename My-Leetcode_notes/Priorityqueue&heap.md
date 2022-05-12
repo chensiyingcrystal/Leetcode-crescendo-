@@ -46,20 +46,31 @@ in a priority queue with descending order.
 * priority_queue<int> pq (arr, arr + N), where arr is the array and N is the size of the array.
 * priority_queue<int> pq(v.begin(), v.end()), where v is the vector.
 
-* 4. Creat min heap using priority_queue STL: use greater<int> class to define a min heap
+* 3. Creat min heap using priority_queue STL: use greater<int> class to define a min heap
 ```
 priority_queue<int, vector<int>, greater<int>>pq;
 ```
 where, vector<int> works as container and greater<int> as comparator class
 
-* 3. using lambda function to define your own comparator for pq
+* 4. using lambda function to define your own comparator for pq
 * First define the lambda object:
 
 ```
-auto compare = [](arg1, arg2) {
-
+auto comp = [](arg1, arg2) {
+    if (arg1 < arg2) {
+        return true; // true means need to swap
+    }
+    else {
+        return false; // false means current position is okay and do not need to swap
+    }
 }
 ```
+
+* then the priority_queue is declared as:
+```
+priority_queue<int, vector<int>, decltype(comp)>pq(comp);
+```
+where comp is an object and need to be passed into decltype function
 
 
 
