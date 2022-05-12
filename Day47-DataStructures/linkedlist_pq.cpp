@@ -4,7 +4,7 @@
 using namespace std;
 
 /** Using linked list to implement priority queue */
-// time complexity: enqueue o(1); dequeue o(n); peek o(n)
+// time complexity: peek o(1); push o(n); pop o(1)
 
 typedef struct node {
     int data;
@@ -31,6 +31,17 @@ Node* newNode(int d, int p) {
 //return the value at head
 int peek(Node** head) {
     return (*head) -> data;
+}
+
+void pop(Node** head) {
+    Node* temp = (*head);
+    (*head) = (*head) -> next;
+    //In C++, the delete operator should only be used either for the pointers 
+    //pointing to the memory allocated using new operator or for a NULL pointer, 
+    //and free() should only be used either for the pointers pointing to the memory 
+    //allocated using malloc() or for a NULL pointer.
+    // free(temp);
+    temp -> next = NULL; 
 }
 
 //function to push according to priority
@@ -65,5 +76,19 @@ int isEmpty(Node** head) {
     return (*head == NULL);
 }
 
-
+// Driver code
+int main()
+{
+    // Create a Priority Queue
+    // 7->4->5->6
+    Node* pq = newNode(4, 0);
+    push(&pq, 5, 1);
+    push(&pq, 6, 2);
+    push(&pq, 7, 3);
+ 
+    while (!isEmpty(&pq)) {
+        cout << " " << peek(&pq);
+        pop(&pq);
+    }
+    return 0;
 }
