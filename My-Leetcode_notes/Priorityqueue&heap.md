@@ -40,5 +40,13 @@ in a priority queue with descending order.
 * initialization: priority_queue<int> pq_name;
 
 * 1. push one by one: time complexity(nlogn): each push operation takes o(logn)
+* 2. using built-in copy constructor of priority_queue: time complexity is o(n)
+
+**method**:
+* priority_queue<int> pq(address of the first element, address of the next of the last element);
+* priority_queue<int> pq (arr, arr + N), where arr is the array and N is the size of the array.
+* priority_queue<int> pq(v.begin(), v.end()), where v is the vector.
+
+
 
 
