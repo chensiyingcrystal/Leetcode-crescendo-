@@ -23,8 +23,12 @@ in a priority queue with descending order.
 ---------------------------**Priority queue implementation**-------------------------
 * 1. **Using array**
 * see details in: [../Day47-DataStructures/array_pq.cpp]
+* time complexity: enqueue O(1); dequeue O(n); peek O(n)
 
 * 2. **Using Linked List**
 * see details in: [../Day47-DataStructures/linkedlist_pq.cpp]
+* time complexity: peek o(1); push o(n); pop o(1)
 
-Priority queue is realized by heap.
+* 3. **Using Heap**
+* see details in: [../Day47-DataStructures/heap_pq.cpp]
+* time complexity:
