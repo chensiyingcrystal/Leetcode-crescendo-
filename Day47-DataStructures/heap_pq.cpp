@@ -29,41 +29,65 @@ using namespace std;
 
 //time complexity
 //top: o(1)
-vector<int> heap;
+class Heap{
+public:
+    vector<int> heap;
 
-//get the top node of the heap, which holds the maximum value among all nodes
-int top() {
-    return heap[0];
-}
-
-//insert new node into the heap: once we insert it into the array, we'll do the float
-void push(int k) {
-    heap.push_back(k);
-    swim(heap.size() - 1);
-}
-
-//delete the maximum number; remove the last number to the beginning; and then do the sink
-void pop() {
-    heap[0] = heap.back();
-    heap.pop_back();
-    sink(0);
-}
-
-
-void swim(int pos) {
-    while (pos > 0 && heap[pos] > heap[(pos - 1)/2]) {
-        swap(heap[pos], heap[(pos - 1) / 2]);
-        pos = (pos - 1) / 2;
-    }
-}
-
-void sink(int pos) {
-    while (2 * pos + 2 < heap.size()) {
-        if (heap[pos] >= max(heap[2 * pos + 1], heap[2 * pos + 2]));
-
+    //get the top node of the heap, which holds the maximum value among all nodes
+    int top() {
+        return heap[0];
     }
 
+    //insert new node into the heap: once we insert it into the array, we'll do the float
+    void push(int k) {
+        heap.push_back(k);
+        swim(heap.size() - 1);
+    }
+
+    //delete the maximum number; remove the last number to the beginning; and then do the sink
+    void pop() {
+        heap[0] = heap.back();
+        heap.pop_back();
+        sink(0);
+    }
+
+
+    void swim(int pos) {
+        while (pos > 0 && heap[pos] > heap[(pos - 1)/2]) {
+            swap(heap[pos], heap[(pos - 1) / 2]);
+            pos = (pos - 1) / 2;
+        }
+    }
+
+    void sink(int pos) {
+        while (2 * pos + 1 < heap.size()) { // we at least want to make sure that its left child is in the boundary
+            int j = 2 * pos + 1; //start with its left child
+            if (j + 1 < heap.size() && heap[j] < heap[j + 1]) j++; //use pointers!! if right child exists and is greater than the left, then move the pointer to the right
+            if (heap[pos] >= heap[j]) break; // if greater than the bigger child, then break
+            swap(heap[pos], heap[j]);
+            pos = j; // update the pointer
+        }
+    }    
+};
+
+
+int main() {
+    Heap heap;
+    heap.push(3);
+    heap.push(6);
+    heap.push(7);
+    heap.push(8);
+    cout << heap.top() << endl;
+    heap.pop();
+    heap.pop();
+    cout << heap.top() << endl;
+    heap.push(20);
+    heap.push(5);
+    heap.push(1);
+    heap.push(30);
+    cout << heap.top() << endl;
 }
+
 
 
 

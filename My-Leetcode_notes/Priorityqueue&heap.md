@@ -31,4 +31,14 @@ in a priority queue with descending order.
 
 * 3. **Using Heap**
 * see details in: [../Day47-DataStructures/heap_pq.cpp]
-* time complexity:
+* time complexity: top(o(1)); push o(logn); pop(o(log(n)))
+
+---------------------------**Priority queue in c++**----------------------------------
+* default priority: the first element of the queue is the greatest of all elements in the queue
+* header file: #include <queue>
+* basic implementation: push(), top(), pop(), size()
+* initialization: priority_queue<int> pq_name;
+
+* 1. push one by one: time complexity(nlogn): each push operation takes o(logn)
+
+
