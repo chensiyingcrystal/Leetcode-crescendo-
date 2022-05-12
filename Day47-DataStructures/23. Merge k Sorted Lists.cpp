@@ -54,4 +54,30 @@ public:
         }
         return head -> next;
    }
+//another method: if we merge the linkied lists one by one just like we did in merging two linked list
+//time complexity should be: N/k * 2 + N/k * 3 + .. + N/k * k = (2+k)(k-1)/2 * N = o(kN)
+//introduce a more efficienty algorithm: Divide and Conquer
+//time complexity: Nlogk
+//merge two sorted linked list together, on each level, we cost o(N)
+//we divide lists at most logk times, we have k levels; so the total is Nlogk
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        if (lists.size() == 0) return NULL;
+        return helper(lists, 0, lists.size() - 1);
+   }
+
+   ListNode* helper(vector<ListNode*>& lists, int start, int end) {
+       if (start == end) {
+           return lists[start];
+       }
+       else {
+           int half = (start + end) / 2;
+           ListNode* left = helper(lists, start, half);
+           ListNode* right = helper(lists, half + 1, end);
+           return mergeTwoLists(left, right);
+       }
+   }
+
+   ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+
+   }
 };
