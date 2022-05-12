@@ -2,6 +2,9 @@
 
 using namespace std;
 
+/** Using array to implement priority queue */
+//time complexity: enqueue O(1); dequeue O(n); peek O(n)
+
 //initialize the struct type of the elements in the pq
 struct item {
     int value;
