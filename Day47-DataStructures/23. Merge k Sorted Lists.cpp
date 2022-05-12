@@ -78,6 +78,40 @@ public:
    }
 
    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+       if (l1 == NULL && l2 == NULL) return NULL;
+       if (l1 == NULL) return l2;
+       if (l2 == NULL) return l1;
+
+       ListNode* head = new ListNode(0);
+       ListNode* prev = head;
+       ListNode* p1 = l1;
+       ListNode* p2 = l2;
+       while (p1 != NULL && p2 != NULL) {
+           if (p1 -> val <= p2 -> val) {
+               prev -> next = p1;
+               prev = p1;
+               p1 = p1 -> next;
+           }
+           else {
+               prev -> next = p2;
+               prev = p2;
+               p2 = p2 -> next;
+           }
+       }
+
+       while (p1 != NULL) {
+           prev -> next = p1;
+           prev = p1;
+           p1 = p1 -> next;
+       }
+
+       while (p2 != NULL) {
+           prev -> next = p2;
+           prev = p2;
+           p2 = p2 -> next;
+       }
+
+
 
    }
 };
