@@ -17,8 +17,16 @@ struct ListNode {
 
 class Solution {
 public:
+//take advantage of sorted lists
+//we only need to push the first item of each lists into the pq
+//thus decreasing time complexity from nlogn to nlogk
     ListNode* mergeKLists(vector<ListNode*>& lists) {
-        //push each element 
+        //initialize a pq
+        auto comp = [](ListNode* a, ListNode* b) {
+            return a -> val > b -> val;
+        };
+
+        priority_queue<ListNode*, vector<ListNode*>, decltype(comp)> pq(comp);
 
 
        
