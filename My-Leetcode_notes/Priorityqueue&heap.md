@@ -37,15 +37,30 @@ in a priority queue with descending order.
 * default priority: the first element of the queue is the greatest of all elements in the queue
 * header file: #include <queue>
 * basic implementation: push(), top(), pop(), size()
-* initialization: priority_queue<int> pq_name;
+* initialization: priority_queue<int> pq_name; **By default this is a max_heap(maximum on the top)**
 
 * 1. push one by one: time complexity(nlogn): each push operation takes o(logn)
 * 2. using built-in copy constructor of priority_queue: time complexity is o(n)
-
 **method**:
 * priority_queue<int> pq(address of the first element, address of the next of the last element);
 * priority_queue<int> pq (arr, arr + N), where arr is the array and N is the size of the array.
 * priority_queue<int> pq(v.begin(), v.end()), where v is the vector.
+
+* 4. Creat min heap using priority_queue STL: use greater<int> class to define a min heap
+```
+priority_queue<int, vector<int>, greater<int>>pq;
+```
+where, vector<int> works as container and greater<int> as comparator class
+
+* 3. using lambda function to define your own comparator for pq
+* First define the lambda object:
+
+```
+auto compare = [](arg1, arg2) {
+
+}
+```
+
 
 
 
