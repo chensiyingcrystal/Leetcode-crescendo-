@@ -6,7 +6,13 @@ using namespace std;
 //what is a heap?
 //heap is completed binary tree that 
 //its root value is always greater or less than it children
-//This property is extended to all its children inside it
+//This property is extended to all it
+
+//A complete binary tree is a binary tree in which all the levels 
+//are completely filled except possibly the lowest one, 
+//which is filled from the left. 
+//A complete binary tree is just like a full binary tree, but with two major differences. 
+//All the leaf elements must lean towards the left.
 
 //In practical, we often use array instead of tree data structures(using pointers)
 //to implement a heap.
@@ -52,6 +58,10 @@ void swim(int pos) {
 }
 
 void sink(int pos) {
+    while (2 * pos + 2 < heap.size()) {
+        if (heap[pos] >= max(heap[2 * pos + 1], heap[2 * pos + 2]));
+
+    }
 
 }
 
