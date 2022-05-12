@@ -40,8 +40,8 @@ void pop(Node** head) {
     //pointing to the memory allocated using new operator or for a NULL pointer, 
     //and free() should only be used either for the pointers pointing to the memory 
     //allocated using malloc() or for a NULL pointer.
-    // free(temp);
-    temp -> next = NULL; 
+    free(temp);
+    // temp -> next = NULL; 
 }
 
 //function to push according to priority
