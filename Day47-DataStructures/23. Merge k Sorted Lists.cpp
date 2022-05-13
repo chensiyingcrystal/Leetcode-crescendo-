@@ -60,6 +60,7 @@ public:
 //time complexity: Nlogk
 //merge two sorted linked list together, on each level, we cost o(N)
 //we divide lists at most logk times, we have k levels; so the total is Nlogk
+//space: o(1)
     ListNode* mergeKLists(vector<ListNode*>& lists) {
         if (lists.size() == 0) return NULL;
         return helper(lists, 0, lists.size() - 1);
@@ -111,7 +112,6 @@ public:
            p2 = p2 -> next;
        }
 
-
-
+       return head -> next;
    }
 };
