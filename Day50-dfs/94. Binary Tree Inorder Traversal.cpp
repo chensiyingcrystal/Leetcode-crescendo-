@@ -24,9 +24,15 @@ public:
     }
 
     void dfs(TreeNode* node, vector<int>& ans) {
+        if (node == nullptr) return;
+        dfs(node -> left, ans);
+        ans.push_back(node -> val);
+        dfs(node -> right, ans);
+    }
+//alternative way to write dfs function
+    void dfs(TreeNode* node, vector<int>& ans) {
         if (node -> left != nullptr) dfs(node -> left, ans);
         ans.push_back(node -> val);
         if (node -> right != nullptr) dfs(node -> right, ans);
     }
-
 };
