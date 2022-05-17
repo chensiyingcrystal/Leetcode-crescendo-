@@ -22,6 +22,7 @@ public:
         return hasPathSum(root -> left, newtargetSum) || hasPathSum(root -> right, newtargetSum);
     }
 //another method: not recommended, backtracking
+//not asking path sum along each node, but from root to leaf, thus not requiring backtracking
     bool hasPathSum(TreeNode* root, int targetSum) {
         if (root == nullptr) return false;
         int nodeSum = 0;
