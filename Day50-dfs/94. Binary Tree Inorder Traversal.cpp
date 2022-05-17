@@ -24,12 +24,14 @@ public:
     }
 
     void dfs(TreeNode* node, vector<int>& ans) {
+        //base case + recursive
         if (node == nullptr) return;
         dfs(node -> left, ans);
         ans.push_back(node -> val);
         dfs(node -> right, ans);
     }
 //alternative way to write dfs function
+//stop null node in advance
     void dfs(TreeNode* node, vector<int>& ans) {
         if (node -> left != nullptr) dfs(node -> left, ans);
         ans.push_back(node -> val);
