@@ -38,16 +38,19 @@ public:
         }
     }
 //another way, directly subtract val from targetSum, do not need nodeSum
+//注意数据量有可能超出int边界！！！
     int pathSum(TreeNode* root, int targetSum) {
         if (root == nullptr) return 0;
         int count = 0;
         dfs(root, (long long)targetSum, count);
+        //外层循环：有限递归左右子树，确定不同起点
         count += pathSum(root -> left, targetSum);
         count += pathSum(root -> right, targetSum);
         return count;
     }
 
     void dfs(TreeNode* root, long long targetSum, int& count) {
+        //由于往下继续深搜，这里不return
         if (root -> val == targetSum) count++;
         if (root -> left != nullptr) dfs(root -> left, (long long)targetSum - root -> val, count);
         if (root -> right != nullptr) dfs(root -> right, (long long)targetSum - root -> val, count);
