@@ -11,7 +11,7 @@ public:
 //then the total hamming distance for these words is c * (n-c)(the total combination number)
 //loop through each digits
     int totalHammingDistance(vector<int>& nums) {
-        //!!!!must initialize!!!you'll never know what the computer will initialize an int
+        //!!!!must initialize!!!since you'll use ans +=!!!
         int ans = 0;
         int n = nums.size();
         for (int i = 0; i <= 31; i++) {
