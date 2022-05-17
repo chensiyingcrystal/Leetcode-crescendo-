@@ -38,6 +38,18 @@ public:
         }
     }
 //another way, directly subtract val from targetSum, do not need nodeSum
+    int pathSum(TreeNode* root, int targetSum) {
+        if (root == nullptr) return 0;
+        int count = 0;
+        dfs(root, (long long)targetSum, count);
+        count += pathSum(root -> left, targetSum);
+        count += pathSum(root -> right, targetSum);
+        return count;
+    }
 
-
+    void dfs(TreeNode* root, long long targetSum, int& count) {
+        if (root -> val == targetSum) count++;
+        if (root -> left != nullptr) dfs(root -> left, (long long)targetSum - root -> val, count);
+        if (root -> right != nullptr) dfs(root -> right, (long long)targetSum - root -> val, count);
+    }
 };
