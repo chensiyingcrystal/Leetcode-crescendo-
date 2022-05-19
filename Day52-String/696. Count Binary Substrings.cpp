@@ -31,5 +31,31 @@ public:
         }
         return;
     }
+//another method: preprocessing record the number of 0 or 1 groups;
+//then for two groups: count = min(group(1), group(2));
+    int countBinarySubstrings(string s) {
+        int n = s.length();
+        vector<int> group;
+
+        int count = 0;
+        char pre = s[0];
+        for (int i = 0; i < n; i++) {
+            if (s[i] == pre) count++;
+            else {
+                group.push_back(count);
+                count = 1;
+                pre = s[i];
+            }
+        }
+        //bug: don't forget here to push the last group count into group vector
+        group.push_back(count);
+
+        int sum = 0;
+        for (int i = 0; i < group.size() - 1; i++) {
+            sum += min(group[i], group[i + 1]);
+        }
+
+        return sum;
+    }
 
 };
