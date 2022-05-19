@@ -57,5 +57,22 @@ public:
 
         return sum;
     }
-
+//compress space complexity
+    int countBinarySubstrings(string s) {
+        int n = s.length();
+        int prev = 0, curr = 1;
+        int ans = 0;
+        for (int i = 1; i < n; i++) {
+            if (s[i] != s[i - 1]) {
+                ans += min(prev, curr);
+                prev = curr;
+                curr = 1;
+            }
+            else {
+                curr++;
+            }
+        }
+        //bug: forget add min(prev, curr); when the loop terminates, must add the last group
+        return ans + min(prev, curr);
+    }
 };
