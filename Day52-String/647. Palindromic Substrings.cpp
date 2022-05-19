@@ -31,7 +31,7 @@ public:
         }
         return count;
     }
-
+//space complexity: o(n2) -> o(n) 
     int countSubstrings(string s) {
         int n = s.length();
         vector<vector<int> > valid(2, vector<int>(n));
@@ -49,7 +49,7 @@ public:
                 }
                 else {
                     if (s[start] == s[end]) valid[(len - 1) % 2][start] = valid[(len - 1) % 2][start + 1];
-                    else valid[len % 2][start] = 0;
+                    else valid[(len - 1) % 2][start] = 0;
                 }
                 count += valid[(len - 1) % 2][start];
             }
