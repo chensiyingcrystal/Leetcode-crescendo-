@@ -8,6 +8,11 @@ using namespace std;
 
 class Solution {
 public:
+//正确的解法：stack
+    int calculate(string s) {
+        
+    }
+//错误的解法：分治
     int calculate(string s) {
         int left = 0, right = s.length() - 1;
         return helper(s, left, right);
@@ -50,7 +55,6 @@ public:
             }
         }
         return 0;
-
     }
 
     int mixed_calculator(string s, int left, int right) {
