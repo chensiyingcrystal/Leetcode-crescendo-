@@ -1,6 +1,6 @@
 #include <vector>
 #include <unordered_map>
-#include <numeric>
+#include <stack>
 #include <string>
 #include <iostream>
 
@@ -10,6 +10,8 @@ class Solution {
 public:
 //正确的解法：stack
     int calculate(string s) {
+        int n = s.length();
+        stack<int> stk;
         
     }
 //错误的解法：分治
