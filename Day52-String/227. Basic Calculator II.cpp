@@ -12,7 +12,60 @@ public:
     int calculate(string s) {
         int n = s.length();
         stack<int> stk;
-        
+        //currnum, prev_operator(default '+')
+        //if space: skip
+        //if digit: update currnum
+        //if s[i] '+' or '-' or '*' or '/' or the last character:  
+                            //if prev_operator is '+' or '-': update currnum using prev_operator then push into stack; 
+                                       //and update prev_operator with s[i]
+                            //if prev_operator is '*' or '/': pop from stack and calculate with currnum using prev_operator;
+                                                             //push the result into stack;
+                                                             //resume currnum
+                                                             //update prev_operator with s[i] 
+        //while stack is not empty, pop all out and add all together and store it in the final result.
+        int currnum = 0;
+        char prev_operator = '+';
+        for (int i = 0; i < n; i++) {
+            char c = s[i];
+            //not in need of the line below // bug: what if the last character is " "
+            // if (c == ' ' && i != n - 1) continue;
+            if (isdigit(c)) {
+                currnum = 10 * currnum + (c - '0');
+            }
+            if (c == '+' || c == '-' || c == '*' || c == '/' || i == n - 1) {
+                if (prev_operator == '+' || prev_operator == '-') {
+                    if (prev_operator == '+') stk.push(currnum);
+                    if (prev_operator == '-') stk.push(-currnum);
+                    prev_operator = c;
+                    currnum = 0;
+                }
+                else if (prev_operator == '*' || prev_operator == '/') {
+                    int prev_num = stk.top();
+                    stk.pop();
+                    int result = prev_operator == '*'? prev_num * currnum : prev_num / currnum;
+                    stk.push(result);
+                    prev_operator = c;
+                    currnum = 0;
+                }
+            }
+        }
+
+        int ans = 0;
+        while (!stk.empty()) {
+            ans += stk.top();
+            stk.pop();
+        }
+
+        return ans; 
+    }
+
+        int ans = 0;
+        while (!stk.empty()) {
+            ans += stk.top();
+            stk.pop();
+        }
+
+        return ans; 
     }
 //错误的解法：分治
     int calculate(string s) {
