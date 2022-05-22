@@ -23,7 +23,20 @@ public:
             }
             sum += dp[k];
         }
-        //loop through the answer and add results together
         return sum;
+    }
+//
+    int subarraySum(vector<int>& nums, int k) {
+        unordered_map<int, int> map;
+        int sum;
+        for (int i = 0; i < nums.size(); i++) {
+            sum += nums[i];
+            int delta = sum - k;
+            if (map.count(delta)) {
+                map[k] += map[delta];
+            }
+            map[sum] += 1;
+        }
+        return map[k];
     }
 };
