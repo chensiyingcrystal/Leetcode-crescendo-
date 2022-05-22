@@ -27,7 +27,7 @@ public:
     }
 //prefix sum: 利用连续的数组！！因此不需要dp o(n2)复杂度
     int subarraySum(vector<int>& nums, int k) {
-        //map records the number of subarrays that sum to key
+        //map records the number of subarrays that sum to key from 0 to ith elements
         unordered_map<int, int> map;
         int sum = 0, count = 0;
         for (int i = 0; i < nums.size(); i++) {
