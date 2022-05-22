@@ -25,18 +25,22 @@ public:
         }
         return sum;
     }
-//
+//prefix sum: 利用连续的数组！！因此不需要dp o(n2)复杂度
     int subarraySum(vector<int>& nums, int k) {
+        //map records the number of subarrays that sum to key
         unordered_map<int, int> map;
-        int sum;
+        int sum = 0, count = 0;
         for (int i = 0; i < nums.size(); i++) {
             sum += nums[i];
             int delta = sum - k;
+            //if found delta, that means there exits a subarray before i that sum up to delta
+            //then there must exits equal number of subarray that ends with nums[i] that add up to k
             if (map.count(delta)) {
-                map[k] += map[delta];
+                //increment the count, 每一次都加入以nums[i]为结尾的加起来等于k的subarray个数 
+                count += map[delta];
             }
             map[sum] += 1;
         }
-        return map[k];
+        return count;
     }
 };
