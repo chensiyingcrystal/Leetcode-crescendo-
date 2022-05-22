@@ -43,4 +43,21 @@ public:
         }
         return dp[target];
     }
+    //小熊出的题，要同时返回得到的最大值
+    bool canPartition(vector<int>& nums, vector<int>& value) {
+        int sum = accumulate(nums.begin(), nums.end(), 0);
+        if (sum % 2 != 0) return false;
+        int target = sum / 2;
+        
+        vector<bool> dp(target + 1, 0);
+        for (int i = 1; i <= nums.size(); i++) {
+            int num = nums[i - 1];
+            int val = value[i - 1];
+            //when j < num, no need to update
+            for (int j = target; j >= num; j--) {
+                dp[j] = dp[j] || dp[j - num];
+            }
+        }
+        return dp[target];
+    }
 };
