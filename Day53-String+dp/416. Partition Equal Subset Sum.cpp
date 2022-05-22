@@ -49,13 +49,13 @@ public:
         if (sum % 2 != 0) return false;
         int target = sum / 2;
         
-        vector<bool> dp(target + 1, 0);
+        vector<int> dp(target + 1, 0);
         for (int i = 1; i <= nums.size(); i++) {
             int num = nums[i - 1];
             int val = value[i - 1];
             //when j < num, no need to update
             for (int j = target; j >= num; j--) {
-                dp[j] = dp[j] || dp[j - num];
+                dp[j] = max(dp[j], dp[j - num] + val);
             }
         }
         return dp[target];
