@@ -43,21 +43,32 @@ public:
         }
         return dp[target];
     }
-    //小熊出的题，要同时返回得到的最大值
-    bool canPartition(vector<int>& nums, vector<int>& value) {
+    //小熊出的题，判断能否装满到j，如果能到话要同时返回得到的最大值，如果不能则为0
+    //这里的考察点第一是要判断恰好能装满，这点很重要，不能直接取上两个状态的最大值
+    //第二是学会用同一个数据记录两个结果，可以用pair，但是也可以用INT_MIN这样的无限值来表示不能装满
+    int canPartition(vector<int>& nums, vector<int>& value) {
         int sum = accumulate(nums.begin(), nums.end(), 0);
-        if (sum % 2 != 0) return false;
+        if (sum % 2 != 0) return 0;
         int target = sum / 2;
         
-        vector<int> dp(target + 1, 0);
+        vector<int> dp(target + 1, INT_MIN);
+        //初始值，只有以下情况是能够装满，则只有它具有初始值
+        dp[0] = 0;
         for (int i = 1; i <= nums.size(); i++) {
             int num = nums[i - 1];
             int val = value[i - 1];
-            //when j < num, no need to update
             for (int j = target; j >= num; j--) {
-                dp[j] = max(dp[j], dp[j - num] + val);
+                //如果前两个状态都不能装满，则该状态也应该是不能装满
+                if (dp[j] == INT_MIN && dp[j - num] == INT_MIN) {
+                    dp[j] = INT_MIN;
+                }
+                //如果有任一状态能够装满，则直接返回两者最大值
+                else {
+                    dp[j] = max(dp[j], dp[j - num] + val);
+                }
             }
         }
-        return dp[target];
+        //判断结果能装满则返回value，不能则返回0
+        return dp[target] == INT_MIN? 0 : dp[target];
     }
 };
