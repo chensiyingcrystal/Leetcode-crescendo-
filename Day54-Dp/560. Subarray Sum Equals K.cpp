@@ -7,6 +7,9 @@ using namespace std;
 
 class Solution {
 public:
+//如果这道题全都是大于0的数组，k也大于0，那么可以用如下dp做
+//但是dp复杂度高，没有利用好连续subarray的特性，另外
+//如果k和nums[i]都是可正可负数，那么无法用传统的方式固定每个j
     int subarraySum(vector<int>& nums, int k) {
         //dp[j]represents in this array(nums[0 : i]), the number of subarrays
         //that must end with nums[i] and that the sum of which equal to j
@@ -21,6 +24,7 @@ public:
                 if (j > num) dp[j] = dp[j - num];
                 if (j == num) dp[j] = 1;
             }
+            //bug:sum每一轮都需要更新，加入以该元素为结尾的和为k的数目
             sum += dp[k];
         }
         return sum;
