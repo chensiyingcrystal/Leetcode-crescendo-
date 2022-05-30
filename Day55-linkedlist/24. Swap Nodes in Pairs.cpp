@@ -21,7 +21,7 @@ public:
         if (head == NULL) return NULL;
         ListNode node = ListNode();
         ListNode* dummy = &node;
-        ListNode* curr = head, *next, *prev = dumb;
+        ListNode* curr = head, *next, *prev = dummy;
 
         while (curr != NULL && curr->next != NULL) {
             next = curr->next->next;
@@ -34,6 +34,6 @@ public:
         if (curr != NULL && curr->next == NULL) prev->next = curr;
         if (curr == NULL) prev->next = NULL;
 
-        return dumb->next;
+        return dummy->next;
     }
 };
