@@ -19,6 +19,7 @@ class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
         if (head == NULL) return NULL;
+        //bug: 连着写的话一定记得后面的要加星号！！！
         ListNode* prev = NULL, *curr = head, *next;
         
         while (curr -> next != NULL) {
