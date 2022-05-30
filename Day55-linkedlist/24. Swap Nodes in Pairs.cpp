@@ -17,7 +17,23 @@ struct ListNode {
 
 class Solution {
 public:
-    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+    ListNode* swapPairs(ListNode* head) {
+        if (head == NULL) return NULL;
+        ListNode node = ListNode();
+        ListNode* dummy = &node;
+        ListNode* curr = head, *next, *prev = dumb;
 
+        while (curr != NULL && curr->next != NULL) {
+            next = curr->next->next;
+            curr->next->next = curr;
+            prev->next = curr->next;
+            prev = curr;
+            curr = next;
+        }
+        
+        if (curr != NULL && curr->next == NULL) prev->next = curr;
+        if (curr == NULL) prev->next = NULL;
+
+        return dumb->next;
     }
 };
