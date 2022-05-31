@@ -40,10 +40,12 @@ public:
     bool isPalindrome(ListNode* head) {
         //1. find the middle node using fast and slow pointers technique
         ListNode* slow = head, *fast = head;
+        //it's fine to write like this, but don't forget to check special cases when there's only one node
         while (fast != NULL && fast->next != NULL) {
             slow = slow->next;
             fast = fast->next->next;
         }
+        //better write these as functions
         //2. reverse the half of the list
         ListNode* half;
         if (fast == NULL) half = slow;
