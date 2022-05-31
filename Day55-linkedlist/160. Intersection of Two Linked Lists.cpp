@@ -35,4 +35,9 @@ public:
 
         return NULL;
     }
+//better solution: imagine two animals running and for a period of time, 
+//if they are traveling at the same speed, then they must meet with each other
+//at the point where they have traveling same length.
+//two pointers and math to solve lots of linked list problems
+
 };
