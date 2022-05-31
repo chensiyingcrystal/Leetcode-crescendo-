@@ -1,5 +1,5 @@
 #include <vector>
-#include <unordered_map>
+#include <unordered_set>
 #include <stack>
 #include <string>
 #include <queue>
@@ -18,6 +18,21 @@ struct ListNode {
 class Solution {
 public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-        
+        unordered_set<ListNode*> visited;
+        ListNode* currA = headA;
+        while (currA != NULL) {
+            visited.insert(currA);
+            currA = currA->next;
+        }
+
+        ListNode* currB = headB;
+        while (currB != NULL) {
+            if (visited.find(currB) != visited.end()) {
+                return currB;
+            }
+            currB = currB->next;
+        }
+
+        return NULL;
     }
 };
