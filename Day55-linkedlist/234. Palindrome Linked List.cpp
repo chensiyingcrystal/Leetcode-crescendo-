@@ -39,12 +39,32 @@ public:
 //o(1) space complexity solution
     bool isPalindrome(ListNode* head) {
         //1. find the middle node using fast and slow pointers technique
-        
-
-
+        ListNode* slow = head, *fast = head;
+        while (fast != NULL && fast->next != NULL) {
+            slow = slow->next;
+            fast = fast->next->next;
+        }
         //2. reverse the half of the list
+        ListNode* half;
+        if (fast == NULL) half = slow;
+        else half = slow->next;
 
-
+        ListNode* prev = NULL, *curr = half, *next;
+        while (curr != NULL) {
+            next = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = next;
+        }
         //3. compare the two halves of the list to determine if it's a palindrome
+        ListNode* half1 = head, *half2 = prev;
+        while (half2 != NULL) {
+            if (half1->val != half2->val) {
+                return false;
+            }
+            half1 = half1->next;
+            half2 = half2->next;
+        }
+        return true;
     }
 };
