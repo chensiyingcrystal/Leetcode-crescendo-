@@ -44,4 +44,18 @@ public:
         odd->next = even_dummy.next;
         return odd_dummy.next;
     }
+//不需要用i的简洁做法
+//穿插间隔移动next
+    ListNode* oddEvenList(ListNode* head) {
+        if (head == NULL) return NULL;
+        ListNode* odd = head, *even = head->next, *even_head = even;
+        while (even != NULL && even->next != NULL) {
+            odd->next = even->next;
+            odd = odd->next;
+            even->next = odd->next;
+            even = even->next;
+        }
+        odd->next = even_head;
+        return head;
+    }
 };
