@@ -27,7 +27,8 @@
     "set": "cpp",
     "numeric": "cpp",
     "__functional_03": "cpp",
-    "random": "c"
+    "random": "c",
+    "type_traits": "cpp"
   },
   "C_Cpp_Runner.cCompilerPath": "/usr/bin/clang",
   "C_Cpp_Runner.cppCompilerPath": "/usr/bin/clang++",
