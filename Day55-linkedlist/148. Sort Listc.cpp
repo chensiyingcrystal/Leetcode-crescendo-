@@ -17,6 +17,14 @@ struct ListNode {
 
 class Solution {
 public:
+//Split: The recursion tree expands in form of a complete binary tree, 
+//splitting the list into two halves recursively. 
+//The number of levels in a complete binary tree is given by \log_{2} nlog 
+//Merge: At each level, we merge n nodes which takes O(n) time. 
+//So the time complexity for split and merge operation is O(nlogn)
+//pace Complexity: \O(logn) , where nn is the number of nodes in linked list. 
+//Since the problem is recursive, we need additional space to store the recursive call stack. 
+//The maximum depth of the recursion tree is logn
     ListNode* sortList(ListNode* head) {
         //special case
         if (head == NULL) return NULL;
