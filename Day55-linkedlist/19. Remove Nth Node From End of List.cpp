@@ -39,4 +39,26 @@ public:
         curr2->next = curr2->next->next;
         return dummy.next;
     }
+//one pass algorithm
+//still two pointers trick: let two pointers have n nodes apart
+//still set dummy here to handle some special cases
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        ListNode dummy = ListNode();
+        dummy.next = head;
+        ListNode* first = &dummy, *second = &dummy;
+
+        //first let second pointer jump to the point that is n nodes apart from the first pointer
+        while (n + 1 > 0) {
+            second = second->next;
+            n--;
+        }
+        //then move first and second pointers one by one until the second pointer reaches the null
+        while (second != NULL) {
+            first = first->next;
+            second = second->next;
+        }
+        //let the node to which the first pointer points point to its next next node
+        first->next = first->next->next;
+        return dummy.next;
+    }
 };
