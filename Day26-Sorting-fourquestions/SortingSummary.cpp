@@ -64,14 +64,14 @@ public:
         }
         int first = l, last = r, key = nums[first];
         while (first < last){
-        while(first < last && nums[last] >= key) {
-            --last;
-        }
-        nums[first] = nums[last];
-        while (first < last && nums[first] <= key) {
-                ++first; 
+            while(first < last && nums[last] >= key) {
+                --last;
             }
-        nums[last] = nums[first];
+            nums[first] = nums[last];
+            while (first < last && nums[first] <= key) {
+                    ++first; 
+                }
+            nums[last] = nums[first];
         }
         nums[first] = key;
         quick_sort(nums, l, first);
