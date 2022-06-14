@@ -27,7 +27,9 @@ public:
         if (root == NULL) return 0;
         return 1 + max(maxDepth(root->left), maxDepth(root->right));
     }
-//b
+//bfs: not as intuitive as dfs
+//convert this question to bfs problem: how many levels in this tree?
+//level traversing
         int maxDepth(TreeNode* root) {
         if (root == NULL) return 0;
         queue<TreeNode*> q;
