@@ -46,6 +46,8 @@ public:
 
     int maxDepth(Node* root) {
         if (root == NULL) return 0;
+        //bug: set max_depth to INT_MIN
+        //what if the root has no children and skip the for loop?
         int max_depth = 0;
         for (Node* node : root->children) {
             max_depth = max(max_depth, maxDepth(node));
