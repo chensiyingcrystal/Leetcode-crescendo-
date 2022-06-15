@@ -43,6 +43,7 @@ public:
         return level;
     }
 //dfs
+//pay attention to several base cases
     int minDepth(TreeNode* root) {
         if (root == NULL) return 0;
         if (root->left == NULL && root->right == NULL) return 1;
