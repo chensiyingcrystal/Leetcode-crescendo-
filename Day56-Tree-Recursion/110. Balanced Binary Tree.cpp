@@ -19,7 +19,7 @@ public:
         TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
         TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
     };
-
+//problem: understanding of binary balanced tree
     bool isBalanced(TreeNode* root) {
         if (root == NULL) return true;
         return helper(root).first;
