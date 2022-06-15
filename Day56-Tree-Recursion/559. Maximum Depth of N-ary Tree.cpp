@@ -24,7 +24,33 @@ public:
 class Solution {
 public:
     int maxDepth(Node* root) {
-        
+        if (root == NULL) return 0;
+        queue<Node*> q;
+        q.push(root);
+        int level = 0;
+
+        while (!q.empty()) {
+            int k = q.size();
+            while (k--) {
+                Node* temp = q.front();
+                q.pop();
+                for (Node* node : temp->children) {
+                    if (node != NULL) q.push(node);
+                }
+            }
+            level++;
+        }
+
+        return level;
+    }
+
+    int maxDepth(Node* root) {
+        if (root == NULL) return 0;
+        int max_depth = 0;
+        for (Node* node : root->children) {
+            max_depth = max(max_depth, maxDepth(node));
+        }
+        return max_depth + 1;
     }
 };
 
