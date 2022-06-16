@@ -30,7 +30,9 @@ public:
         if (root == NULL) return -1;
         int left = helper(root->left, max_length);
         int right = helper(root->right, max_length);
+        //what we update here is the longest path's length; this path must pass the root
         max_length = max(max_length, left + right + 2);
+        //what we return here is the longer path's length; this path only contain left or right subtree
         return max(left, right) + 1;
     }
 };
