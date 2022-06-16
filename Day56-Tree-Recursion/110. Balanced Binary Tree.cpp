@@ -35,4 +35,17 @@ public:
         ans.second = max(left_res.second, right_res.second) + 1;
         return ans;
     }
+//advanced method
+//use one variable to represent two information
+    bool isBalanced(TreeNode* root) {
+        if (root == NULL) return true;
+        return helper(root) != -1;
+    }
+
+    int helper(TreeNode* root) {
+        if (root == NULL) return 0;
+        int left = helper(root->left), right = helper(root->right);
+        if (left == -1 || right == -1 || abs(left - right) > 1) return -1;
+        return max(left, right) + 1;
+    }
 };
