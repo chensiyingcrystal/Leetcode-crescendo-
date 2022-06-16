@@ -28,6 +28,10 @@ public:
         return hasPathSum(root->left, targetSum - root->val) 
             || hasPathSum(root->right, targetSum - root->val);
     }
+//if not required starting from the root and ending at leaf, how to write the code?
 
-    bool 
+    bool hasPathSumII(TreeNode* root, int targetSum) {
+
+
+    }
 };
