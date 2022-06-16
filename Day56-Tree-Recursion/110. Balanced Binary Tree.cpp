@@ -39,12 +39,15 @@ public:
 //use one variable to represent two information
     bool isBalanced(TreeNode* root) {
         if (root == NULL) return true;
+        //use -1 to represent unbalanced tree while the height of the root, if
+        //it is a balanced tree, is also returned
         return helper(root) != -1;
     }
 
     int helper(TreeNode* root) {
         if (root == NULL) return 0;
         int left = helper(root->left), right = helper(root->right);
+        //determine if it's a balanced tree in advance of return; save time
         if (left == -1 || right == -1 || abs(left - right) > 1) return -1;
         return max(left, right) + 1;
     }
