@@ -1,4 +1,4 @@
-#include <unordered_map>
+#include <unordered_set>
 #include <queue>
 #include <sstream>
 
@@ -33,7 +33,7 @@ public:
         return ans;
         
     }
-    
+    //use flag here to mark if it's a root of an island
     void dfs(TreeNode*& root, vector<TreeNode*>& ans, bool flag, unordered_set<int>& delete_set) {
         if (root == NULL) return;
         if (delete_set.find(root->val) != delete_set.end()) {
