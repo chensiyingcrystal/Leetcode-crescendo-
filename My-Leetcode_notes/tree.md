@@ -61,7 +61,7 @@
         * preprocessing: use unordered_set
         * design dfs: 
             * first write natural base cases
-            * if not coming with any base cases, think a recursive case
+            * if not coming with any base cases, think a natural recursive case
             * if complicated and not natural recursive case, then process it with several cases 
             and write code naturally with logic; lastly finding ways to optimize code
 
