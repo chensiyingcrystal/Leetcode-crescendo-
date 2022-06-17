@@ -30,9 +30,11 @@ public:
     }
 
     TreeNode* helper(vector<int>& preorder, int pre_start, int pre_end, vector<int>& inorder, int in_start, int in_end) {
-        if (pre_start == pre_end && in_start == in_end) {
-            TreeNode* temp = (TreeNode*)malloc(sizeof(TreeNode));
-            temp = &TreeNode(preorder[pre_start]);
+        if (pre_start > pre_end) {
+            return NULL;
+        }
+        if (pre_start == pre_end) {
+            TreeNode* temp = new TreeNode(preorder[pre_start]);
             return temp;
         }
         
@@ -44,11 +46,9 @@ public:
             }
         }
 
-        TreeNode* root = (TreeNode*)malloc(sizeof(TreeNode));
-        root = &TreeNode(preorder[pre_start]);
+        TreeNode* root = new TreeNode(preorder[pre_start]);
         
         int left_number = pivot - in_start;
-        int right_number = in_end - pivot;
 
         root->left = helper(preorder, pre_start + 1, pre_start + left_number, inorder, in_start, pivot - 1);
         root->right = helper(preorder, pre_start + left_number + 1, pre_end, inorder, pivot + 1, in_end);
