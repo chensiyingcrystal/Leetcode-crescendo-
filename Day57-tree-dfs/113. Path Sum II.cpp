@@ -74,7 +74,36 @@ public:
     }
 
 //Case2: start from any node but must end at leaf
+    vector<vector<int> > ans;
+    vector<vector<int> > pathSumNodetoLeaf(TreeNode* root, int targetSum) {
+        if (root == NULL) return {};
+        vector<int> temp;
+        backtrack(root, targetSum, ans, temp);
+        vector<int> temp1;
+        backtrack(root->left, targetSum, ans, temp1);
+        vector<int> temp2;
+        backtrack(root->right, targetSum, ans, temp2);
+        return ans;
+    }
+
+    void backtrack(TreeNode* root, int targetSum, vector<vector<int> >& ans, vector<int>& temp) {
+        if (root == NULL) return;
+        if (root->left == NULL && root->right == NULL) {
+            if (root->val == targetSum) {
+                temp.push_back(root->val);
+                ans.push_back(temp);
+                temp.pop_back();
+            }
+            return;
+        }
+
+        temp.push_back(root->val);
+        backtrack(root, targetSum - root->val, ans, temp);
+        backtrack(root, targetSum - root->val, ans, temp);
+        temp.pop_back();
+    }
 
 //Case3: no limitation on any of the ends
+
 
 };
