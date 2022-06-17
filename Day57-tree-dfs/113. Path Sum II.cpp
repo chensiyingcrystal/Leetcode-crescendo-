@@ -104,6 +104,34 @@ public:
     }
 
 //Case3: no limitation on any of the ends
+    vector<vector<int> > ans;
+    vector<vector<int> > pathSumNodetoNode(TreeNode* root, int targetSum) {
+        if (root == NULL) return {};
+        vector<int> temp;
+        backtrack(root, targetSum, ans, temp);
+        
+        for (vector<int>& res : pathSumNodetoNode(root->left, targetSum)) {
+            ans.push_back(res);
+        }
+
+        for (vector<int>& res : pathSumNodetoNode(root->right, targetSum)) {
+            ans.push_back(res);
+        }
+
+        return ans;
+    }
+
+    void backtrack(TreeNode* root, int targetSum, vector<vector<int> >& ans, vector<int>& temp) {
+        if (root == NULL) return;
+        temp.push_back(root->val);
+        if (root->val == targetSum) {
+            ans.push_back(temp);
+        }
+
+        backtrack(root->left, targetSum - root->val, ans, temp);
+        backtrack(root->right, targetSum - root->val, ans, temp);
+        temp.pop_back();
+    }
 
 
 };
