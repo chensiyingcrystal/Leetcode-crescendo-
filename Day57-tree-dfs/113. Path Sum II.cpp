@@ -50,4 +50,14 @@ public:
         }
         tmp.pop_back();
     }
+//what if we don't require the path start from the root and end at leaf
+//Case1: start from root but not necessarily end at leaf
+    vector<vector<int> > pathSumRootToNode(TreeNode* root, int targetSum) {
+        
+    }
+
+//Case2: start from any node but must end at leaf
+
+//Case3: no limitation on any of the ends
+
 };

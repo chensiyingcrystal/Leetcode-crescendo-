@@ -23,7 +23,7 @@ public:
 //Advantage: save many redundant and repetitive steps and reduce time complexity
     int pathSum(TreeNode* root, int targetSum) {
         if (root == NULL) return 0;
-        unordered_map<int, int> map;
+        unordered_map<long, int> map;
         //important: initializing the map; what if the root value is equal with targetSum?
         map[0] = 1;
         int count = 0;
@@ -31,7 +31,7 @@ public:
         return count;
     }
     
-    void dfs(TreeNode* root, int targetSum, long nodeSum, unordered_map<int, int>& map, int& count) {
+    void dfs(TreeNode* root, int targetSum, long nodeSum, unordered_map<long, int>& map, int& count) {
         if (root == NULL) return;
         //important: keep the sum of nodes' val in the limitation of int
         nodeSum += (long)root->val;

@@ -46,14 +46,14 @@ public:
 //Solution2: intuition comes from pathSumIII
     bool hasPathSumII(TreeNode* root, int targetSum) {
         if (root == NULL) return false;
-        unordered_map<int, int> prefix_sum;
+        unordered_map<long, int> prefix_sum;
         prefix_sum[0] = 1;
         return dfs(root, targetSum, 0, prefix_sum);
     }
 
-    bool dfs(TreeNode* root, int targetSum, int nodeSum, unordered_map<int, int>& prefix_sum) {
+    bool dfs(TreeNode* root, int targetSum, long nodeSum, unordered_map<long, int>& prefix_sum) {
         if (root == NULL) return false;
-        nodeSum += root->val;
+        nodeSum += (long)root->val;
         if (prefix_sum.find(nodeSum - targetSum) != prefix_sum.end() && prefix_sum[nodeSum - targetSum] != 0) {
             return true;
         }
