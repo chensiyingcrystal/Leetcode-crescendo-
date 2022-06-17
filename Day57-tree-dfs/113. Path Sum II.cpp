@@ -53,7 +53,24 @@ public:
 //what if we don't require the path start from the root and end at leaf
 //Case1: start from root but not necessarily end at leaf
     vector<vector<int> > pathSumRootToNode(TreeNode* root, int targetSum) {
-        
+        if (root == NULL) return {};
+        vector<vector<int> > ans;
+        vector<int> temp;
+        backtrack(root, targetSum, ans, temp);
+        return ans;
+    }
+
+    void backtrack(TreeNode* root, int targetSum, vector<vector<int> >& ans, vector<int>& temp) {
+        if (root == NULL) return;
+
+        temp.push_back(root->val);
+        if (root->val == targetSum) {
+            ans.push_back(temp);
+        }
+
+        backtrack(root->left, targetSum - root->val, ans, temp);
+        backtrack(root->right, targetSum - root->val, ans, temp);
+        temp.pop_back();
     }
 
 //Case2: start from any node but must end at leaf
