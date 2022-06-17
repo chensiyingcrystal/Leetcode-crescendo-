@@ -123,6 +123,7 @@ public:
 
     void backtrack(TreeNode* root, int targetSum, vector<vector<int> >& ans, vector<int>& temp) {
         if (root == NULL) return;
+        
         temp.push_back(root->val);
         if (root->val == targetSum) {
             ans.push_back(temp);
