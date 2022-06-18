@@ -45,7 +45,8 @@ public:
         TreeNode* root = new TreeNode(inorder[pivot]);
         int left_number = pivot - in_start;
         int right_number = in_end - pivot;
-        root->left = helper(inorder, in_start, pivot - 1, postorder, post_end - left_number - right_number, post_end - right_number - 1);
+        
+        root->left = helper(inorder, in_start, pivot - 1, postorder, post_start, post_end - right_number - 1);
         root->right = helper(inorder, pivot + 1, in_end, postorder, post_end - right_number, post_end - 1);
         return root;
     }
