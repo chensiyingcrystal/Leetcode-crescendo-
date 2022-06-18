@@ -55,5 +55,33 @@ public:
         root->right = helper(preorder, pre_start + left_number + 1, pre_end, postorder, pivot + 1, post_end - 1);
         return root;  
     }
+//reduce time by hash map
+    TreeNode* constructFromPrePost(vector<int>& preorder, vector<int>& postorder) {
+        int m = preorder.size();
+        int n = postorder.size();
 
+        unordered_map<int, int> map;
+        for (int i = 0; i < n; i++) {
+            map[postorder[i]] = i;
+        }
+        return helper(preorder, 0, m - 1, 0, map);
+    }
+
+    TreeNode* helper(vector<int>& preorder, int pre_start, int pre_end, int post_start, unordered_map<int, int>& map) {
+        if (pre_start > pre_end) {
+            return NULL;
+        }
+
+        TreeNode* root = new TreeNode(preorder[pre_start]);
+        if (pre_start == pre_end) {
+            root->left = NULL;
+            root->right = NULL;
+            return root;
+        }
+
+        int pivot = map[preorder[pre_start + 1]], left_number = pivot - post_start + 1;
+        root->left = helper(preorder, pre_start + 1, pre_start + left_number, post_start, map);
+        root->right = helper(preorder, pre_start + left_number + 1, pre_end, pivot + 1, map);
+        return root;  
+    }
 };
