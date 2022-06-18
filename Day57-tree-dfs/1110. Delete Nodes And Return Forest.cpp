@@ -22,10 +22,12 @@ public:
 
     vector<TreeNode*> delNodes(TreeNode* root, vector<int>& to_delete) {
         //1. preprocessing: convert to_delete to hashset to do o(1) search each time
-        unordered_set<int> delete_set;
-        for (int& num : to_delete) {
-            delete_set.insert(num);
-        }
+        // unordered_set<int> delete_set;
+        // for (int& num : to_delete) {
+        //     delete_set.insert(num);
+        // }
+        //make code concise
+        unordered_set<int> delete_set(to_delete.begin(), to_delete.end());
         
         //2. dfs finding all islands and add them to the result
         vector<TreeNode*> ans;
