@@ -43,13 +43,19 @@ public:
         vector<int> ans;
         stack<TreeNode*> stk;
         stk.push(root);
+        TreeNode* curr = root;
 
         while (!stk.empty()) {
-            TreeNode* temp = stk.top();
+            while (curr != NULL) {
+                if (curr->left != NULL) stk.push(curr->left);
+                curr = curr->left;
+            }
+            curr = stk.top();
             stk.pop();
-            if (temp->right != NULL) stk.push(temp->right);
-            ans.push_back(temp->val);
-            if (temp->left != NULL) stk.push(temp->left);
+            ans.push_back(curr->val);
+            if (curr->right != NULL) stk.push(curr->right);
+            //KEY: no matter curr is null or not, should leave it processed before the next middle node(root) be processed
+            curr = curr->right;
         }
         return ans;
     }
