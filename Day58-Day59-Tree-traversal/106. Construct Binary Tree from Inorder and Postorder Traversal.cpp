@@ -50,6 +50,30 @@ public:
         root->right = helper(inorder, pivot + 1, in_end, postorder, post_end - right_number, post_end - 1);
         return root;
     }
+//take advantage of unique values by building a hash map to store the index and value
+    TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
+        int m = inorder.size();
+        int n = postorder.size();
+    
+        unordered_map<int, int> map;
+        for (int i = 0; i < n; i++) {
+            map[inorder[i]] = i;
+        }
+
+        return helper(postorder, 0, n - 1, m - 1, map);
+    }
+
+    TreeNode* helper(vector<int>& postorder, int post_start, int post_end, int in_end, unordered_map<int, int>& map) {
+        if (post_start > post_end) {
+            return NULL;
+        }
+
+        int pivot = map[postorder[post_end]], right_number = in_end - pivot;
+        TreeNode* root = new TreeNode(postorder[post_end]);
+        root->right = helper(postorder, post_end - right_number, post_end - 1, in_end, map);
+        root->left = helper(postorder, post_start, post_end - right_number - 1, pivot - 1, map);
+        return root;
+    }
 
 
 };
