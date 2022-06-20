@@ -24,7 +24,21 @@ public:
     };
 
     TreeNode* insertIntoBST(TreeNode* root, int val) {
-        
+        TreeNode* curr = root;
+        dfs(curr, val);
+        return root;
+    }
+
+    void dfs(TreeNode* curr, int val) {
+        if (curr == NULL) {
+            curr = new TreeNode(val);
+            return;
+        }
+        if (curr->val < val) {
+            dfs(curr->right, val);
+            return;
+        }
+        dfs(curr->left, val);
     }
         
 };
