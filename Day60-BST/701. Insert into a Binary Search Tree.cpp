@@ -22,7 +22,7 @@ public:
         TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
         TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
     };
-//not very hard but easy to make mistake
+//Solution1: avoid using this method; not very hard but easy to make mistake
     TreeNode* insertIntoBST(TreeNode* root, int val) {
         //bug: always remember to check if root is null;
         //if not adding this line, what gets modified is curr's pointer in the dfs function not root
@@ -44,7 +44,7 @@ public:
         }
         dfs(curr->left, val);
     }
-//optimized 
+//Solution2:optimized 
     TreeNode* insertIntoBST(TreeNode* root, int val) {
         if (root == NULL) return new TreeNode(val);
         dfs(root, val);
@@ -61,5 +61,33 @@ public:
         }
         return root->val < val? dfs(root->right, val) : dfs(root->left, val);
     }
-            
+//Solution3: recommended; returning a treenode* 
+    TreeNode* insertIntoBST(TreeNode* root, int val) {
+        if (root == NULL) return new TreeNode(val);
+        if (root->val < val) root->right = insertIntoBST(root->right, val);
+        else root->left = insertIntoBST(root->left, val);
+        return root;
+    } 
+//Solution4: iterative  
+    TreeNode* insertIntoBST(TreeNode* root, int val) {
+        if (root == NULL) return new TreeNode(val);
+        TreeNode* node = root;
+        while (node) {
+            if (node->val < val) {
+                if (node->right == NULL) {
+                    node->right = new TreeNode(val);
+                    return root;
+                }
+                node = node->right;
+            }
+            else if (node->val > val) {
+                if (node->left == NULL) {
+                    node->left = new TreeNode(val);
+                    return root;
+                }
+                node = node->left;
+            }
+        }
+        return root;
+    }   
 };
