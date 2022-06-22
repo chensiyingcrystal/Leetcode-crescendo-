@@ -71,6 +71,9 @@ public:
 //Solution4: iterative  
     TreeNode* insertIntoBST(TreeNode* root, int val) {
         if (root == NULL) return new TreeNode(val);
+        unordered_map<int, int> map;
+        map[3] = 0;
+        map[2] = 0;
         TreeNode* node = root;
         while (node) {
             if (node->val < val) {
