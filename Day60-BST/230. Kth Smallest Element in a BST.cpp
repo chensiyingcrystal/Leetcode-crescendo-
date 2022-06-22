@@ -30,20 +30,19 @@ public:
   //you feel using which is more comfortable)
 //and use a ans's reference to record answer
     int kthSmallest(TreeNode* root, int k) {
-        int ans = -1;
-        dfs(root, k, ans);
+        int ans = -1, count = 0;
+        dfs(root, k, ans, count);
         return ans;
     }
-
-    void dfs(TreeNode* root, int& k, int& ans) {
+    void dfs(TreeNode* root, int k, int& ans, int& count) {
         if (root == NULL) return;
-        dfs(root->left, k, ans);
+        dfs(root->left, k, ans, count);
         if (ans != -1) return;
-        k--;
-        if (k == 0) {
+        count++;
+        if (count == k) {
             ans = root->val;
             return;
         }
-        dfs(root->right, k, ans);
+        dfs(root->right, k, ans, count);
     }
 };
