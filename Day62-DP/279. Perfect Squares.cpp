@@ -27,7 +27,10 @@ public:
             min_count = min(min_count, numSquares(n - i * i));
         }
         return min_count + 1;
-        
+//This is actually a backpack problem
+//Each time we decide whether we need to use this element or not, use how many times
+//And we can do space optimization which we got our final dp equation here
+//Actually it is similar to our dfs recursive case.    
     }
     int numSquares(int n) {
         vector<int> dp(n + 1);
