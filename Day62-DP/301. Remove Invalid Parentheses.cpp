@@ -125,6 +125,7 @@ public:
             }
             else if (s[first] == ')') {
                 backtrack(s, ans, temp, min_removed, leftcount, rightcount, first + 1, removed + 1);
+                //右边加入的情况进行限制
                 if (rightcount < leftcount) {
                     temp += s[first];
                     backtrack(s, ans, temp, min_removed, leftcount, rightcount + 1, first + 1, removed);
