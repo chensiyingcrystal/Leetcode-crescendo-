@@ -110,7 +110,15 @@ public:
         }
         else {
             if (s[first] == '(') {
+                //不加的情况
                 backtrack(s, ans, temp, min_removed, leftcount, rightcount, first + 1, removed + 1);
+                //加的情况
+                //注意下一层任何可能对母level产生影响的都需要pop back
+                //技巧：这里我们将所有应该全局track的变量设置成为了global，不应对母level产生影响的设置成为了local
+                //如果将leftcount rightcount这样的变量也用引用，那这些变量也需要在回到母level前++ --
+                //代码会变得非常复杂，因此推荐这种模式写backtrack
+                //分清楚哪些不该影响，哪些全局track，仅对于临时answer进行pop back，并且保证任何产生
+                //影响的情况（如遇到letter）也要pop back
                 temp += s[first];
                 backtrack(s, ans, temp, min_removed, leftcount + 1, rightcount, first + 1, removed);
                 temp.pop_back();
