@@ -78,6 +78,16 @@ public:
 //当达到最小我们就清空并且更新vector，数量相等我们仅更新，而避免重复我们就用hash set就可以做到！
 //记住这里必须要避重，且避重采用的方法是hash set
 //3-- 分类讨论是字母 左括号 还是右括号的情况，这样结构会更清晰
+// Time Complexity : O(2^N)
+// since in the worst case we will have only left parentheses in the expression and 
+//for every bracket we will have two options 
+// Space Complexity : O(N)
+//because we are resorting to a recursive solution and for a recursive solution 
+//there is always stack space used as internal function states are saved onto a stack 
+//during recursion. The maximum depth of recursion decides the stack space used. 
+//Since we process one character at a time and the base case for the recursion is 
+//when we have processed all of the characters of the expression string, 
+//the size of the stack would be O(N). Note that we are not considering the space required to store the valid expressions. We only count the intermediate space here.
     vector<string> removeInvalidParentheses(string s) {
         //get clear with what we need to keep track of(set as global variable) or what not
         int min_removed = INT_MAX;
@@ -141,6 +151,18 @@ public:
 //剪枝的思路来源于：我们其实可以获得应该丢弃的左括号和右括号的数量
 //这样可以对于丢弃的情况进行剪枝
 //注意这种情况下我们仍然要对于右括号加入的情况进行限制，否则仍然会出错，试想第一个就是右括号的情况
+
+//Time Complexity : The optimization that we have performed is simply a better form of pruning. 
+//Pruning here is something that will vary from one test case to another. 
+//In the worst case, we can have something like ((((((((( and the left_rem = len(S) 
+//and in such a case we can discard all of the characters because all are misplaced. 
+//So, in the worst case we still have 2 options per parenthesis and 
+//that gives us a complexity of O(2^N)
+//Space Complexity : The space complexity remains the same i.e. O(N)as previous solution. 
+//We have to go to a maximum recursion depth of N before hitting the base case. 
+//Note that we are not considering the space required to store the valid expressions. 
+//We only count the intermediate space here.
+
     vector<string> removeInvalidParentheses(string s) {
         unordered_set<string> ans;
         string temp = "";
