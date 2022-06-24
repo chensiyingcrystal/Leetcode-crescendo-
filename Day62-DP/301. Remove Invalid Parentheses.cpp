@@ -137,4 +137,72 @@ public:
         return;
         
     }
+//Solution3: 进一步时间的优化（backtrack剪枝）
+//剪枝的思路来源于：我们其实可以获得应该丢弃的左括号和右括号的数量
+//这样可以对于丢弃的情况进行剪枝
+//注意这种情况下我们仍然要对于右括号加入的情况进行限制，否则仍然会出错，试想第一个就是右括号的情况
+    vector<string> removeInvalidParentheses(string s) {
+        unordered_set<string> ans;
+        string temp = "";
+        pair<int, int> discarded = discardInvalidParentheses(s);
+        int discarded_left = discarded.first;
+        int discarded_right = discarded.second;
+        backtrack(s, ans, temp, 0, 0, discarded_left, discarded_right, 0);
+        return vector<string>(ans.begin(), ans.end());
+    }
+    
+    void backtrack(string& s, unordered_set<string>& ans, string& temp, int leftcount, int rightcount, int discarded_left, int discarded_right, int first) {
+        if (first == s.length()) {
+            //对于最终情况，因为我们在下面限制了右括号一路上不能大于左括号，因此
+            //这里我们只需要判断左右丢弃数量达到了，这种状态就已经是最少丢弃字符情况了
+            if (discarded_left == 0 && discarded_right == 0) {
+                ans.insert(temp);
+            }
+            return;
+        }
+        //字母的情况不受影响
+        if (s[first] != '(' && s[first] != ')') {
+            temp += s[first];
+            backtrack(s, ans, temp, leftcount, rightcount, discarded_left, discarded_right, first + 1);
+            temp.pop_back();
+        }
+        else {
+            if (s[first] == '(') {
+                //丢弃的情况可以剪枝
+                if (discarded_left > 0) backtrack(s, ans, temp, leftcount, rightcount, discarded_left - 1, discarded_right, first + 1);
+                //加入的情况不受影响
+                temp += s[first];
+                backtrack(s, ans, temp, leftcount + 1, rightcount, discarded_left, discarded_right, first + 1);
+                temp.pop_back();
+            }
+            else if (s[first] == ')') {
+                if (discarded_right > 0) backtrack(s, ans, temp, leftcount, rightcount, discarded_left, discarded_right - 1, first + 1);
+                //右括号加入的情况仍然要受到限制
+                if (rightcount < leftcount) {
+                    temp += s[first];
+                    backtrack(s, ans, temp, leftcount, rightcount + 1, discarded_left, discarded_right, first + 1);
+                    temp.pop_back();
+                }
+            }
+        }
+        
+        return;
+        
+    }
+    
+    pair<int, int> discardInvalidParentheses(string s) {
+        int left = 0, right = 0;
+        for (auto& c : s) {
+            if (c == '(') {
+                left += 1;
+            }
+            else if (c == ')') {
+                if (left != 0) left--;
+                else {
+                    right += 1;
+                }
+            }
+        }
+        return {left, right};
+    }
 };
