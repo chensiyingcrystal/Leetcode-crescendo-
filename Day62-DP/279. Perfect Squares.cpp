@@ -12,6 +12,21 @@ public:
 
 
     }
+//We find this solution by thinking from dfs
+//Below is the dfs implementation, which exceeds time limits
+//Here we considered many replicate steps; Thus we can use dp to optimize it
+    int numSquares(int n) {
+        if (n == 0) {
+            return 0;
+        }
+        
+        int min_count = INT_MAX;
+        for (int i = 1; i * i <= n; i++) {
+            min_count = min(min_count, numSquares(n - i * i));
+        }
+        return min_count + 1;
+        
+    }
     int numSquares(int n) {
         vector<int> dp(n + 1);
         dp[0] = 0;
