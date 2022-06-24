@@ -70,4 +70,62 @@ public:
         }
         return stk.empty();
     }
+//Solution2: 优化点
+//1-- 上述解法时间复杂度高的原因是每次到最后我们都要消耗o(n)的时间检查是不是valid string
+//其实我们应用的是我们在某道题中学会的方法，但是！！那道题是同时有三种不同类型的括号需要同时判断
+//而对于只有一种括号而言，我们只需要在途中保证右括号不会超过左括号并且在最后判断左右括号数量相等即可
+//2-- 对于判断最小removed，我们需要用一个global variable记录最小remove，并且用另一个local变量记录removed
+//当达到最小我们就清空并且更新vector，数量相等我们仅更新，而避免重复我们就用hash set就可以做到！
+//记住这里必须要避重，且避重采用的方法是hash set
+//3-- 分类讨论是字母 左括号 还是右括号的情况，这样结构会更清晰
+    vector<string> removeInvalidParentheses(string s) {
+        //get clear with what we need to keep track of(set as global variable) or what not
+        int min_removed = INT_MAX;
+        unordered_set<string> ans;
+        string temp = "";
+        backtrack(s, ans, temp, min_removed, 0, 0, 0, 0);
+        return vector<string>(ans.begin(), ans.end());
+    }
+    
+    void backtrack(string& s, unordered_set<string>& ans, string& temp, int& min_removed, int leftcount, int rightcount, int first, int removed) {
+        if (first == s.length()) {
+            if (leftcount == rightcount) {
+                if (removed < min_removed) {
+                    //learn this syntax
+                    ans.clear();
+                    ans.insert(temp);
+                    min_removed = removed;
+                }
+                else if (removed == min_removed) {
+                    ans.insert(temp);
+                }
+            }
+            return;
+        }
+        
+        if (s[first] != '(' && s[first] != ')') {
+            temp += s[first];
+            backtrack(s, ans, temp, min_removed, leftcount, rightcount, first + 1, removed);
+            temp.pop_back();
+        }
+        else {
+            if (s[first] == '(') {
+                backtrack(s, ans, temp, min_removed, leftcount, rightcount, first + 1, removed + 1);
+                temp += s[first];
+                backtrack(s, ans, temp, min_removed, leftcount + 1, rightcount, first + 1, removed);
+                temp.pop_back();
+            }
+            else if (s[first] == ')') {
+                backtrack(s, ans, temp, min_removed, leftcount, rightcount, first + 1, removed + 1);
+                if (rightcount < leftcount) {
+                    temp += s[first];
+                    backtrack(s, ans, temp, min_removed, leftcount, rightcount + 1, first + 1, removed);
+                    temp.pop_back();
+                }
+            }
+        }
+        
+        return;
+        
+    }
 };
