@@ -30,7 +30,8 @@ public:
 //This is actually a backpack problem
 //Each time we decide whether we need to use this element or not, use how many times
 //And we can do space optimization which we got our final dp equation here
-//Actually it is similar to our dfs recursive case.    
+//Actually it is similar to our dfs recursive case.
+//仔细体会两者的联系，以后可以一下写出dp的方程    
     }
     int numSquares(int n) {
         vector<int> dp(n + 1);
