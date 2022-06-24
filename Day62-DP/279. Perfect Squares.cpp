@@ -22,6 +22,8 @@ public:
         
         int min_count = INT_MAX;
         for (int i = 1; i * i <= n; i++) {
+            //unlike normal dfs or backtracking, the child cases have a total influence on parent case
+            //we have to use recursive case thinking to figure out the relationship between parent case and child cases
             min_count = min(min_count, numSquares(n - i * i));
         }
         return min_count + 1;
