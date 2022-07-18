@@ -21,7 +21,7 @@ public:
 //Some constraints if we can use dp
    //two directions, no opportunity to go back and forth, maintain in an order!
    //count unique paths instead of outputting all unique paths.
-
+//time:o(mn), space: o(mn)
     int uniquePaths(int m, int n) {
         vector<vector<int> > dp(m, vector<int>(n)); //dp: unique paths from starting point to destination
         dp[0][0] = 1; // base case
@@ -38,4 +38,9 @@ public:
         }
         return dp[m - 1][n - 1];
     }
+//follow-up1: how we can decrease space complexity to o(1)
+  //answer: use combination
+  //total steps: m + n - 2
+  //steps of going down: m - 1
+  //total unique paths: from m + n - 2 choose m - 1, how many combinations of that?
 };
