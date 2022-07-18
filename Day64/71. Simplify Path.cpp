@@ -30,13 +30,15 @@ public:
         const int n = path.length();
         for(int i = 0; i < n; i++) {
             if (path[i] == '/') continue;
-            
+            //first split the path;
+            //Split the input string using / as the delimiter
+            //whatever we have between two / characters is either a directory name or a special character and we have to process them accordingly.
             string temp = "";
             while (i < n && path[i] != '/') {
                 temp += path[i];
                 i++;
             }
-  
+            //then process one component at a time
             if (temp == ".") continue;
             else if (temp == "..") {
                 if (!stk.empty()) {
