@@ -26,13 +26,16 @@ public:
 
             while (map[right] > 1) {
                 map[left]--;
+                sum -= left;
+                count--;
                 left++;
             }
-            
+
             if (count == k) {
                 ans = max(ans, sum);
-                sum = 0;
-                count = 0;
+                sum -= left;
+                count--;
+                left++;
             }
         }
 
