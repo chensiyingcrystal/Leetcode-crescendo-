@@ -34,6 +34,8 @@ public:
             //Split the input string using / as the delimiter
             //whatever we have between two / characters is either a directory name or a special character and we have to process them accordingly.
             string temp = "";
+            //important!!!bug: i < n
+            //anytime you reference i, must check its availability
             while (i < n && path[i] != '/') {
                 temp += path[i];
                 i++;
@@ -41,7 +43,9 @@ public:
             //then process one component at a time
             if (temp == ".") continue;
             else if (temp == "..") {
+                //the edge case : "/../"
                 if (!stk.empty()) {
+                    //anytime we want to pop something out from a stack, we need to check if it's already empty
                     stk.pop();
                 }
             }
@@ -56,7 +60,7 @@ public:
             ans = "/" + stk.top() + ans;
             stk.pop();
         }
-        
+        //need to check to avoid the original stack is empty
         return ans == ""? "/" : ans;
 
         
