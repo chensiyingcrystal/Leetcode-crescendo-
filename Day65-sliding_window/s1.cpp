@@ -32,6 +32,27 @@ public:
     }
 //sliding window
     int findkMaxSum(vector<int>& nums, int k) {
+        int n = nums.size();
+        int left = 0, right = 0;
+        int sum = 0, maxSum = INT_MIN;
+
+        while (right < n) {
+            sum += nums[right];
+            
+            while (right - left + 1 > k) {
+                left++;
+                sum -= nums[left];
+            }
+
+            if (right - left + 1 == k) {
+                maxSum = max(maxSum, sum);
+            }
+
+            right++;
+            
+        }
+
+        return maxSum;
 
     }
     
