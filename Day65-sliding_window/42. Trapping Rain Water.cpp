@@ -68,7 +68,7 @@ public:
         return sum;
 
     }
-
+//two pointers
     int trap(vector<int>& height) {
         int h = 0, ans = 0;
         int l = 0, r = height.size() - 1;
@@ -82,6 +82,25 @@ public:
                 h = max(h, height[r]);
                 ans += h - height[r];
                 r--;
+            }
+        }
+        return ans;
+    }
+//huahua
+//经验（盛最多雨水的容器）
+//原理：短板，安心移动一个指针，比如移动l的时候，不管r有咩有达到最大值，都不影响l，所以可以安心移动l指针
+    int trap(vector<int>& height) {
+        int l = 0, r = height.size() - 1;
+        int max_l = height[l], max_r = height[r];
+        int ans = 0;
+        while (l < r) {
+            if (max_l < max_r) {
+                ans += max_l - height[l];
+                max_l = max(max_l, height[++l]);
+            }
+            else {
+                ans += max_r - height[r];
+                max_r = max(max_r, height[--r]);
             }
         }
         return ans;
