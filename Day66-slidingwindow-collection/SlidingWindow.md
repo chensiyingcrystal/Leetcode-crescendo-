@@ -59,25 +59,20 @@
         while (right < m) {
             //记录当前字符，对记录本和counter信息产生什么影响？
             char c = s[right];
-            freq_s[c]++;
-            if (freq_t[c] != 0 && freq_t[c] == freq_s[c]) count++;
+            
 
-            while (count == need) {
-                if (right - left + 1 < minLength) {
-                    start = left;
-                    minLength = right - left + 1;
-                }
+            while (count == need) { //condition：满足窗口要求（一定是必要条件）！！
+                //更新结果（不需要条件， 更短即可）
+               
+               //撤回即将pass的字符对信息的更新
 
-                char c1 = s[left];
-                if (freq_t[c1] != 0 && freq_s[c1] == freq_t[c1]) count--;
-                freq_s[c1]--;
                 left++;
             }
 
             right++;
     }
 
-        return minLength == INT_MAX? "" : s.substr(start, minLength);
+        return minLength == INT_MAX? xxx : xxx; //看清楚答案要的是什么
    }
 ```
 
