@@ -44,12 +44,15 @@
 4. **Question Overview**题目分类
 
 **第一类**：Substring 可变窗口
+
 * 159基础：Given a string s, return the length of the longest substring that contains at most two distinct characters.
       * 经典滑动窗口，模板题
-      * 用count记录 vs 用map size进行记录不同类型的字符，用erase擦除字符
+      * 用count记录 vs 用map size进行记录不同类型的字符，用erase擦除字符 vs 用count+vector固定size
    * [159](https://leetcode.com/problems/longest-substring-with-at-most-two-distinct-characters/)
    *#* count增加的case：未存在过或者存在但是freq为0；
    *#* count减少的case：ele的freq变为0
+   * 用vector记录：cover所有字符 初始频率为0
 
-
+* 340基础--159的直接变形题： Given a string s, return the length of the longest substring that contains at most k distinct characters.
+   * [340](https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characters/)
 
