@@ -11,8 +11,9 @@
 的窗口都是有效的，需要在每次循环内记录ans）
 
 3. **模板**
+* 模板1（记录答案在左指针滑动刮出无效字符后）
 ```
-   int lengthOfLongestSubstringTwoDistinct(string s) {
+   int xxx(string s) {
       int n = s.length();
       int left = 0, right = 0; //often write right as the last character pointer
       unordered_map<char, int> map; //record each element's frequency(might need another counter: distinct...)
@@ -39,6 +40,44 @@
       }
       
       return ans;  // check ans here!!
+   }
+```
+
+* 模板2（有效窗口在左指针滑动排除多余字符内，此时左指针滑动是为了达到最小串的目标，所有在循环内的窗口都是有效）
+```
+   int xxx(string s, string t) {
+        int m = s.length(), n = t.length();
+        if (m < n) return "";
+
+        //需要的资源：指针，记录本，（对照本）， counter， 对照计数器
+        int left = 0, right = 0;
+        vector<int> freq_t(128, 0);
+        vector<int> freq_s(128, 0); //record each (valid) character's frequency
+        int count = 0, need = 0; // record the number of valid character
+        int minLength = INT_MAX, start = 0; //结果记录，看清楚需要什么类型的结果
+
+        while (right < m) {
+            //记录当前字符，对记录本和counter信息产生什么影响？
+            char c = s[right];
+            freq_s[c]++;
+            if (freq_t[c] != 0 && freq_t[c] == freq_s[c]) count++;
+
+            while (count == need) {
+                if (right - left + 1 < minLength) {
+                    start = left;
+                    minLength = right - left + 1;
+                }
+
+                char c1 = s[left];
+                if (freq_t[c1] != 0 && freq_s[c1] == freq_t[c1]) count--;
+                freq_s[c1]--;
+                left++;
+            }
+
+            right++;
+    }
+
+        return minLength == INT_MAX? "" : s.substr(start, minLength);
    }
 ```
 
