@@ -41,12 +41,13 @@
 ```
 
 
-
-3. **Question Overview**题目分类
+4. **Question Overview**题目分类
 * 159基础：Given a string s, return the length of the longest substring that contains at most two distinct characters.
       * 经典滑动窗口，模板题
-      * 用map size进行记录不同类型的字符，用erase擦除字符
+      * 用count记录 vs 用map size进行记录不同类型的字符，用erase擦除字符
    * [159](https://leetcode.com/problems/longest-substring-with-at-most-two-distinct-characters/)
+   # count增加的case：未存在过或者存在但是freq为0；
+   # count减少的case：ele的freq变为0
 
 * prefix sum：进阶
       * 考察要点：利用contiguous的特性解题
