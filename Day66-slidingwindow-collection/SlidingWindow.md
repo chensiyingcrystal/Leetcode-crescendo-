@@ -64,5 +64,6 @@
 
 * 76最经典系列2：Given two strings s and t of lengths m and n respectively, return the minimum window substring of s such that every character in t (including duplicates) is included in the window.
    * 模板题：限定了每个字符的频率, 是通过另一个字符确定的
-   * 仅限定了频率，但是没有限定顺序
-   * [3](https://leetcode.com/problems/longest-substring-without-repeating-characters/)
+   * 目标（最短，包含所有t中字符, 达到要求的频率， 尽量缩减字符频率）
+   * 仅限定了频率，但是没有限定顺序(follow up 727)
+   * [76](https://leetcode.com/problems/minimum-window-substring/) 
