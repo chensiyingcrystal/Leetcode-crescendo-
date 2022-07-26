@@ -10,37 +10,34 @@
 
 3. **模板**
 ```
-    int lengthOfLongestSubstringTwoDistinct(string s) {
-        int n = s.length();
-        int left = 0, right = 0; //often write right as the last character pointer
-        unordered_map<char, int> map; //record each character's frequency
-        int count = 0;
-        int maxLength = INT_MIN; // don't forget to check out special case(don't even go into the loop)
-        
-        while (right < n) {
-            char c = s[right];
-            //do something to this current char(record its freq.)
-            if (!map.count(c) || map[c] == 0) count++;
-            map[c]++;
-            
-            //move left pointer until it becomes valid
-            while (count > 2) { //condition: the indicator of invalid window
-                char c1 = s[left];
-                //delete this character before passing it(retrieving all the changes made on it)
-                map[c1]--;
-                if (map[c1] == 0) count--;
-                left++;
-            }
-            
-            //record ans after a valid window checking
-            maxLength = max(maxLength, right - left + 1);
-            
-            right++;
-            
-        }
-        
-        return maxLength;
-    }
+   int lengthOfLongestSubstringTwoDistinct(string s) {
+      int n = s.length();
+      int left = 0, right = 0; //often write right as the last character pointer
+      unordered_map<char, int> map; //record each element's frequency(might need another counter: distinct...)
+      int ans = INT_MIN/INT_MAX; // don't forget to check out special case(don't even go into the loop or never updated in the loop)
+      
+      while (right < n) {
+         //do something to this current element pointed by right(e.g.record its freq.)
+         
+
+         //move left pointer until it becomes valid
+         while (//condition: the indicator of invalid/valid window) { 
+               //discard this element so we need to retrieve all the changes
+
+               left++;
+         }
+         
+         //record ans after a valid window checking
+         //this checking part could also be in the while loop above
+         //depending on the status in the while loop(is valid window or invalid)
+         //one thing for sure: our ans is only for recording valid window
+         ans = ...;
+         
+         right++;
+      }
+      
+      return ans;  // check ans here!!
+   }
 ```
 
 
