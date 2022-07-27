@@ -103,3 +103,9 @@
    * **一定要清楚count的定义（需不需要count，是用来记录不同字符的个数，还是达标字符的个数）
    * 记录不需要的字符也可，判定清楚即可，不要纠结
    * [76](https://leetcode.com/problems/minimum-window-substring/) 
+
+* 438---76变形：Given two strings s and p, return an array of all the start indices of p's anagrams in s.
+   * 目标（包含所有t中字符, 字符频率要完全一致）
+   * 不能包含多余字符（没有在t中的字符，数量超过t数量的字符）
+   * 难点在于如何处理多余字符
+   * [438](https://leetcode.com/problems/find-all-anagrams-in-a-string/) 
