@@ -113,6 +113,11 @@
    * 解法二：套用模板二（反常规），将大窗口视作都有效，在收缩过程中排除多余字符并仅记录有效结果（类似76）
    * [438](https://leetcode.com/problems/find-all-anagrams-in-a-string/) 
 
+* 567---438直接变形：Given two strings s and p, return an array of all the start indices of p's anagrams in s.
+   * 目标（包含所有t中字符, 字符频率要完全一致）
+   * 不能包含多余字符（没有在t中的字符，数量超过t数量的字符）
+   * 解法二：套用模板二（反常规但代码好写），将大窗口视作都有效，在收缩过程中排除多余字符并仅记录有效结果（类似76）
+   * [567](https://leetcode.com/problems/permutation-in-string/) 
 
 5. **总结**：
        *第一次尽量用map做不会错，知道会用vector优化即可*
