@@ -9,6 +9,7 @@
 * ---》 对暴力解进行优化，跳过不必要比较的步骤，比如求最短长度，那么当以一个字符为起点找到可行解时，其后面的长度不需要再考虑；比如滑动左指针经过的字符为起点时，其窗口不满足要求也可以不考虑
 * 左指针滑动的目标为其中之一：要么在找有效窗口（pass无效的，记录结果应该在左指针滑动循环之后）；要么就是在实现最短的目标（此时循环内
 的窗口都是有效的，需要在每次循环内记录ans）
+* why do we need count? The last approach can be optimized, if instead of comparing all the elements of the hashmaps for every updated s2maps2map corresponding to every window of s2s2 considered, we keep a track of the number of elements which were already matching in the earlier hashmap and update just the count of matching elements when we shift the window towards the right.
 
 3. **模板**
 * 模板1（记录答案在左指针滑动刮出无效字符后）
@@ -113,7 +114,7 @@
    * 解法二：套用模板二（反常规），将大窗口视作都有效，在收缩过程中排除多余字符并仅记录有效结果（类似76）
    * [438](https://leetcode.com/problems/find-all-anagrams-in-a-string/) 
 
-* 567---438直接变形：Given two strings s and p, return an array of all the start indices of p's anagrams in s.
+* 567---438直接变形：Given two strings s1 and s2, return true if s2 contains a permutation of s1, or false otherwise.
    * 目标（包含所有t中字符, 字符频率要完全一致）
    * 不能包含多余字符（没有在t中的字符，数量超过t数量的字符）
    * 解法二：套用模板二（反常规但代码好写），将大窗口视作都有效，在收缩过程中排除多余字符并仅记录有效结果（类似76）
