@@ -13,7 +13,7 @@ public:
     }
 
     int findCumulativeMax(vector<int>& nums, int k) {
-        if (nums.size() == 0 || k == 0) return 0;
+        if (nums.size() == 0 || k == 0 || k > nums.size()) return 0;
         int n = nums.size();
         int left = 0, right = 0;
         int maxSum = INT_MIN, tempSum = 0;
@@ -27,7 +27,7 @@ public:
             while (visited[curr] > 1) {
                 int prev = nums[left];
                 tempSum -= prev;
-                visited.erase(prev);
+                visited[prev]--;
                 left++;
             }
 
@@ -39,8 +39,6 @@ public:
         }
 
         return maxSum == INT_MIN? -1 : maxSum;
-
-
 
 
     } 
