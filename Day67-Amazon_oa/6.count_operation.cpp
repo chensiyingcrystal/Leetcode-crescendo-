@@ -31,16 +31,4 @@ public:
         return minAns;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-    }
 };
