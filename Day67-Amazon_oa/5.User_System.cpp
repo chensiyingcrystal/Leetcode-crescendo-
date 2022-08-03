@@ -16,7 +16,7 @@ public:
     vector<string> implementAPT(vector<string>& logs) {
         vector<string> ans;
         for (string& log : logs) {
-            vector<string> request = parseLog(log);
+            vector<string> request = parseLogBySpace(log);
             if (request[0] == "register") {
                 ans.push_back(userRegister(request[1], request[2]));
             }
@@ -27,35 +27,6 @@ public:
                 ans.push_back(userLogout(request[1]));
             }
         }
-        return ans;
-    }
-
-    vector<string> parseLog(string& req) {
-        vector<string> ans;
-        string type = "";
-        int i = 0;
-        while (req[i] != ' ') {
-            type += req[i];
-            i++;
-        }
-        ans.push_back(type);
-
-        i += 2;
-        string username = "";
-        while (req[i] != '>') {
-            username += req[i];
-            i++;
-        }
-        ans.push_back(username);
-        if (type == "logout") return ans;
-
-        i += 3;
-        string password = "";
-        while (req[i] != '>') {
-            password += req[i];
-            i++;
-        }
-        ans.push_back(password);
         return ans;
     }
 
