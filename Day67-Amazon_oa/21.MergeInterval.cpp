@@ -3,6 +3,7 @@
 #include <string>
 #include <string.h>
 #include <vector>
+#include <iostream>
 
 using namespace std;
 
@@ -36,5 +37,12 @@ public:
         }
         return minMerge;
     }
-
 };
+
+int main() {
+    Solution* ss = new Solution();
+    vector<vector<int>> stock = {{1, 2}, {2, 3}, {3, 5}, {4, 5}};
+    int pos = ss->findMinMerge(stock);
+    cout << pos << endl;
+    return 0;
+}
