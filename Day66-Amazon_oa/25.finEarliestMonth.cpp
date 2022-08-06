@@ -25,7 +25,7 @@ public:
         long long preSum = 0;
         double minAverage = INT_MAX;
         int ans;
-        for (int i = 0; i <= n - 2; i++) {
+        for (int i = 0; i <= n - 2; i++) {//cannot to the last index(cause dividing by zero)
             preSum += nums[i];
             //In order to use the double version, which returns a double, at least one of the ints must be explicitly casted to a double.
             double diff = preSum / (double)(i + 1) - (total - preSum) / (double)(n - i - 1); //use double 
@@ -34,7 +34,7 @@ public:
                 ans = i;
             }
         }
-        return ans + 1;
+        return minAverage == INT_MAX? -1 : ans + 1;
 
     }
 
@@ -45,7 +45,7 @@ public:
 
 int main() {
     Solution* ss = new Solution();
-    vector<int> nums = {1,4,4,5,4,4,1};
+    vector<int> nums = {2, 5};
     int pos = ss->findEarliestMonth(nums);
     cout << pos << endl;
     return 0;
