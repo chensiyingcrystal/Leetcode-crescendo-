@@ -29,7 +29,9 @@
     "__functional_03": "cpp",
     "random": "c",
     "type_traits": "cpp",
-    "ctype.h": "c"
+    "ctype.h": "c",
+    "__tree": "cpp",
+    "map": "cpp"
   },
   "C_Cpp_Runner.cCompilerPath": "/usr/bin/clang",
   "C_Cpp_Runner.cppCompilerPath": "/usr/bin/clang++",

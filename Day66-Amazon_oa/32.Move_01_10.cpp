@@ -50,7 +50,7 @@ public:
 
 int main() {
     Solution* ss = new Solution();
-    vector<int> nums = {1, 1, 1, 1, 0, 1, 0, 1};
+    vector<int> nums = {0, 0, 1, 1};
     int pos = ss->findMinMove0110(nums);
     cout << pos << endl;
     return 0;
