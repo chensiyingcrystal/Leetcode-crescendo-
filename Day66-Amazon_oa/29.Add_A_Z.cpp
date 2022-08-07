@@ -25,7 +25,7 @@ public:
                 ans += countA;
             }
         }
-        return ans;
+        return countA >= countZ ? ans + countA : ans + countZ;
     }
 
     
@@ -36,8 +36,8 @@ public:
 
 int main() {
     Solution* ss = new Solution();
-    string s = "01001";
-    int pos = ss->findEarliestMonth(nums);
+    string s = "BAZAZ";
+    int pos = ss->findMaxAZ(s);
     cout << pos << endl;
     return 0;
 }
