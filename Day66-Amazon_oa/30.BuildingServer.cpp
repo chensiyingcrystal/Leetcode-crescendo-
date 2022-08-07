@@ -14,18 +14,8 @@ public:
 
     }
 
-    int findMaxAZ(string s) {
-        int ans = 0, countA = 0, countZ = 0;
-        for (int i = 0; i < s.length(); i++) {
-            if (s[i] == 'A') {
-                countA++;
-            }
-            else if (s[i] == 'Z') {
-                countZ++;
-                ans += countA;
-            }
-        }
-        return countA >= countZ ? ans + countA : ans + countZ;
+    int findBuildingServer(vector<int> headcount, vector<int> routerLocation, vector<int> routerRange) {
+
     }
 
         
