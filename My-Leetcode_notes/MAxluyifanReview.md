@@ -1,80 +1,13 @@
 # 总结
 1. **搜索适用类型**
-* BFS: 最短路径问题，拓扑排序，染色，判断图中是不是有环，许多人同时从不同点出发谁先到终点, 棋盘交换（八数码）, 查找图中的根节点；
-* DFS: 
+* BFS: 最短路径问题，拓扑排序，染色，判断图中是不是有环，许多人同时从不同点出发谁先到终点, 棋盘交换（八数码）, 查找图中的根节点；树的层次遍历和蛇形遍历；每层节点的最大值；二叉树的最小深度；？怎么判断二叉树是个堆；
+* DFS: 岛屿问题， 
+* 回溯：
+
+2. **贪心问题**
 * 
 
-2. **原理**
-* 
-
-3. **模板**
-* 模板1（记录答案在左指针滑动刮出无效字符后）
-```
-   int xxx(string s) {
-      int n = s.length();
-      int left = 0, right = 0; //often write right as the last character pointer
-      unordered_map<char, int> map; //record each element's frequency(might need another counter: distinct...)
-      int ans = INT_MIN/INT_MAX; // don't forget to check out special case(don't even go into the loop or never updated in the loop)
-      
-      while (right < n) {
-         //do something to this current element pointed by right(e.g.record its freq.)
-         
-
-         //move left pointer until it becomes valid
-         while (//condition: the indicator of invalid/valid window) { 
-               //discard this element so we need to retrieve all the changes
-
-               left++;
-         }
-         
-         //record ans after a valid window checking
-         //this checking part could also be in the while loop above
-         //depending on the status in the while loop(is valid window or invalid)
-         //one thing for sure: our ans is only for recording valid window
-         ans = ...;
-         
-         right++;
-      }
-      
-      return ans;  // check ans here!!
-   }
-```
-
-* 模板2（有效窗口在左指针滑动排除多余字符内，此时左指针滑动是为了达到最小串的目标，所有在循环内的窗口都是有效）
-```
-   int xxx(string s, string t) {
-        int m = s.length(), n = t.length();
-        if (m < n) return "";
-
-        //需要的资源：指针，记录本，（对照本）， counter， 对照计数器
-        int left = 0, right = 0;
-        vector<int> freq_t(128, 0);
-        vector<int> freq_s(128, 0); //record each (valid) character's frequency
-        int count = 0, need = 0; // record the number of valid character
-        int minLength = INT_MAX, start = 0; //结果记录，看清楚需要什么类型的结果
-
-        while (right < m) {
-            //记录当前字符，对记录本和counter信息产生什么影响？
-            char c = s[right];
-            
-
-            while (count == need) { //condition：满足窗口要求（一定是必要条件）！！
-                //更新结果（不需要条件， 更短即可）
-               
-               //撤回即将pass的字符对信息的更新
-
-                left++;
-            }
-
-            right++;
-    }
-
-        return minLength == INT_MAX? xxx : xxx; //看清楚答案要的是什么
-   }
-```
-
-
-4. **Question Overview**题目分类
+3. **Question Overview**题目分类
 
 **第一类**：Substring 可变窗口
 
