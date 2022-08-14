@@ -47,6 +47,7 @@ public:
 
     void pushHead(string& name) {
         Node* new_node = new Node(name, NULL);
+        //push前为空的情况
         if (new_head == NULL && new_tail == NULL) {
             new_head = new_node;
             new_tail = new_node;
@@ -72,9 +73,13 @@ public:
     }
 
     void popHead(string& name) {
+        //注意被pop到全空的情况
+        if(new_head == NULL && new_tail == NULL) return;
         Node* temp = new_head->next;
         new_head->next = NULL;
         new_head = temp;
+        //假如pop到全空，tail也应该指向null
+        if(new_head == NULL) new_tail = NULL;
         return;
     }
 
