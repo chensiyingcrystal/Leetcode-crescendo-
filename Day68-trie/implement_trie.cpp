@@ -2,31 +2,28 @@
 
 using namespace std;
 
-
-
 template<typename V>
 class TrieMap {
 private:
-    const int R = 256;
     int size;
+    Trie* trie;
 
-    class TrieNode {
-    public:
+    class Trie {
+        bool isEnd;
         V val;
-        TrieNode* children[R];
+        Trie* children[256];
 
-        TrieNode() {
+        Trie() {
+            isEnd = false;
             val = NULL;
-            for (int i = 0; i < R; i++) {
+            for (int i = 0; i < 256; i++) {
                 children[i] = NULL;
             }
         }
     };
 
-    TrieNode* root;
-
-    TrieNode* getNode(TrieNode* node, string& word, int start) {
-        TrieNode* curr = node;
+    Trie* findTrieNode(Trie* trie, string& word, int start) {
+        Trie* curr = trie;
         for (int i = start; i < word.length(); i++) {
             char c = word[i];
             if (curr->children[c] == NULL) return NULL;
@@ -38,7 +35,7 @@ private:
 public:
     TrieMap() {
         size = 0;
-        root = new TrieNode();
+        trie = new Trie();
     }
 
     void add(string key, V val) {
@@ -49,19 +46,26 @@ public:
 
     }
 
-    void V get(string key) {
-
+    V getValue(string key) {
+        Trie* curr = findTrieNode(trie, key, 0);
+        if (curr == NULL) return NULL;
+        return curr->val;
     }
 
     bool findKey(string key) {
-
-    }
-
-    string findShortestPrefix(string query) {
-
+        return getValue(key);
     }
 
     string findLongestPrefix(string query) {
+        Trie* curr = trie;
+        int maxLen = 0;
+        for (int i = 0; i < query.length(); i++) {
+            char c = query[i];
+            if (curr->children[c] == NULL) {
+                return query.substr(0, maxLen);
+            }
+            curr = curr->children[c];
+        }
 
     }
 
@@ -80,10 +84,5 @@ public:
     bool findPatternKey(string pattern) {
 
     }
-
-    int getSize() {
-        return size;
-    }
-
 
 };
