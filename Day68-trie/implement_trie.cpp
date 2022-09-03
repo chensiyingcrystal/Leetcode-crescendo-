@@ -29,9 +29,10 @@ private:
         TrieNode* curr = node;
         for (int i = start; i < word.length(); i++) {
             char c = word[i];
-            if (curr->children[c])
-
+            if (curr->children[c] == NULL) return NULL;
+            curr = curr->children[c];
         }
+        return curr;
     }
 
 public:
