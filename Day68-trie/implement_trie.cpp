@@ -7,17 +7,17 @@ using namespace std;
 template<typename V>
 class TrieMap {
 private:
-    const int R;
+    const int R = 256;
     int size;
 
     class TrieNode {
     public:
         V val;
-        TrieNode* children[256];
+        TrieNode* children[R];
 
         TrieNode() {
             val = NULL;
-            for (int i = 0; i < 256; i++) {
+            for (int i = 0; i < R; i++) {
                 children[i] = NULL;
             }
         }
@@ -25,8 +25,21 @@ private:
 
     TrieNode* root;
 
+    TrieNode* getNode(TrieNode* node, string& word, int start) {
+        TrieNode* curr = node;
+        for (int i = start; i < word.length(); i++) {
+            char c = word[i];
+            if (curr->children[c])
+
+        }
+    }
 
 public:
+    TrieMap() {
+        size = 0;
+        root = new TrieNode();
+    }
+
     void add(string key, V val) {
 
     }
