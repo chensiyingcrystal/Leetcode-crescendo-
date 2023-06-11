@@ -8,6 +8,8 @@ using namespace std;
 
 class Solution {
 public:
+// 2461. Maximum Sum of Distinct Subarrays With Length K
+// https://leetcode.com/problems/maximum-sum-of-distinct-subarrays-with-length-k/description/?envType=study-plan-v2&envId=amazon-spring-23-high-frequency
     long long maximumSubarraySum(vector<int>& nums, int k) {
         int left = 0, right = 0;
         unordered_map<int, int> numMap;
