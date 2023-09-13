@@ -31,7 +31,8 @@
     "type_traits": "cpp",
     "ctype.h": "c",
     "__tree": "cpp",
-    "map": "cpp"
+    "map": "cpp",
+    "filesystem": "cpp"
   },
   "C_Cpp_Runner.cCompilerPath": "/usr/bin/clang",
   "C_Cpp_Runner.cppCompilerPath": "/usr/bin/clang++",
